@@ -4,8 +4,11 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private float jumpSpeed;
+    [SerializeField] private float wallJumpSpeed;
+
     private Rigidbody2D body;
     private bool grounded = false;
+    private bool onWall = false;
 
     private void Awake()
     {
@@ -22,10 +25,19 @@ public class PlayerMovement : MonoBehaviour
         else if (horizontalInput < -0.01f)
             transform.localScale = new Vector3(-1, 1, 1);
 
-        if ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) && grounded)
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
-            body.linearVelocity = new Vector2(body.linearVelocity.x, jumpSpeed);
-            grounded = false;
+            if (grounded)
+            {
+                body.linearVelocity = new Vector2(body.linearVelocity.x, jumpSpeed);
+                grounded = false;
+            }
+            else if (onWall)
+            {
+                body.linearVelocity = new Vector2(body.linearVelocity.x, wallJumpSpeed);
+                onWall = false;
+            }
+            
         }
     }
 
@@ -33,5 +45,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
             grounded = true;
+
+        if(collision.gameObject.CompareTag("Wall"))
+            onWall = true;
+
     }
 }
