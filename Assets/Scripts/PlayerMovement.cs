@@ -30,14 +30,12 @@ public class PlayerMovement : MonoBehaviour
             if (grounded)
             {
                 body.linearVelocity = new Vector2(body.linearVelocity.x, jumpSpeed);
-                grounded = false;
             }
             else if (onWall)
             {
                 body.linearVelocity = new Vector2(body.linearVelocity.x, wallJumpSpeed);
                 onWall = false;
             }
-            
         }
     }
 
@@ -45,9 +43,15 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
             grounded = true;
-
-        if(collision.gameObject.CompareTag("Wall"))
+        if (collision.gameObject.CompareTag("Wall"))
             onWall = true;
+    }
 
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+            grounded = false;
+        if (collision.gameObject.CompareTag("Wall"))
+            onWall = false;
     }
 }
