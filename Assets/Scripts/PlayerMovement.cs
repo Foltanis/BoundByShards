@@ -1,53 +1,51 @@
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public abstract class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float speed;
-    [SerializeField] private float jumpSpeed;
-    [SerializeField] private float wallJumpSpeed;
+    [SerializeField] protected float speed = 6f;
+    [SerializeField] protected float jumpSpeed = 6f;
+    [SerializeField] protected float wallJumpSpeed = 5f;
 
-    private Rigidbody2D body;
-    private bool grounded = false;
-    private bool onWall = false;
+    protected Rigidbody2D body;
+    protected bool grounded;
+    protected bool onWall;
+    protected Vector3 baseScale;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         body = GetComponent<Rigidbody2D>();
+        baseScale = transform.localScale;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        body.linearVelocity = new Vector2(horizontalInput * speed, body.linearVelocity.y);
+        HandleInput();
+    }
 
-        if (horizontalInput > 0.01f)
-            transform.localScale = Vector3.one;
-        else if (horizontalInput < -0.01f)
-            transform.localScale = new Vector3(-1, 1, 1);
+    protected abstract void HandleInput();
 
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+    public virtual void Jump()
+    {
+        if (grounded)
         {
-            if (grounded)
-            {
-                body.linearVelocity = new Vector2(body.linearVelocity.x, jumpSpeed);
-            }
-            else if (onWall)
-            {
-                body.linearVelocity = new Vector2(body.linearVelocity.x, wallJumpSpeed);
-                onWall = false;
-            }
+            body.linearVelocity = new Vector2(body.linearVelocity.x, jumpSpeed);
+        }
+        else if (onWall)
+        {
+            body.linearVelocity = new Vector2(body.linearVelocity.x, wallJumpSpeed);
+            onWall = false;
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground") && collision.relativeVelocity.y >= 0)
+        if (collision.gameObject.CompareTag("Ground"))
             grounded = true;
         if (collision.gameObject.CompareTag("Wall"))
             onWall = true;
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    protected virtual void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
             grounded = false;
