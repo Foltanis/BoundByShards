@@ -1,4 +1,5 @@
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 public abstract class PlayerMovement : MonoBehaviour
 {
@@ -15,11 +16,19 @@ public abstract class PlayerMovement : MonoBehaviour
 
     protected int currentHealth;
 
+    protected PlayerInput playerInput;
+    protected InputAction moveAction;
+
     protected virtual void Awake()
     {
         body = GetComponent<Rigidbody2D>();
         baseScale = transform.localScale;
         currentHealth = maxHealth;
+
+        playerInput = GetComponent<PlayerInput>();
+
+        
+        moveAction = playerInput.actions["Move"];
     }
 
     protected virtual void Update()
@@ -27,7 +36,23 @@ public abstract class PlayerMovement : MonoBehaviour
         HandleInput();
     }
 
-    protected abstract void HandleInput();
+    protected virtual void HandleInput()
+    {
+        Vector2 move = moveAction.ReadValue<Vector2>();
+        float horizontal = move.x;
+
+        body.linearVelocity = new Vector2(horizontal * speed, body.linearVelocity.y);
+
+        
+        if (horizontal > 0.01f)
+            transform.localScale = new Vector3(Mathf.Abs(baseScale.x), baseScale.y, baseScale.z);
+        else if (horizontal < -0.01f)
+            transform.localScale = new Vector3(-Mathf.Abs(baseScale.x), baseScale.y, baseScale.z);
+
+        
+        if (move.y > 0.5f)
+            Jump();
+    }
 
     public virtual void Jump()
     {
