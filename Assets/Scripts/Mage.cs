@@ -5,7 +5,8 @@ public class Mage : PlayerMovement
     protected override void Awake()
     {
         base.Awake();
-        speed *= 0.4f;  
+        speed *= 0.3f;
+        jumpSpeed *= 0.2f;
         wallJumpSpeed = 0;
     }
 
