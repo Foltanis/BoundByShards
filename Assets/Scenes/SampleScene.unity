@@ -128,7 +128,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 210577526}
-  - component: {fileID: 210577527}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Untagged
@@ -153,18 +152,6 @@ Transform:
   - {fileID: 1290900611}
   m_Father: {fileID: 410210316}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &210577527
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 210577525}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bb2e41918d06fa44ae7c64512809c3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
 --- !u!1 &372267292
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,7 +333,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 410210316}
-  - component: {fileID: 410210313}
   m_Layer: 0
   m_Name: PlayerMovement
   m_TagString: Untagged
@@ -354,18 +340,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
   m_IsActive: 1
---- !u!114 &410210313
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 410210312}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b622c0fadf2614b4291e1f3425f4607d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
 --- !u!4 &410210316
 Transform:
   m_ObjectHideFlags: 0
