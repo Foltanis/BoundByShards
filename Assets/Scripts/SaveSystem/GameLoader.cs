@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public static class GameLoader
 {
@@ -11,6 +12,8 @@ public static class GameLoader
             return;
         }
 
-        Debug.Log($"Loaded save '{data.metadata.displayName}' successfully.");
+        string sceneName = data.levelSceneName;
+        PlayerPrefs.SetString("currentSaveId", id);
+        SceneManager.LoadScene(sceneName);
     }
 }
