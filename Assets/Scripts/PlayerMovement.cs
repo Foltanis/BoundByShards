@@ -52,6 +52,7 @@ public abstract class PlayerMovement : MonoBehaviour
         
         if (move.y > 0.5f)
             Jump();
+
     }
 
     public virtual void Jump()
@@ -100,5 +101,10 @@ public abstract class PlayerMovement : MonoBehaviour
             grounded = false;
         if (collision.gameObject.CompareTag("Wall"))
             onWall = false;
+    }
+
+    public int GetHp()
+    {
+        return currentHealth;
     }
 }

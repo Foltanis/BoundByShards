@@ -1,6 +1,11 @@
 using UnityEngine;
 public abstract class SlimeBase : PlayerMovement
 {
+    protected override void Awake()
+    {
+        base.Awake();
+        gameObject.SetActive(false);
+    }
     protected override void HandleInput()
     {
         float horizontalInput = GetHorizontalInput();
@@ -24,4 +29,11 @@ public abstract class SlimeBase : PlayerMovement
 
    
     public abstract void SpecialAbility();
+
+    public virtual void SetHp(int hp)
+    {
+        currentHealth = hp;
+    }
+
+    
 }

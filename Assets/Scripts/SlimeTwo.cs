@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class SlimeTwo : SlimeBase
 {
+    
     protected override float GetHorizontalInput()
     {
         float input = 0;
