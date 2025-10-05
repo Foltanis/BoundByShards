@@ -107,4 +107,7 @@ public abstract class PlayerMovement : MonoBehaviour
     {
         return currentHealth;
     }
+
+    public InputAction GetMoveAction() { return moveAction; }
+
 }
