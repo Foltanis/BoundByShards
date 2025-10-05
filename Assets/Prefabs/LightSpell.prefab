@@ -44,3 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60872800b3ab08141ae7fb3ae65a1c08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LightSpell
+  lightPrefab: {fileID: 6510115427391124205, guid: 377416b4a1aaaab46bd51961dbb4225e, type: 3}
