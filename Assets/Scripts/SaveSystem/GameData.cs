@@ -5,6 +5,5 @@ public class GameData
 {
     public SaveMetadata metadata;
 
-    public int level;
-    public string currentScene;
+    public string levelSceneName;
 }

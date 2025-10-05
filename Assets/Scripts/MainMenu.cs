@@ -9,7 +9,7 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
-        
+        SaveSystem.Init();
     }
 
     void Update()
@@ -20,8 +20,9 @@ public class MainMenu : MonoBehaviour
     public void NewGame()
     {
         string newGameName = newGameNameInput.text;
+        SaveSystem.CreateNewGame(newGameName);
         Debug.Log("Starting new game: " + newGameName);
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Level1");
     }
 
     public void QuitGame()

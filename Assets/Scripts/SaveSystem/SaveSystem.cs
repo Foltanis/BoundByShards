@@ -11,7 +11,7 @@ public static class SaveSystem
     private static string saveDir => Path.Combine(Application.persistentDataPath, "Saves");
     private static string indexPath => Path.Combine(saveDir, "index.json");
 
-    private static Dictionary<string, SaveMetadata> cache = new();
+    private static Dictionary<string, SaveMetadata> saves = new();
 
     public static void Init()
     {
@@ -21,7 +21,7 @@ public static class SaveSystem
         if (File.Exists(indexPath))
         {
             string json = File.ReadAllText(indexPath);
-            cache = JsonUtility.FromJson<SaveMetadataList>(json).ToDictionary();
+            saves = JsonUtility.FromJson<SaveMetadataList>(json).ToDictionary();
         }
     }
 
@@ -36,8 +36,10 @@ public static class SaveSystem
             lastPlayedTime = DateTime.Now.ToString(),
             playDuration = 0f
         };
-        cache[id] = meta;
+        saves[id] = meta;
         SaveMetadataIndex();
+
+        PlayerPrefs.SetString("currentSaveId", id);
 
         GameData newData = new GameData { metadata = meta };
         SaveGameData(newData);
@@ -53,7 +55,7 @@ public static class SaveSystem
         BinaryFormatter formatter = new();
         formatter.Serialize(stream, data);
 
-        cache[data.metadata.id] = data.metadata;
+        saves[data.metadata.id] = data.metadata;
         SaveMetadataIndex();
     }
 
@@ -72,13 +74,13 @@ public static class SaveSystem
         string path = Path.Combine(saveDir, id + ".save");
         if (File.Exists(path)) File.Delete(path);
 
-        if (cache.Remove(id))
+        if (saves.Remove(id))
             SaveMetadataIndex();
     }
 
     private static void SaveMetadataIndex()
     {
-        var wrapper = new SaveMetadataList { list = new List<SaveMetadata>(cache.Values) };
+        var wrapper = new SaveMetadataList { list = new List<SaveMetadata>(saves.Values) };
         string json = JsonUtility.ToJson(wrapper, true);
         File.WriteAllText(indexPath, json, Encoding.UTF8);
     }
@@ -93,6 +95,6 @@ public static class SaveSystem
 
     public static List<SaveMetadata> GetAllMetadata()
     {
-        return new List<SaveMetadata>(cache.Values);
+        return new List<SaveMetadata>(saves.Values);
     }
 }
