@@ -7,7 +7,7 @@ public class Spells : MonoBehaviour
     protected SlimeTwo slimeTwo;
     protected Mage mage;
 
-    public void Awake()
+    public virtual void Awake()
     {
         slimeOne = FindAnyObjectByType<SlimeOne>(FindObjectsInactive.Include);
         slimeTwo = FindAnyObjectByType<SlimeTwo>(FindObjectsInactive.Include);

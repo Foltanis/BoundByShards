@@ -45,5 +45,8 @@ public class Mage : PlayerMovement
         }
     }
 
+    public InputAction GetLightSpellInput() { return lightSpell; }
+    public InputAction GetSpellMoveInput() { return spellMove; }
+
 
 }
