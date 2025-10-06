@@ -7,7 +7,6 @@ public class SlimesConn : SlimeBase
     {
         body = GetComponent<Rigidbody2D>();
         baseScale = transform.localScale;
-        currentHealth = maxHealth;
 
         playerInput = GetComponent<PlayerInput>();
         speed *= 0.65f;
@@ -15,6 +14,7 @@ public class SlimesConn : SlimeBase
         wallJumpSpeed *= 0.5f;
 
         maxHealth *= 2;
+        currentHealth = maxHealth;
     }
     protected override float GetHorizontalInput()
     {

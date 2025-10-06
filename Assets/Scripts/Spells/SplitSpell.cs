@@ -8,6 +8,8 @@ public class SplitSpell : Spells
     bool slimesSplit = false;
     private Coroutine timerCoroutine;
     private bool timerRunning = false;
+    private const float mergeDistance = 0.4f;
+    private const float timeToConnect = 10f;
     public override void Cast()
     {
         if (slimesSplit && SlimesCanConnect())
@@ -23,6 +25,7 @@ public class SplitSpell : Spells
 
     private void CastSplitSlimes()
     {
+        // splitting slimes into two, health is halved
         slimesSplit = true;
         Vector3 slimesPos = slimes.GetCurrPosition();
         int slimesHealth = slimes.GetHp();
@@ -32,13 +35,14 @@ public class SplitSpell : Spells
         slimeOne.gameObject.SetActive(true);
         slimeTwo.gameObject.SetActive(true);
 
+        // helt is floored when odd
         slimeOne.SetHp(slimesHealth / 2);
         slimeTwo.SetHp(slimesHealth / 2);
 
-        slimeOne.transform.position = slimesPos + new Vector3(-0.4f, 0, 0);
-        slimeTwo.transform.position = slimesPos + new Vector3(0.4f, 0, 0);
+        slimeOne.transform.position = slimesPos + new Vector3(-mergeDistance, 0, 0);
+        slimeTwo.transform.position = slimesPos + new Vector3(mergeDistance, 0, 0);
 
-        StartTimer(10f);
+        StartTimer(timeToConnect);
     }
     
     public void StartTimer(float duration)
@@ -78,7 +82,7 @@ public class SplitSpell : Spells
 
     private void OnTimerEnd()
     {
-
+        // connect slimes if they are close enough, otherwise end level
         if (slimesSplit && SlimesCanConnect())
         {
             ConnectSlimes();
@@ -92,12 +96,14 @@ public class SplitSpell : Spells
     }
     private bool SlimesCanConnect()
     {
+        //checking distance between slimes
         float distance = Vector3.Distance(slimeOne.transform.position, slimeTwo.transform.position);
-        return distance <= 0.4f;
+        return distance <= mergeDistance;
     }
 
     private void ConnectSlimes()
     {
+        // merging slimes, health is summed
         StopTimer();
         slimesSplit = false;
         Vector3 mergePos = (slimeOne.transform.position + slimeTwo.transform.position) / 2f;

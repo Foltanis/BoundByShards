@@ -64,7 +64,7 @@ public abstract class PlayerMovement : MonoBehaviour
         else if (onWall)
         {
             body.linearVelocity = new Vector2(body.linearVelocity.x, wallJumpSpeed);
-            onWall = false;
+            onWall = false; // neda sa suvisle skakat po stene (treba ist od steny a naspat)
         }
     }
 

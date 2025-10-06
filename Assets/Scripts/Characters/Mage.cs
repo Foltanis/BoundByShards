@@ -9,10 +9,11 @@ public class Mage : PlayerMovement
     private InputAction lightSpellInput;
     private InputAction spellMoveInput;
 
-    [SerializeField]  private SplitSpell splitSpell;
+    [SerializeField]  private GameObject splitSpellPrefab;
     [SerializeField] private GameObject lightSpellPrefab;
 
     private GameObject lightSpell;
+    private GameObject splitSpell;
 
     private bool enableMovement = true;
     protected override void Awake()
@@ -29,12 +30,19 @@ public class Mage : PlayerMovement
 
     protected override void HandleInput()
     {
+        // can move only if no light spell is active
         if (enableMovement)
         base.HandleInput();
 
+        // spells are implemented as prefabs
         if (splitSlimesInput.triggered)
         {
-            splitSpell.Cast();
+            if (splitSpell == null)
+            {
+                splitSpell = Instantiate(splitSpellPrefab, transform.position, Quaternion.identity);
+               
+            }
+            splitSpell.GetComponent<SplitSpell>().Cast();
         }
         if (lightSpellInput.triggered)
         {
@@ -49,12 +57,11 @@ public class Mage : PlayerMovement
                 lightSpell = null;
             }
         }
-            
-
     }
 
     public override void Jump()
     {
+        // mage cant wall jump
         if (enableMovement && grounded)
         {
             body.linearVelocity = new Vector2(body.linearVelocity.x, jumpSpeed);

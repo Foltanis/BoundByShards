@@ -6,7 +6,7 @@ public class LightController : MonoBehaviour
     private InputAction moveAction;
     private float speed = 5f;
 
-    // Inicializácia — dostane InputAction priamo od LightSpell
+    
     public void Init(InputAction moveInput)
     {
         moveAction = moveInput;

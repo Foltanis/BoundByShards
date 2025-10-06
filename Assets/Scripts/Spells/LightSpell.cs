@@ -25,14 +25,13 @@ public class LightSpell : Spells
         // zablokujeme pohyb mága
         mage.SetControlEnabled(false);
 
-        // pozícia maga
         Vector3 pos = mage.transform.position;
 
-        // vytvoríme 2 svetlá
+        
         light1 = Instantiate(lightPrefab, pos + new Vector3(-1, 0, 0), Quaternion.identity);
         light2 = Instantiate(lightPrefab, pos + new Vector3(1, 0, 0), Quaternion.identity);
 
-        // napr. pridáme skripty na ovládanie svetiel
+        
         light1.AddComponent<LightController>().Init(Light1Move);
         light2.AddComponent<LightController>().Init(Light2Move);
     }
@@ -44,6 +43,5 @@ public class LightSpell : Spells
         if (light1) Destroy(light1);
         if (light2) Destroy(light2);
 
-        
     }
 }

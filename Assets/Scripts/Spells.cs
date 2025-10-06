@@ -2,6 +2,7 @@
 
 public class Spells : MonoBehaviour
 {
+    // references to all characters objects
     protected SlimesConn slimes;
     protected SlimeOne slimeOne;
     protected SlimeTwo slimeTwo;
