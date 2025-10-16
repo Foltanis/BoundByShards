@@ -174,7 +174,7 @@ MonoBehaviour:
   jumpSpeed: 6
   wallJumpSpeed: 5
   maxHealth: 6
-  splitSpell: {fileID: 0}
+  splitSpellPrefab: {fileID: 5425609755830375076, guid: 793a218665bfdd14988fe74b54d1f9de, type: 3}
   lightSpellPrefab: {fileID: 5483846419222235285, guid: 0f265ecc5861175408795909a0239dfe, type: 3}
 --- !u!114 &1838574957094760717
 MonoBehaviour:
