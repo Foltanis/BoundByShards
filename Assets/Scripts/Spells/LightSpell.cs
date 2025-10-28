@@ -1,47 +1,73 @@
-using System.Data;
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class LightSpell : Spells
+public class LightSpell
 {
-    [SerializeField] private GameObject lightPrefab;
+    private static LightSpell _instance;
+    public static LightSpell Instance
+    {
+        get
+        {
+            if (_instance == null)
+                _instance = new LightSpell();
+            return _instance;
+        }
+    }
+
+    private GameObject mage;
+    private PlayerInput mageInput;
+
     private GameObject light1;
     private GameObject light2;
 
-    private InputAction Light1Move;
-    private InputAction Light2Move;
+    private InputAction movePrimary;
+    private InputAction moveSecondary;
+    private InputAction endSpell;
 
-    public override void Awake()
+    private bool active = false;
+
+    
+    private LightSpell()
     {
-        base.Awake();
+        var cm = CharacterManager.Instance;
+
         
-        Light2Move = mage.GetSpellMoveInput();
-        Light1Move = mage.GetMoveAction();
+        mage = cm.GetPrefab("Mage");
+        mageInput = mage.GetComponent<PlayerInput>();
+        
+        
+        movePrimary = mageInput.actions["SpellMovePrimary"];
+        moveSecondary = mageInput.actions["SpellMoveSecondary"];
+        endSpell = mageInput.actions["LightSpell"];
     }
 
-    public override void Cast()
+    public void Cast(GameObject lightPrefab)
     {
+        if (active)
+        {
+            EndSpell();
+            return;
+        }
+            
+        active = true;
 
-        // zablokujeme pohyb mága
-        mage.SetControlEnabled(false);
+        mageInput.enabled = false;
+        mageInput.actions["LightSpell"].Enable();
 
         Vector3 pos = mage.transform.position;
+        light1 = Object.Instantiate(lightPrefab, pos + Vector3.left, Quaternion.identity);
+        light2 = Object.Instantiate(lightPrefab, pos + Vector3.right, Quaternion.identity);
 
-        
-        light1 = Instantiate(lightPrefab, pos + new Vector3(-1, 0, 0), Quaternion.identity);
-        light2 = Instantiate(lightPrefab, pos + new Vector3(1, 0, 0), Quaternion.identity);
-
-        
-        light1.AddComponent<LightController>().Init(Light1Move);
-        light2.AddComponent<LightController>().Init(Light2Move);
+        light1.AddComponent<LightController>().Init(movePrimary);
+        light2.AddComponent<LightController>().Init(moveSecondary);
     }
 
     public void EndSpell()
     {
-        mage.SetControlEnabled(true);
+        active = false;
+        mageInput.enabled = true;
 
-        if (light1) Destroy(light1);
-        if (light2) Destroy(light2);
-
+        if (light1) Object.Destroy(light1);
+        if (light2) Object.Destroy(light2);
     }
 }

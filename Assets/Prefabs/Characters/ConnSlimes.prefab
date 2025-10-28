@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 6382882799786054361}
   - component: {fileID: 9138063847320164703}
   - component: {fileID: 3369617468725522983}
-  - component: {fileID: 7321041956376046675}
+  - component: {fileID: 5792186083688720239}
   m_Layer: 0
-  m_Name: Slimes
+  m_Name: ConnSlimes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 2429295521814322496}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.74, y: 0.109999985, z: 0}
+  m_LocalPosition: {x: 5.67, y: -1.55, z: 0}
   m_LocalScale: {x: 0.5, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -109,7 +109,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: e1524da43e2b70540aab85fba7c5c385, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -157,7 +157,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.00000011920929}
   m_Size: {x: 1, y: 1.9999999}
   m_Direction: 0
---- !u!114 &7321041956376046675
+--- !u!114 &5792186083688720239
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,10 +166,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2429295521814322496}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ff29e15ccfb4164380d622cfceced46, type: 3}
+  m_Script: {fileID: 11500000, guid: 831d865ffb641e64fbe80ed23c76dbb4, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
-  speed: 6
-  jumpSpeed: 6
-  wallJumpSpeed: 5
-  maxHealth: 6
+  m_EditorClassIdentifier: Assembly-CSharp::Health
+  maxHealth: 12

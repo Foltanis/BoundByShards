@@ -9,11 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2333836674689704498}
-  - component: {fileID: 3211566984029853508}
   - component: {fileID: 4359722416442332384}
   - component: {fileID: 9065869902741719725}
   - component: {fileID: 480273409425211262}
-  - component: {fileID: 8462822190865269200}
+  - component: {fileID: 3969257538626271736}
+  - component: {fileID: 7475918889058433317}
+  - component: {fileID: 5615946209376479982}
   m_Layer: 0
   m_Name: SlimeTwo
   m_TagString: Untagged
@@ -36,22 +37,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3211566984029853508
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1397024207107231673}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65dec4e978a354c4db299a7404207bf3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  speed: 6
-  jumpSpeed: 6
-  wallJumpSpeed: 5
-  maxHealth: 6
 --- !u!212 &4359722416442332384
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -183,7 +168,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &8462822190865269200
+--- !u!114 &3969257538626271736
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -195,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
-  m_Actions: {fileID: -944628639613478452, guid: 0d0ecca73fcbf5d428fec06771fe054b, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: ed668eda37be279478552c9e32a5b923, type: 3}
   m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -210,6 +195,34 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: SlimeTwoControls
+  m_DefaultActionMap: SlimeTwo
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &7475918889058433317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1397024207107231673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b622c0fadf2614b4291e1f3425f4607d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  speed: 6
+  jumpForce: 6
+  wallJumpForce: 4
+--- !u!114 &5615946209376479982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1397024207107231673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 831d865ffb641e64fbe80ed23c76dbb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Health
+  maxHealth: 6

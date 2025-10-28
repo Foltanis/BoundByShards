@@ -1,16 +1,18 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class LightController : MonoBehaviour
 {
     private InputAction moveAction;
-    private float speed = 5f;
+    [SerializeField] private float speed = 5f;
 
     
     public void Init(InputAction moveInput)
     {
         moveAction = moveInput;
+        moveAction.Enable();
     }
+
 
     private void Update()
     {

@@ -1,119 +1,106 @@
 ﻿using UnityEngine;
 
-using UnityEngine.Windows;
-using System.Collections;
-
-public class SplitSpell : Spells
+public class SplitSpell
 {
-    bool slimesSplit = false;
-    private Coroutine timerCoroutine;
-    private bool timerRunning = false;
-    private const float mergeDistance = 0.4f;
-    private const float timeToConnect = 10f;
-    public override void Cast()
+    private static SplitSpell _instance;
+    public static SplitSpell Instance
     {
-        if (slimesSplit && SlimesCanConnect())
+        get
         {
-            ConnectSlimes();
-        }
-        else if (!slimesSplit)
-        {
-            slimesSplit = true;
-            CastSplitSlimes();
+            if (_instance == null)
+                _instance = new SplitSpell();
+            return _instance;
         }
     }
 
-    private void CastSplitSlimes()
-    {
-        // splitting slimes into two, health is halved
-        slimesSplit = true;
-        Vector3 slimesPos = slimes.GetCurrPosition();
-        int slimesHealth = slimes.GetHp();
+    private bool slimesSplit = false;
+    private float mergeDistance = 0.4f;
+    private float timeToConnect = 10f;
 
-        slimes.gameObject.SetActive(false);
+    private GameObject dashSlime;
+    private GameObject slimeTwo;
+    private GameObject connSlimes;
 
-        slimeOne.gameObject.SetActive(true);
-        slimeTwo.gameObject.SetActive(true);
+    private Timer timer;
 
-        // helt is floored when odd
-        slimeOne.SetHp(slimesHealth / 2);
-        slimeTwo.SetHp(slimesHealth / 2);
 
-        slimeOne.transform.position = slimesPos + new Vector3(-mergeDistance, 0, 0);
-        slimeTwo.transform.position = slimesPos + new Vector3(mergeDistance, 0, 0);
-
-        StartTimer(timeToConnect);
-    }
     
-    public void StartTimer(float duration)
+    private SplitSpell()
     {
-        if (!timerRunning)
-        {
-            timerCoroutine = StartCoroutine(TimerCoroutine(duration));
-        }
+        var cm = CharacterManager.Instance;
+        dashSlime = cm.GetPrefab("DashSlime");
+        slimeTwo = cm.GetPrefab("SlimeTwo");
+        connSlimes = cm.GetPrefab("ConnSlimes");
+
+        timer = new Timer(timeToConnect);
     }
 
-    public void StopTimer()
+    public void Update(float deltaTime)
     {
-        if (timerRunning && timerCoroutine != null)
-        {
-            StopCoroutine(timerCoroutine);
-            timerRunning = false;
-            Debug.Log("⏹️ Časovač bol ukončený skôr!");
-        }
+        if (!timer.IsRunning)
+            return;
+
+
+        timer.Update(deltaTime);
+        if (timer.IsFinished())
+            OnTimerEnd();
+        
     }
 
-    private IEnumerator TimerCoroutine(float duration)
+    public void Cast()
     {
-        timerRunning = true;
-        float time = duration;
-
-        while (time > 0f)
-        {
-            Debug.Log($"⏱️ zoSTAVA {time:F0} sekúnd");
-            yield return new WaitForSeconds(1f);
-            time -= 1f;
-        }
-
-        Debug.Log("✅ Časovač skončil!");
-        timerRunning = false;
-        OnTimerEnd();
-    }
-
-    private void OnTimerEnd()
-    {
-        // connect slimes if they are close enough, otherwise end level
         if (slimesSplit && SlimesCanConnect())
-        {
             ConnectSlimes();
-        }
-        else
-        {
-            slimeOne.gameObject.SetActive(false);
-            slimeTwo.gameObject.SetActive(false);
-            gameObject.SetActive(false);
-        }
+        else if (!slimesSplit)
+            SplitSlimes();
     }
-    private bool SlimesCanConnect()
+
+    private void SplitSlimes()
     {
-        //checking distance between slimes
-        float distance = Vector3.Distance(slimeOne.transform.position, slimeTwo.transform.position);
-        return distance <= mergeDistance;
+        slimesSplit = true;
+        Vector3 pos = connSlimes.transform.position;
+        int hp = connSlimes.GetComponent<Health>().GetHp();
+
+        connSlimes.SetActive(false);
+        CharacterManager.Instance.Spawn("DashSlime", pos + new Vector3(-mergeDistance, 0, 0));
+        CharacterManager.Instance.Spawn("SlimeTwo", pos + new Vector3(mergeDistance, 0, 0));
+
+        dashSlime.GetComponent<Health>().SetHp(hp / 2);
+        slimeTwo.GetComponent<Health>().SetHp(hp / 2);
+
+        timer.Reset();
     }
 
     private void ConnectSlimes()
     {
-        // merging slimes, health is summed
-        StopTimer();
+        timer.Stop();
         slimesSplit = false;
-        Vector3 mergePos = (slimeOne.transform.position + slimeTwo.transform.position) / 2f;
-        int newHp = slimeOne.GetHp() + slimeTwo.GetHp();
 
-        slimeOne.gameObject.SetActive(false);
-        slimeTwo.gameObject.SetActive(false);
+        Vector3 mergePos = (dashSlime.transform.position + slimeTwo.transform.position) / 2f;
+        int newHp = dashSlime.GetComponent<Health>().GetHp() + slimeTwo.GetComponent<Health>().GetHp();
 
-        slimes.gameObject.SetActive(true);
-        slimes.SetHp(newHp);
-        slimes.transform.position = mergePos;
+        dashSlime.SetActive(false);
+        slimeTwo.SetActive(false);
+        CharacterManager.Instance.Spawn("ConnSlimes", mergePos);
+        connSlimes.GetComponent<Health>().SetHp(newHp);
+    }
+
+    private bool SlimesCanConnect()
+    {
+        float distance = Vector3.Distance(dashSlime.transform.position, slimeTwo.transform.position);
+        return distance <= mergeDistance;
+    }
+
+    private void OnTimerEnd()
+    {
+        if (slimesSplit && SlimesCanConnect())
+            ConnectSlimes();
+        else
+        {
+            // level lost condition
+            dashSlime.SetActive(false);
+            slimeTwo.SetActive(false);
+            connSlimes.SetActive(false);
+        }
     }
 }
