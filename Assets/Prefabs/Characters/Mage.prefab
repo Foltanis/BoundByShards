@@ -225,6 +225,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: d9e0361a-fc35-4db8-9e4b-3f0b022e61d6
     m_ActionName: 'Mage/SplitSpell[/Keyboard/q]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0925960f-6871-4e44-8552-c4324e9a61b7
+    m_ActionName: 'Mage/FireballSpell[/Keyboard/x]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Mage
@@ -271,3 +275,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MageAbilities
   lightPrefab: {fileID: 6510115427391124205, guid: 377416b4a1aaaab46bd51961dbb4225e, type: 3}
+  fireballPrefab: {fileID: 4472305404297667350, guid: 026b6bc832efb104185e28c9ba4c8376, type: 3}
