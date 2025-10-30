@@ -50,7 +50,7 @@ public class FireballSpell
 
         
         GameObject fb = Object.Instantiate(fireballPrefab, spawnPos, Quaternion.identity);
-        fb.GetComponent<FireballController>().Init(aimDir);
+        fb.GetComponent<FireballController>().Init(aimDir, mage);
 
         cooldownOn = true;
         cooldown.Reset();

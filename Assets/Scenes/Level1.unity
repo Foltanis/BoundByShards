@@ -728,11 +728,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 336576361140073839, guid: 5b9176eb18003574aaa23a7b567ea41b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.67
+      value: 0.58
       objectReference: {fileID: 0}
     - target: {fileID: 336576361140073839, guid: 5b9176eb18003574aaa23a7b567ea41b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.55
+      value: -0.77
       objectReference: {fileID: 0}
     - target: {fileID: 336576361140073839, guid: 5b9176eb18003574aaa23a7b567ea41b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -980,10 +980,10 @@ MonoBehaviour:
     activeOnStart: 1
   - id: DashSlime
     instance: {fileID: 1987607730}
-    activeOnStart: 0
+    activeOnStart: 1
   - id: ConnSlimes
     instance: {fileID: 1210360562}
-    activeOnStart: 1
+    activeOnStart: 0
   - id: SlimeTwo
     instance: {fileID: 308493025}
     activeOnStart: 0
@@ -1172,6 +1172,21 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8071830606806677439, guid: 2e3d0058425c65c4ab8ec0b43f8a270f, type: 3}
   m_PrefabInstance: {fileID: 8842005122408929025}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1987607738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1987607730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242eecb0fe8026840be426ab2c934700, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DashAbility
+  dashSpeed: 20
+  dashDuration: 0.2
+  dashCooldown: 1
 --- !u!1001 &4892876930321528765
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1334,6 +1349,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4652442154033575274, guid: 2e3d0058425c65c4ab8ec0b43f8a270f, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4652442154033575274, guid: 2e3d0058425c65c4ab8ec0b43f8a270f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[10].m_ActionId
+      value: 0925960f-6871-4e44-8552-c4324e9a61b7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4652442154033575274, guid: 2e3d0058425c65c4ab8ec0b43f8a270f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_ActionId
+      value: dc3afeb4-cde3-4663-8c2c-99d54f1d62e2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4652442154033575274, guid: 2e3d0058425c65c4ab8ec0b43f8a270f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[10].m_ActionName
+      value: 'Mage/FireballSpell[/Keyboard/x]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4652442154033575274, guid: 2e3d0058425c65c4ab8ec0b43f8a270f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_ActionName
+      value: 'DashSlime/Dash[/Keyboard/space]'
+      objectReference: {fileID: 0}
     - target: {fileID: 8071830606806677439, guid: 2e3d0058425c65c4ab8ec0b43f8a270f, type: 3}
       propertyPath: m_Name
       value: DashSlime
@@ -1341,7 +1376,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8071830606806677439, guid: 2e3d0058425c65c4ab8ec0b43f8a270f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1987607738}
   m_SourcePrefab: {fileID: 100100000, guid: 2e3d0058425c65c4ab8ec0b43f8a270f, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
