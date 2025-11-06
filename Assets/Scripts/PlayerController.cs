@@ -87,10 +87,6 @@ public class PlayerController : MonoBehaviour
             Vector2 force = new Vector2(wallDir * wallJumpForce, jumpForce);
             body.linearVelocity = force;
         }
-
-
-
-
     }
 
     private void OnJumpCanceled(InputAction.CallbackContext ctx)
@@ -111,5 +107,8 @@ public class PlayerController : MonoBehaviour
         if (col.gameObject.CompareTag("Wall")) onWall = false;
     }
 
-    
+    public void ResetInput()
+    {
+        moveValue = 0f;
+    }
 }

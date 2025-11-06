@@ -5,13 +5,13 @@ using UnityEngine.InputSystem;
 public class DashAbility : MonoBehaviour
 {
     [Header("Dash Settings")]
-    [SerializeField] private float dashSpeed = 1000000f;
+    [SerializeField] private float dashSpeed = 200f;
     [SerializeField] private float dashDuration = 0.2f;
-    [SerializeField] private float dashCooldown = 1.0f;  
+    [SerializeField] private float dashCooldown = 1.0f;
 
     private Rigidbody2D rb;
+    private PlayerController playerController;
     private PlayerInput playerInput;
-    //private InputAction moveAction;
     private InputAction dashAction;
 
     private bool isDashing = false;
@@ -25,11 +25,9 @@ public class DashAbility : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        playerController = GetComponent<PlayerController>();
         playerInput = GetComponent<PlayerInput>();
-
-        //moveAction = playerInput.actions["Move"];
         dashAction = playerInput.actions["Dash"];
-
         defaultGravityScale = rb.gravityScale;
 
         dashTimer = new Timer(dashDuration);
@@ -46,7 +44,7 @@ public class DashAbility : MonoBehaviour
                 canDash = true;
         }
 
-        //Ak je pr·ve dash aktÌvny
+        // Dash management
         if (isDashing)
         {
             dashTimer.Update(Time.deltaTime);
@@ -55,7 +53,7 @@ public class DashAbility : MonoBehaviour
         }
 
         // Dash input
-        if (canDash && dashAction.triggered /*&& !isDashing*/)
+        if (canDash && dashAction.triggered)
         {
             StartDash();
         }
@@ -64,42 +62,32 @@ public class DashAbility : MonoBehaviour
     private void StartDash()
     {
         Debug.Log("Dash started");
-        //dashDirection = moveAction.ReadValue<float>();
 
-        // ak sa nehybe, pouûijeme smer podæa otoËenia
-        //if (Mathf.Abs(dashDirection) < 0.1f)
-        //dashDirection = Mathf.Sign(transform.localScale.x);
+        playerController.enabled = false;
+
         dashDirection = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
 
         rb.gravityScale = 0f;
         rb.linearDamping = 0f;
-
-        //rb.linearVelocity = Vector2.zero;
+        rb.linearVelocity = Vector2.zero;
         rb.AddForce(dashDirection * dashSpeed, ForceMode2D.Impulse);
 
         isDashing = true;
         canDash = false;
 
-        cooldownTimer.Reset();
         dashTimer.Reset();
+        cooldownTimer.Reset();
     }
 
     private void EndDash()
     {
         isDashing = false;
-        canDash = true;
-
-        rb.gravityScale = 1f; // sp‰ù na pÙvodn˙ hodnotu
-
-        // Spomalenie po dashe(alebo nech·ö podæa fyziky)
+        rb.gravityScale = defaultGravityScale;
         rb.linearVelocity = Vector2.zero;
+
+        playerController.ResetInput();
+        playerController.enabled = true;
+
         Debug.Log("Dash ended");
-        // e.g. animator.ResetTrigger("Dash");
     }
-
-    //public bool IsDashing()
-    //{
-    //    return isDashing;
-    //}
 }
-
