@@ -773,13 +773,64 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2429295521814322496, guid: 5b9176eb18003574aaa23a7b567ea41b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1210360569}
+    - targetCorrespondingSourceObject: {fileID: 2429295521814322496, guid: 5b9176eb18003574aaa23a7b567ea41b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1210360568}
   m_SourcePrefab: {fileID: 100100000, guid: 5b9176eb18003574aaa23a7b567ea41b, type: 3}
 --- !u!1 &1210360562 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2429295521814322496, guid: 5b9176eb18003574aaa23a7b567ea41b, type: 3}
   m_PrefabInstance: {fileID: 1210360561}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1210360568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210360562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b622c0fadf2614b4291e1f3425f4607d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  speed: 6
+  jumpForce: 6
+  wallJumpForce: 4
+--- !u!114 &1210360569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210360562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
+  m_Actions: {fileID: -944628639613478452, guid: ed668eda37be279478552c9e32a5b923, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: 567295c9-57a8-4abe-9b2a-77ed07452256
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &1211998625
 GameObject:
   m_ObjectHideFlags: 0
@@ -980,10 +1031,10 @@ MonoBehaviour:
     activeOnStart: 1
   - id: DashSlime
     instance: {fileID: 1987607730}
-    activeOnStart: 1
+    activeOnStart: 0
   - id: ConnSlimes
     instance: {fileID: 1210360562}
-    activeOnStart: 0
+    activeOnStart: 1
   - id: SlimeTwo
     instance: {fileID: 308493025}
     activeOnStart: 0
