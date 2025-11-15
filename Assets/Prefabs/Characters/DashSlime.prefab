@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4652442154033575274}
   - component: {fileID: 1581983881622850056}
   - component: {fileID: 3354037432182590936}
+  - component: {fileID: 2868377957074245869}
   m_Layer: 0
   m_Name: DashSlime
   m_TagString: Untagged
@@ -166,7 +167,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &4652442154033575274
 MonoBehaviour:
@@ -233,6 +234,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: d9e0361a-fc35-4db8-9e4b-3f0b022e61d6
     m_ActionName: 'Mage/SplitSpell[/Keyboard/q]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0925960f-6871-4e44-8552-c4324e9a61b7
+    m_ActionName: 'Mage/FireballSpell[/Keyboard/x]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: dc3afeb4-cde3-4663-8c2c-99d54f1d62e2
+    m_ActionName: 'DashSlime/Dash[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7b6478ff-ae4d-4d16-9e1f-c339baac03d8
+    m_ActionName: 'ConnSlimes/Move[/Keyboard/leftArrow,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7d664fb5-d189-432b-8f97-1a7b28347e36
+    m_ActionName: 'ConnSlimes/Jump[/Keyboard/numpad8]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: DashSlime
@@ -266,3 +283,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
   maxHealth: 6
+--- !u!114 &2868377957074245869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8071830606806677439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242eecb0fe8026840be426ab2c934700, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DashAbility
+  dashSpeed: 20
+  dashDuration: 0.2
+  dashCooldown: 1

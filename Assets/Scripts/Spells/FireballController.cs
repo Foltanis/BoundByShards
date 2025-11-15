@@ -3,22 +3,23 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class FireballController : MonoBehaviour
 {
-    [SerializeField] private int damage = 10;
-    [SerializeField] private float speed = 5f;
-
     private Rigidbody2D rb;
     private Collider2D myCollider;
-    Vector2 direction;
-    private Collider2D casterCol;
 
+    private Vector2 direction;
+    private float speed;
+    private int damage;
+    private Collider2D casterCollider;
 
-    public void Init(Vector2 dir, GameObject caster)
+    public void Init(Vector2 dir, float speed, int dmg, GameObject caster)
     {
-        direction = dir.normalized;
-        casterCol = caster.GetComponent<Collider2D>();
+        direction = dir;
+        this.speed = speed;
+        damage = dmg;
+        casterCollider = caster.GetComponent<Collider2D>();
     }
 
-    void Awake()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         myCollider = GetComponent<Collider2D>();
@@ -27,22 +28,15 @@ public class FireballController : MonoBehaviour
     private void Start()
     {
         rb.linearVelocity = direction * speed;
-
-        if (casterCol != null)
-        {
-            Physics2D.IgnoreCollision(myCollider, casterCol, true);
-        }
+        Physics2D.IgnoreCollision(myCollider, casterCollider, true);
     }
 
-
-    void OnCollisionEnter2D(Collision2D col)
+    private void OnCollisionEnter2D(Collision2D col)
     {
-        //if (col.gameObject.CompareTag("Enemy"))
-        //{
-        //    var hp = col.gameObject.GetComponent<Health>();
-        //    if (hp != null)
-        //        hp.TakeDamage(damage);
-        //}
+        // Example: deal damage if target has HP
+        //var hp = col.gameObject.GetComponent<Health>();
+        //if (hp != null)
+        //    hp.TakeDamage(damage);
 
         Destroy(gameObject);
     }

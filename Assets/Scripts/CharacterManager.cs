@@ -1,10 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+
+public enum CharacterType
+{
+    Mage,
+    SlimesConn,
+    DashSlime,
+    SlimeTwo
+}
+
 [System.Serializable]
 public class CharacterEntry
 {
-    public string id;
+    public CharacterType id;
     public GameObject instance;
     public bool activeOnStart = true;
 }
@@ -15,7 +24,7 @@ public class CharacterManager : MonoBehaviour
 
     [SerializeField] private List<CharacterEntry> characters = new List<CharacterEntry>();
 
-    private Dictionary<string, GameObject> lookup = new Dictionary<string, GameObject>();
+    private Dictionary<CharacterType, GameObject> lookup = new Dictionary<CharacterType, GameObject>();
 
     void Awake()
     {
@@ -38,7 +47,7 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
-    public void Spawn(string id, Vector3 position)
+    public void Spawn(CharacterType id, Vector3 position)
     {
         if (lookup.TryGetValue(id, out var obj) && obj != null)
         {
@@ -47,16 +56,16 @@ public class CharacterManager : MonoBehaviour
             return;
         }
 
-        Debug.LogWarning($"❌ Character '{id}' not found!");
+        Debug.LogWarning($"Character '{id}' not found!");
     }
 
-    public GameObject GetPrefab(string id)
+    public GameObject Get(CharacterType id)
     {
         if (lookup.TryGetValue(id, out var prefab))
         {
             return prefab;
         }
-        Debug.LogWarning($"❌ Character '{id}' not found!");
+        Debug.LogWarning($"Character '{id}' not found!");
         return null;
     }
 }

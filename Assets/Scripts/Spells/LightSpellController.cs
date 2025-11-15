@@ -1,0 +1,70 @@
+﻿using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class LightSpellController : MonoBehaviour
+{
+    [SerializeField] private LightSpellData spellData; // ScriptableObject reference
+
+    private PlayerInput input;
+
+    private InputAction movePrimary;
+    private InputAction moveSecondary;
+    private InputAction toggleSpell;
+
+    private LightController light1;
+    private LightController light2;
+
+    private bool isActive = false;
+
+    private void Awake()
+    {
+        input = GetComponent<PlayerInput>();
+
+        movePrimary = input.actions["SpellMovePrimary"];
+        moveSecondary = input.actions["SpellMoveSecondary"];
+        toggleSpell = input.actions["LightSpell"];
+    }
+
+    private void Update()
+    {
+        if (toggleSpell != null && toggleSpell.triggered)
+            ToggleSpell();
+    }
+
+    private void ToggleSpell()
+    {
+        if (!isActive) Cast();
+        else EndSpell();
+    }
+
+    private void Cast()
+    {
+        isActive = true;
+
+        // disable player movement inputs during spell
+        input.enabled = false;
+        input.actions["SplitSpell"].Enable();
+        input.actions["LightSpell"].Enable();
+
+        Vector3 center = transform.position;
+
+        light1 = Instantiate(spellData.lightPrefab, center + Vector3.left * spellData.spawnDistance, Quaternion.identity)
+            .AddComponent<LightController>();
+        light2 = Instantiate(spellData.lightPrefab, center + Vector3.right * spellData.spawnDistance, Quaternion.identity)
+            .AddComponent<LightController>();
+
+        light1.Init(movePrimary);
+        light2.Init(moveSecondary);
+    }
+
+    private void EndSpell()
+    {
+        isActive = false;
+
+        input.enabled = true;
+
+        if (light1) Destroy(light1.gameObject);
+        if (light2) Destroy(light2.gameObject);
+    }
+}

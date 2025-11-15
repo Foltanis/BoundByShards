@@ -16,6 +16,9 @@ GameObject:
   - component: {fileID: 3017597585836091560}
   - component: {fileID: 7354679049311615750}
   - component: {fileID: 5169507764869604571}
+  - component: {fileID: 1521894128957006429}
+  - component: {fileID: 2265801819773075243}
+  - component: {fileID: 7052615775822783775}
   m_Layer: 0
   m_Name: Mage
   m_TagString: Untagged
@@ -229,6 +232,18 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 0925960f-6871-4e44-8552-c4324e9a61b7
     m_ActionName: 'Mage/FireballSpell[/Keyboard/x]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: dc3afeb4-cde3-4663-8c2c-99d54f1d62e2
+    m_ActionName: 'DashSlime/Dash[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7b6478ff-ae4d-4d16-9e1f-c339baac03d8
+    m_ActionName: 'ConnSlimes/Move[/Keyboard/leftArrow,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7d664fb5-d189-432b-8f97-1a7b28347e36
+    m_ActionName: 'ConnSlimes/Jump[/Keyboard/numpad8]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Mage
@@ -274,5 +289,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92b70685ed4ec2f4aac73905a07abc9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MageAbilities
-  lightPrefab: {fileID: 6510115427391124205, guid: 377416b4a1aaaab46bd51961dbb4225e, type: 3}
-  fireballPrefab: {fileID: 4472305404297667350, guid: 026b6bc832efb104185e28c9ba4c8376, type: 3}
+  splitSpellController: {fileID: 2265801819773075243}
+--- !u!114 &1521894128957006429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4254639586056531541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60872800b3ab08141ae7fb3ae65a1c08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightSpellController
+  spellData: {fileID: 11400000, guid: 57625c2b6d60d8f45aa281bcf82da2e2, type: 2}
+--- !u!114 &2265801819773075243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4254639586056531541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29e0742d0f20aeb42bd85581507f1b67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SplitSpellController
+  data: {fileID: 11400000, guid: 8712dbe32cdb96547bef8883304c9e9c, type: 2}
+  slimeOne: {fileID: 0}
+  slimeTwo: {fileID: 0}
+  slimesConnected: {fileID: 0}
+--- !u!114 &7052615775822783775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4254639586056531541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f641fb5ab8d250d4e9b84e9050b1f6e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FireballSpellController
+  spellData: {fileID: 11400000, guid: 8f311a58cb1dac347a8b2b0d2a6a6b45, type: 2}
