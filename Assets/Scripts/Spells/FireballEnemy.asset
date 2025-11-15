@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2dea3d5d14edf694397821f8b5a4d979, type: 3}
-  m_Name: FireballMage
+  m_Name: FireballEnemy
   m_EditorClassIdentifier: Assembly-CSharp::FireballData
   fireballPrefab: {fileID: 4472305404297667350, guid: 026b6bc832efb104185e28c9ba4c8376, type: 3}
-  cooldown: 1.5
-  projectileSpeed: 8
-  damage: 10
-  spawnOffset: {x: 0, y: 0.35, z: 0}
+  cooldown: 5
+  projectileSpeed: 5
+  damage: 3
+  spawnOffset: {x: 0, y: 0.22, z: 0}

@@ -20,7 +20,7 @@ public class FireballSpellController : MonoBehaviour
         GameObject caster = gameObject;
 
         GameObject fb = Instantiate(spellData.fireballPrefab,
-                                    caster.transform.position + Vector3.up * 0.5f,
+                                    caster.transform.position + spellData.spawnOffset,
                                     Quaternion.identity);
 
         fb.GetComponent<FireballController>()
