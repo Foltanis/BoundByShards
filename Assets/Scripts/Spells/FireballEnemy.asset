@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FireballEnemy
   m_EditorClassIdentifier: Assembly-CSharp::FireballData
   fireballPrefab: {fileID: 4472305404297667350, guid: 026b6bc832efb104185e28c9ba4c8376, type: 3}
-  cooldown: 5
+  cooldown: 1
   projectileSpeed: 5
   damage: 3
   spawnOffset: {x: 0, y: 0.22, z: 0}

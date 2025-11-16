@@ -239,6 +239,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ca45ba072b1ff444b0d2708def83998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FreezeAbility
-  freezeCooldown: 2
-  freezeDuration: 3.2
+  freezeCooldown: 3
   freezeZone: {fileID: 6573226197154402700, guid: 19c3c51b67975ff439c6924c56ee8ef7, type: 3}

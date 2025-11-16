@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FireballSpellController : MonoBehaviour
+public class FireballSpellController : MonoBehaviour, IFreezableReceiver
 {
     [SerializeField] private FireballData spellData;
 
@@ -31,4 +31,14 @@ public class FireballSpellController : MonoBehaviour
     }
 
     public bool IsOnCooldown => cooldownRemaining > 0;
+
+    public void CastOnFreeze()
+    {
+        enabled = false;
+    }
+
+    public void CastOnUnfreeze()
+    {
+        enabled = true;
+    }
 }

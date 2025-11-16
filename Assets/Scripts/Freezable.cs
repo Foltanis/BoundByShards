@@ -28,10 +28,11 @@ public class Freezable : MonoBehaviour
         foreach (var receiver in GetComponents<IFreezableReceiver>())
         {
             Debug.Log($"Notifying receiver {receiver} of freeze state: {freezing}");
+
             if (freezing)
-                receiver.OnFreeze();
+                receiver.CastOnFreeze();
             else
-                receiver.OnUnfreeze();
+                receiver.CastOnUnfreeze();
         }
     }
 }

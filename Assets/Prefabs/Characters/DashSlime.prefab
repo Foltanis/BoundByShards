@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1581983881622850056}
   - component: {fileID: 3354037432182590936}
   - component: {fileID: 2868377957074245869}
+  - component: {fileID: 6106085468113512201}
   m_Layer: 0
   m_Name: DashSlime
   m_TagString: Untagged
@@ -250,6 +251,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 7d664fb5-d189-432b-8f97-1a7b28347e36
     m_ActionName: 'ConnSlimes/Jump[/Keyboard/numpad8]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 92f8ca1f-098f-43e8-82a2-4f15482deffc
+    m_ActionName: 'SlimeTwo/Freeze[/Keyboard/numpad5]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: DashSlime
@@ -298,3 +303,15 @@ MonoBehaviour:
   dashSpeed: 20
   dashDuration: 0.2
   dashCooldown: 1
+--- !u!114 &6106085468113512201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8071830606806677439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ada260684041e45a54c5af77521d15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Freezable

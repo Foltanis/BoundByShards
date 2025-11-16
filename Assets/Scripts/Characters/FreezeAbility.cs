@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 public class FreezeAbility : MonoBehaviour
 {
     [SerializeField] private float freezeCooldown = 2f;
-    [SerializeField] private float freezeDuration = 3.2f;
     [SerializeField] private GameObject freezeZone;
 
     private bool cooldown = false;
@@ -28,15 +27,8 @@ public class FreezeAbility : MonoBehaviour
             if (timer <= 0f) cooldown = false;
         }
 
-        var moveAction = input.actions["Move"];
-        if (moveAction != null)
-        {
-            float move = moveAction.ReadValue<float>();
-            Debug.Log("Move value: " + move);
-        }
-
         if (freezeAction.triggered)
-            Debug.Log("Freeze action triggered");   
+            CastFreeze();
     }
 
     private void CastFreeze()
@@ -49,12 +41,4 @@ public class FreezeAbility : MonoBehaviour
         cooldown = true;
         timer = freezeCooldown;
     }
-
-    //private void OnTriggerEnter2D(Collider2D other)
-    //{
-    //    Debug.Log("Freeze hit: " + other.name);
-    //    var freezable = other.GetComponent<Freezable>();
-    //    if (freezable != null && other.gameObject != gameObject)
-    //        freezable.Freeze(freezeDuration);
-    //}
 }

@@ -124,25 +124,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1397024207107231673, guid: b2ccb8742ccacea499757db3f633a29d, type: 3}
   m_PrefabInstance: {fileID: 4892876930321528765}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &308493032 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2333836674689704498, guid: b2ccb8742ccacea499757db3f633a29d, type: 3}
-  m_PrefabInstance: {fileID: 4892876930321528765}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &308493033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 308493025}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ca45ba072b1ff444b0d2708def83998, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FreezeAbility
-  freezeCooldown: 2
-  freezeZone: {fileID: 2030641853}
 --- !u!1 &372267292
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,18 +332,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4254639586056531541, guid: 83f681a76d73f7a4482b25248c80fa6c, type: 3}
   m_PrefabInstance: {fileID: 4938189995913695898}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &493109564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 493109552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7ada260684041e45a54c5af77521d15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Freezable
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1179,10 +1148,10 @@ MonoBehaviour:
     activeOnStart: 0
   - id: 1
     instance: {fileID: 1210360562}
-    activeOnStart: 1
+    activeOnStart: 0
   - id: 3
     instance: {fileID: 308493025}
-    activeOnStart: 0
+    activeOnStart: 1
 --- !u!4 &1890789602
 Transform:
   m_ObjectHideFlags: 0
@@ -1368,110 +1337,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8071830606806677439, guid: 2e3d0058425c65c4ab8ec0b43f8a270f, type: 3}
   m_PrefabInstance: {fileID: 8842005122408929025}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1987607739
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1987607730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7ada260684041e45a54c5af77521d15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Freezable
---- !u!1 &2030641853
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2030641855}
-  - component: {fileID: 2030641854}
-  - component: {fileID: 2030641856}
-  m_Layer: 0
-  m_Name: FreezeArea
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!61 &2030641854
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2030641853}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0.0915401, y: 0.15256727}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 8.437607, y: 2.678232}
-  m_EdgeRadius: 0
---- !u!4 &2030641855
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2030641853}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 308493032}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2030641856
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2030641853}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf64399965ec89e44aedb71460959801, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FreezeHitbox
-  freezeDuration: 3.2
 --- !u!1001 &517835157523660144
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1598,10 +1463,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlimeTwo
       objectReference: {fileID: 0}
-    - target: {fileID: 1397024207107231673, guid: b2ccb8742ccacea499757db3f633a29d, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2333836674689704498, guid: b2ccb8742ccacea499757db3f633a29d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.4423559
@@ -1644,14 +1505,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 2333836674689704498, guid: b2ccb8742ccacea499757db3f633a29d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2030641855}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1397024207107231673, guid: b2ccb8742ccacea499757db3f633a29d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 308493033}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2ccb8742ccacea499757db3f633a29d, type: 3}
 --- !u!1001 &4938189995913695898
 PrefabInstance:
@@ -1661,18 +1516,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1838574957094760717, guid: 83f681a76d73f7a4482b25248c80fa6c, type: 3}
-      propertyPath: m_ActionEvents.Array.size
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 1838574957094760717, guid: 83f681a76d73f7a4482b25248c80fa6c, type: 3}
-      propertyPath: m_ActionEvents.Array.data[14].m_ActionId
-      value: 92f8ca1f-098f-43e8-82a2-4f15482deffc
-      objectReference: {fileID: 0}
-    - target: {fileID: 1838574957094760717, guid: 83f681a76d73f7a4482b25248c80fa6c, type: 3}
-      propertyPath: m_ActionEvents.Array.data[14].m_ActionName
-      value: 'SlimeTwo/Freeze[/Keyboard/numpad5]'
-      objectReference: {fileID: 0}
     - target: {fileID: 2265801819773075243, guid: 83f681a76d73f7a4482b25248c80fa6c, type: 3}
       propertyPath: slimeOne
       value: 
@@ -1732,10 +1575,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4254639586056531541, guid: 83f681a76d73f7a4482b25248c80fa6c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 493109564}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83f681a76d73f7a4482b25248c80fa6c, type: 3}
 --- !u!1001 &8842005122408929025
 PrefabInstance:
@@ -1785,18 +1625,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4652442154033575274, guid: 2e3d0058425c65c4ab8ec0b43f8a270f, type: 3}
-      propertyPath: m_ActionEvents.Array.size
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4652442154033575274, guid: 2e3d0058425c65c4ab8ec0b43f8a270f, type: 3}
-      propertyPath: m_ActionEvents.Array.data[14].m_ActionId
-      value: 92f8ca1f-098f-43e8-82a2-4f15482deffc
-      objectReference: {fileID: 0}
-    - target: {fileID: 4652442154033575274, guid: 2e3d0058425c65c4ab8ec0b43f8a270f, type: 3}
-      propertyPath: m_ActionEvents.Array.data[14].m_ActionName
-      value: 'SlimeTwo/Freeze[/Keyboard/numpad5]'
-      objectReference: {fileID: 0}
     - target: {fileID: 8071830606806677439, guid: 2e3d0058425c65c4ab8ec0b43f8a270f, type: 3}
       propertyPath: m_Name
       value: DashSlime
@@ -1804,10 +1632,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8071830606806677439, guid: 2e3d0058425c65c4ab8ec0b43f8a270f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1987607739}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e3d0058425c65c4ab8ec0b43f8a270f, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

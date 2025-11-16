@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 1521894128957006429}
   - component: {fileID: 2265801819773075243}
   - component: {fileID: 7052615775822783775}
+  - component: {fileID: 8027575757377276669}
   m_Layer: 0
   m_Name: Mage
   m_TagString: Untagged
@@ -244,6 +245,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 7d664fb5-d189-432b-8f97-1a7b28347e36
     m_ActionName: 'ConnSlimes/Jump[/Keyboard/numpad8]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 92f8ca1f-098f-43e8-82a2-4f15482deffc
+    m_ActionName: 'SlimeTwo/Freeze[/Keyboard/numpad5]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Mage
@@ -332,3 +337,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FireballSpellController
   spellData: {fileID: 11400000, guid: 8f311a58cb1dac347a8b2b0d2a6a6b45, type: 2}
+--- !u!114 &8027575757377276669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4254639586056531541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ada260684041e45a54c5af77521d15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Freezable

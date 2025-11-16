@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class LightSpellController : MonoBehaviour
+public class LightSpellController : MonoBehaviour, IFreezableReceiver
 {
     [SerializeField] private LightSpellData spellData; // ScriptableObject reference
 
@@ -28,6 +28,7 @@ public class LightSpellController : MonoBehaviour
 
     private void Update()
     {
+
         if (toggleSpell != null && toggleSpell.triggered)
             ToggleSpell();
     }
@@ -66,5 +67,19 @@ public class LightSpellController : MonoBehaviour
 
         if (light1) Destroy(light1.gameObject);
         if (light2) Destroy(light2.gameObject);
+    }
+
+    public void CastOnFreeze()
+    {
+        enabled = false;
+        if (light1 != null) light1.enabled = false;
+        if (light2 != null) light2.enabled = false;
+    }
+
+    public void CastOnUnfreeze()
+    {
+        enabled = true;
+        if (light1 != null) light1.enabled = true;
+        if (light2 != null) light2.enabled = true;
     }
 }

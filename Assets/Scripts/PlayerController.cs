@@ -115,14 +115,17 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
         moveValue = 0f;
     }
 
-    public void OnFreeze()
+    public void CastOnFreeze()
     {
+
+        Debug.Log("Player frozensdadasdasdas");
+        Debug.Log(name);
         body.linearVelocity = Vector2.zero;
-        frozen = true;
+        enabled = false;
     }
 
-    public void OnUnfreeze()
+    public void CastOnUnfreeze()
     {
-        frozen = false;
+        enabled = true;
     }
 }
