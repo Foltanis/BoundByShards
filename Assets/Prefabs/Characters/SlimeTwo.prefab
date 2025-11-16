@@ -15,7 +15,8 @@ GameObject:
   - component: {fileID: 3969257538626271736}
   - component: {fileID: 7475918889058433317}
   - component: {fileID: 5615946209376479982}
-  m_Layer: 0
+  - component: {fileID: 7023006090582539396}
+  m_Layer: 6
   m_Name: SlimeTwo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,3 +227,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
   maxHealth: 6
+--- !u!114 &7023006090582539396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1397024207107231673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ca45ba072b1ff444b0d2708def83998, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FreezeAbility
+  freezeCooldown: 2
+  freezeDuration: 3.2
+  freezeZone: {fileID: 6573226197154402700, guid: 19c3c51b67975ff439c6924c56ee8ef7, type: 3}

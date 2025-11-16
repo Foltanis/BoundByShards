@@ -1,15 +1,14 @@
 using UnityEngine;
 
-public class FreezeHitbox : MonoBehaviour
+public class FreezeZone : MonoBehaviour
 {
-    [SerializeField] private float freezeDuration = 3.2f;
+    [SerializeField] private float freezeDuration = 3f;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         var freezable = other.GetComponent<Freezable>();
         if (freezable != null)
         {
-            Debug.Log("Freeze hit " + other.name);
             freezable.Freeze(freezeDuration);
         }
     }

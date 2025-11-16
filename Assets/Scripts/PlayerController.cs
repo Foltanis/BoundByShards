@@ -17,10 +17,12 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
     private InputAction jumpAction;
 
     private Rigidbody2D body;
-    private Health health;
+    //private Health health;
     private bool grounded;
     private bool onWall;
     private Vector3 baseScale;
+
+    private bool frozen = false;
 
     void Awake()
     {
@@ -32,7 +34,7 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
         body = GetComponent<Rigidbody2D>();
         baseScale = transform.localScale;
 
-        Health health = GetComponent<Health>();
+        //health = GetComponent<Health>();
     }
 
     void OnEnable()
@@ -53,6 +55,7 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
 
     void FixedUpdate() 
     {
+        if (frozen) return;
         body.linearVelocity = new Vector2(moveValue * speed, body.linearVelocity.y);
 
         // rotate character in direction of movement
@@ -98,7 +101,7 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
     {
         if (col.gameObject.CompareTag("Ground")) grounded = true;
         if (col.gameObject.CompareTag("Wall")) onWall = true;
-        if (col.gameObject.CompareTag("Enemy")) health.TakeDamage(1);
+        //if (col.gameObject.CompareTag("Enemy")) health.TakeDamage(1);
     }
 
     void OnCollisionExit2D(Collision2D col)
@@ -115,11 +118,11 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
     public void OnFreeze()
     {
         body.linearVelocity = Vector2.zero;
-        enabled = false; //stop Update and FixedUpdate from being called
+        frozen = true;
     }
 
     public void OnUnfreeze()
     {
-        enabled = true;
+        frozen = false;
     }
 }

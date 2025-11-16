@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class FreezeAbility : MonoBehaviour
 {
     [SerializeField] private float freezeCooldown = 2f;
+    [SerializeField] private float freezeDuration = 3.2f;
     [SerializeField] private GameObject freezeZone;
 
     private bool cooldown = false;
@@ -17,8 +18,6 @@ public class FreezeAbility : MonoBehaviour
     {
         input = GetComponent<PlayerInput>();
         freezeAction = input.actions["Freeze"];
-
-        freezeZone.SetActive(false); // disabled until cast
     }
 
     private void Update()
@@ -29,23 +28,33 @@ public class FreezeAbility : MonoBehaviour
             if (timer <= 0f) cooldown = false;
         }
 
+        var moveAction = input.actions["Move"];
+        if (moveAction != null)
+        {
+            float move = moveAction.ReadValue<float>();
+            Debug.Log("Move value: " + move);
+        }
+
         if (freezeAction.triggered)
-            CastFreeze();
+            Debug.Log("Freeze action triggered");   
     }
 
     private void CastFreeze()
     {
         if (cooldown) return;
 
-        freezeZone.SetActive(true);
-        Invoke(nameof(DisableArea), 0.2f); // active for a moment
+        GameObject freezeArea = Instantiate(freezeZone, transform.position, Quaternion.identity);
+        Destroy(freezeArea, 0.2f); // active for a moment
 
         cooldown = true;
         timer = freezeCooldown;
     }
 
-    private void DisableArea()
-    {
-        freezeZone.SetActive(false);
-    }
+    //private void OnTriggerEnter2D(Collider2D other)
+    //{
+    //    Debug.Log("Freeze hit: " + other.name);
+    //    var freezable = other.GetComponent<Freezable>();
+    //    if (freezable != null && other.gameObject != gameObject)
+    //        freezable.Freeze(freezeDuration);
+    //}
 }
