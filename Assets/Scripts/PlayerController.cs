@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerInput))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Health))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IFreezableReceiver
 {
     [SerializeField] private float speed = 6f;
     [SerializeField] private float jumpForce = 6f;
@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnJumpCanceled(InputAction.CallbackContext ctx)
     {
-        //onWall = false;
+        onWall = false; // to stop climbing the wall
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -110,5 +110,16 @@ public class PlayerController : MonoBehaviour
     public void ResetInput()
     {
         moveValue = 0f;
+    }
+
+    public void OnFreeze()
+    {
+        body.linearVelocity = Vector2.zero;
+        enabled = false; //stop Update and FixedUpdate from being called
+    }
+
+    public void OnUnfreeze()
+    {
+        enabled = true;
     }
 }
