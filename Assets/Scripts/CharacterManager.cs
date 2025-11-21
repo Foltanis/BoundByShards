@@ -26,6 +26,8 @@ public class CharacterManager : MonoBehaviour
 
     private Dictionary<CharacterType, GameObject> lookup = new Dictionary<CharacterType, GameObject>();
 
+    public List<CharacterEntry> Characters => characters;
+
     void Awake()
     {
         if (Instance != null && Instance != this)

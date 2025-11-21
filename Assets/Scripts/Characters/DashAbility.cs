@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,13 +15,11 @@ public class DashAbility : MonoBehaviour
     private PlayerInput playerInput;
     private InputAction dashAction;
 
-    private bool isDashing = false;
     private bool canDash = true;
     private Vector2 dashDirection;
-    private Timer dashTimer;
-    private Timer cooldownTimer;
 
     private float defaultGravityScale;
+    private Coroutine dashRoutine;
 
     void Awake()
     {
@@ -29,30 +28,10 @@ public class DashAbility : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         dashAction = playerInput.actions["Dash"];
         defaultGravityScale = rb.gravityScale;
-
-        dashTimer = new Timer(dashDuration);
-        cooldownTimer = new Timer(dashCooldown);
     }
 
     void Update()
     {
-        // Cooldown management
-        if (!canDash)
-        {
-            cooldownTimer.Update(Time.deltaTime);
-            if (cooldownTimer.IsFinished())
-                canDash = true;
-        }
-
-        // Dash management
-        if (isDashing)
-        {
-            dashTimer.Update(Time.deltaTime);
-            if (dashTimer.IsFinished())
-                EndDash();
-        }
-
-        // Dash input
         if (canDash && dashAction.triggered)
         {
             StartDash();
@@ -61,27 +40,43 @@ public class DashAbility : MonoBehaviour
 
     private void StartDash()
     {
+        //if (dashRoutine != null) StopCoroutine(dashRoutine);
+        dashRoutine = StartCoroutine(DashRoutine());
+    }
+
+    private IEnumerator DashRoutine()
+    {
         Debug.Log("Dash started");
 
+        // Disable input
         playerController.enabled = false;
 
+        // Determine dash direction
         dashDirection = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
 
+        // Modify physics
         rb.gravityScale = 0f;
         rb.linearDamping = 0f;
         rb.linearVelocity = Vector2.zero;
+
+        // Apply dash force
         rb.AddForce(dashDirection * dashSpeed, ForceMode2D.Impulse);
 
-        isDashing = true;
         canDash = false;
 
-        dashTimer.Reset();
-        cooldownTimer.Reset();
+        // Wait for dash duration
+        yield return new WaitForSeconds(dashDuration);
+
+        // End dash
+        EndDash();
+
+        // Start cooldown
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
     }
 
     private void EndDash()
     {
-        isDashing = false;
         rb.gravityScale = defaultGravityScale;
         rb.linearVelocity = Vector2.zero;
 

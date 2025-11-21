@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
 
     private bool frozen = false;
 
+    public bool IsGrounded() => grounded;
+
     void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
