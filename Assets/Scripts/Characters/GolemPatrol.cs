@@ -1,44 +1,45 @@
 using UnityEngine;
-using UnityEngine.Timeline;
 
 public class GolemPatrol : MonoBehaviour
 {
-    [SerializeField] private float speed = 2f;          
-    [SerializeField] private float moveDistance = 3f;  
+    [SerializeField] private float speed = 2f;        // movement speed
+    [SerializeField] private float period = 2f;       // time it takes to move in one direction
     [SerializeField] private bool startMovingRight = true;
 
-    private Vector2 startPosition;
     private int direction;
+    private float timer;
 
     private void Start()
     {
-        // set starting position, direction, facing right or left
-        ChangeDirection(startMovingRight ? 1 : -1);
+        direction = startMovingRight ? 1 : -1;
+        timer = period * 0.5f;
     }
 
     private void Update()
     {
-        // movement in x direction
-        float moveStep = speed * Time.deltaTime * direction;
-        transform.Translate(moveStep, 0f, 0f);
+        // Move based on direction
+        transform.Translate(speed * direction * Time.deltaTime, 0f, 0f);
 
-        float currentOffset = Mathf.Abs(transform.position.x - startPosition.x);
+        // Count up time
+        timer += Time.deltaTime;
 
-        if (currentOffset >= moveDistance)
+        // When period finishes, switch direction
+        if (timer >= period)
         {
-            if (direction == 1)
-                ChangeDirection(-1);
-            else
-                ChangeDirection(1);
+            timer = 0f;
+            ChangeDirection();
         }
     }
 
-    private void ChangeDirection(int newDirection)
+    private void ChangeDirection()
     {
-        startPosition = transform.position;
-        direction = newDirection;
+        direction = -direction; // flip direction
 
-        // rotate the golem to face the new direction
-        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        // Flip sprite visually
+        transform.localScale = new Vector3(
+            -transform.localScale.x,
+            transform.localScale.y,
+            transform.localScale.z
+        );
     }
 }

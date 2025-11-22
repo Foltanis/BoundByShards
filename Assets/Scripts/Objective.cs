@@ -1,70 +1,73 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Objective : MonoBehaviour
 {
-    private GameObject player1;
-    private GameObject player2;
-    private GameObject player3;
+    private GameObject[] allPlayers;                      // All players found at Start
+    private HashSet<GameObject> playersInside = new HashSet<GameObject>();   // Active players currently inside
 
-    private bool player1_achieved = false;
-    private bool player2_achieved = false;
-    private bool player3_achieved = false;
-
-    void Start()
+    private void Start()
     {
-        player1 = GameObject.Find("Player1");
-        player2 = GameObject.Find("Player2");
-        player3 = GameObject.Find("Player3");
-    }
+        // Find ALL players in the scene with tag "Player" (active or inactive)
+        allPlayers = Resources.FindObjectsOfTypeAll<GameObject>();
 
-    void Update()
-    {
-    }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        switch (other.gameObject.tag)
+        List<GameObject> playerList = new List<GameObject>();
+        foreach (var obj in allPlayers)
         {
-            case "Player1":
-                player1_achieved = true;
-                break;
-            case "Player2":
-                player2_achieved = true;
-                break;
-            case "Player3":
-                player3_achieved = true;
-                break;
-            default:
-                return;
+            if (obj.CompareTag("Player"))
+                playerList.Add(obj);
         }
 
-        if (player1_achieved && player2_achieved && player3_achieved)
-        {
-            int currentIndex = SceneManager.GetActiveScene().buildIndex;
-            int nextIndex = currentIndex + 1;
-            if (nextIndex < SceneManager.sceneCountInBuildSettings)
-                SceneManager.LoadScene(nextIndex);
-            else
-                Debug.LogWarning("No next scene in build settings!");
-        }
+        allPlayers = playerList.ToArray();
     }
 
-    public void OnTriggerExit(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        switch (other.gameObject.tag)
+        Debug.Log("OnTriggerEnter");
+        if (!other.CompareTag("Player"))
+            return;
+
+        GameObject player = other.gameObject;
+
+        // Only track active players
+        if (player.activeInHierarchy)
+            playersInside.Add(player);
+
+        // Check if all ACTIVE players are inside
+        if (AreAllActivePlayersInside())
+            LoadNextScene();
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        Debug.Log("OnTriggerExit");
+        if (!other.CompareTag("Player"))
+            return;
+
+        GameObject player = other.gameObject;
+
+        playersInside.Remove(player);
+    }
+
+    private bool AreAllActivePlayersInside()
+    {
+        foreach (var p in allPlayers)
         {
-            case "Player1":
-                player1_achieved = false;
-                break;
-            case "Player2":
-                player2_achieved = false;
-                break;
-            case "Player3":
-                player3_achieved = false;
-                break;
-            default:
-                return;
+            if (p.activeInHierarchy && !playersInside.Contains(p))
+                return false;
         }
+        return true;
+    }
+
+    private void LoadNextScene()
+    {
+        int currentIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextIndex = currentIndex + 1;
+
+        if (nextIndex < SceneManager.sceneCountInBuildSettings)
+            SceneManager.LoadScene(nextIndex);
+        else
+            Debug.LogWarning("No next scene in build settings!");
     }
 }

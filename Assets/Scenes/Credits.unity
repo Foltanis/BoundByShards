@@ -129,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 108192237}
   - component: {fileID: 108192239}
+  - component: {fileID: 108192241}
   - component: {fileID: 108192240}
   m_Layer: 0
   m_Name: General
@@ -183,6 +184,20 @@ MonoBehaviour:
   globalLight: {fileID: 1681421343}
   canvasGroup: {fileID: 1396799454}
   fadeDuration: 3
+--- !u!114 &108192241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108192236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53b47d15aeaaec54ba9b35ea0f41515a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioFadeIn
+  audioSource: {fileID: 1795668963}
+  fadeDuration: 2
 --- !u!1 &135016864
 GameObject:
   m_ObjectHideFlags: 0
@@ -2206,7 +2221,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 9b990dd32d018a142bf853220880b05e, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 0
   Mute: 0

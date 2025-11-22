@@ -50,6 +50,7 @@ public class PursuingAbility : MonoBehaviour
                 break;
 
             case State.ChaseTarget:
+                if (targetPlayer == null) break;
                 MoveTowards(targetPlayer);
 
                 // If target player is no longer on the same platform, find a new target
@@ -88,10 +89,8 @@ public class PursuingAbility : MonoBehaviour
         float xDeltaFromTarget = target.transform.position.x - transform.position.x;
         float dir = Mathf.Sign(xDeltaFromTarget);
 
-        // 
-        if (!targetPlayerController.IsGrounded() && Mathf.Abs(xDeltaFromTarget) < 0.3/*speed * Time.fixedDeltaTime * magicConstant*/)
+        if (!targetPlayerController.IsGrounded() && Mathf.Abs(xDeltaFromTarget) < 0.1)
             rb.linearVelocity = new Vector2(0.0f, rb.linearVelocity.y);
-        //return
         else 
             rb.linearVelocity = new Vector2(dir * speed, rb.linearVelocity.y);
         
@@ -127,7 +126,8 @@ public class PursuingAbility : MonoBehaviour
         if (closest == null)
             closest = FindRandomGroundedPlayer(groundedPlayers);
 
-        targetPlayerController = closest.GetComponent<PlayerController>();
+        if (closest != null)
+            targetPlayerController = closest.GetComponent<PlayerController>();
 
         return closest;
     }
@@ -157,51 +157,121 @@ public class PursuingAbility : MonoBehaviour
         return Mathf.Abs(playerFeetY - myFeetY) < inLevelThreshold;
     }
 
+    bool TryFindTopEdgePolygon(CompositeCollider2D comp, Vector3 playerPos, out float left, out float right, out float surfaceY)
+    {
+        left = right = surfaceY = 0f;
+        float bestDist = Mathf.Infinity;
+        bool found = false;
+
+        // Allocate a temp buffer. You can also allocate dynamically, but this is fine.
+        Vector2[] points = new Vector2[32];
+
+        for (int p = 0; p < comp.pathCount; p++)
+        {
+            int count = comp.GetPath(p, points);
+
+            if (count < 2)
+                continue;
+
+            // Closed polygon: last point connects back to first
+            for (int i = 0; i < count; i++)
+            {
+                Vector2 a = points[i];
+                Vector2 b = points[(i + 1) % count]; // wrap-around
+
+                bool horizontal = Mathf.Abs(a.y - b.y) < 0.01f;
+                if (!horizontal) continue;
+
+                float y = a.y;
+
+                // Only consider edges BELOW the player
+                if (playerPos.y < y) continue;
+
+                float segLeft = Mathf.Min(a.x, b.x);
+                float segRight = Mathf.Max(a.x, b.x);
+
+                // Check if player's X is over that segment
+                if (playerPos.x < segLeft - 0.01f || playerPos.x > segRight + 0.01f)
+                    continue;
+
+                // Distance to this surface
+                float dist = Mathf.Abs(playerPos.y - y);
+
+                if (dist < bestDist)
+                {
+                    bestDist = dist;
+                    left = segLeft;
+                    right = segRight;
+                    surfaceY = y;
+                    found = true;
+                }
+            }
+        }
+
+        return found;
+    }
+
+    float FindSafeTeleportY(CompositeCollider2D comp, Vector2 startPos)
+    {
+        float y = startPos.y;
+
+        // Move up in tiny steps until you're clearly outside platform collider
+        for (int i = 0; i < 20; i++)
+        {
+            if (!comp.OverlapPoint(new Vector2(startPos.x, y)))
+                return y;
+
+            y += 0.05f;  // climb in small increments
+        }
+
+        // fallback (just in case)
+        return startPos.y + 1f;
+    }
+
     void TeleportToPlayerPlatform()
     {
-        // GameObject platformToTeleport = FindPlatformUndePlayer(targetPlayer);
-        // if (platformToTeleport == null)
-        //     return;
+        GameObject platform = FindPlatformUndePlayer(targetPlayer);
+        if (platform == null) return;
 
-        // BoxCollider2D col = platformToTeleport.GetComponent<BoxCollider2D>();
+        CompositeCollider2D comp = platform.GetComponent<CompositeCollider2D>();
+        if (comp == null)
+        {
+            Debug.LogWarning("Platform has no CompositeCollider2D.");
+            return;
+        }
 
-        // // platform bounds
-        // Bounds b = col.bounds;
-        // float left = b.min.x;
-        // float right = b.max.x;
+        if (!TryFindTopEdgePolygon(comp, targetPlayer.transform.position, out float left, out float right, out float surfaceY))
+        {
+            Debug.LogWarning("Could not find top polygon edge.");
+            return;
+        }
 
-        // float playerX = targetPlayer.transform.position.x;
+        float playerX = targetPlayer.transform.position.x;
 
-        // // forbidden area around player
-        // float forbiddenLeft = playerX - minDistanceToTeleportFromPlayer;
-        // float forbiddenRight = playerX + minDistanceToTeleportFromPlayer;
-        
-        // List<(float, float)> intervals = new List<(float, float)>();
+        float forbiddenLeft = playerX - minDistanceToTeleportFromPlayer;
+        float forbiddenRight = playerX + minDistanceToTeleportFromPlayer;
 
-        // // intervals where teleport is allowed
-        // if (forbiddenLeft > left)
-        //     intervals.Add((left, forbiddenLeft));
-        // // intervals.Add((left, Mathf.Min(forbiddenLeft, right))); why not this?
+        List<(float, float)> intervals = new();
 
-        // if (forbiddenRight < right)
-        //     intervals.Add((forbiddenRight, right));
+        if (forbiddenLeft > left)
+            intervals.Add((left, Mathf.Min(forbiddenLeft, right)));
 
-        // if (intervals.Count == 0)
-        // {
-        //     Debug.Log("No room to teleport on platform");
-        //     return;
-        // }
+        if (forbiddenRight < right)
+            intervals.Add((Mathf.Max(forbiddenRight, left), right));
 
-        
-        // var randomInterval = intervals[Random.Range(0, intervals.Count)];
-        // float randomX = Random.Range(randomInterval.Item1, randomInterval.Item2);
+        if (intervals.Count == 0)
+        {
+            Debug.Log("No valid teleport interval.");
+            return;
+        }
 
-        
-        // float y = b.max.y + transform.localScale.y + 0.01f; // slightly above platform
+        var interval = intervals[Random.Range(0, intervals.Count)];
+        float randomX = Random.Range(interval.Item1, interval.Item2);
 
-        // // teleport
-        // transform.position = new Vector3(randomX, y, transform.position.z);
-        // Debug.Log("Teleported to: " + transform.position);
+        float initialY = surfaceY + 0.1f;
+        float y = FindSafeTeleportY(comp, new Vector2(randomX, initialY));
+
+        transform.position = new Vector3(randomX, y, transform.position.z);
     }
 
     GameObject FindPlatformUndePlayer(GameObject player)

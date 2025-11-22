@@ -101,15 +101,15 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
     {
         Vector2 origin = boxCollider.bounds.center;
         Vector2 size = boxCollider.bounds.size;
-        Vector2 boxSize   = new Vector2(size.x * 0.9f, groundCheckDistance);
+        Vector2 boxSize   = new Vector2(wallCheckDistance, size.y * 0.9f);
         Collider2D hitLeft = Physics2D.OverlapBox(
-            origin + Vector2.left * (size.y + groundCheckDistance) * 0.5f,
+            origin + Vector2.left * (size.x + wallCheckDistance) * 0.5f,
             boxSize,
             0f,
             platformLayer
         );
         Collider2D hitRight = Physics2D.OverlapBox(
-            origin + Vector2.right * (size.y + groundCheckDistance) * 0.5f,
+            origin + Vector2.right * (size.x + wallCheckDistance) * 0.5f,
             boxSize,
             0f,
             platformLayer
@@ -184,5 +184,34 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
     public void CastOnUnfreeze()
     {
         enabled = true;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (!showDebugGizmos || boxCollider == null)
+            return;
+
+        Vector2 origin = boxCollider.bounds.center;
+        Vector2 size = boxCollider.bounds.size;
+
+        // Ground check box
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(
+            origin + Vector2.down * (size.y + groundCheckDistance) * 0.5f,
+            new Vector2(size.x * 0.9f, groundCheckDistance)
+        );
+
+        // Wall check boxes
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(
+            origin + Vector2.right * (size.x + wallCheckDistance) * 0.5f,
+            new Vector2(wallCheckDistance, size.y * 0.9f)
+        );
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireCube(
+            origin + Vector2.left * (size.x + wallCheckDistance) * 0.5f,
+            new Vector2(wallCheckDistance, size.y * 0.9f)
+        );
     }
 }
