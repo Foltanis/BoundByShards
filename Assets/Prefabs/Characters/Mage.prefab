@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 7052615775822783775}
   - component: {fileID: 8027575757377276669}
   - component: {fileID: 1018190970935484503}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mage
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -298,7 +298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 831d865ffb641e64fbe80ed23c76dbb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  maxHealth: 6
+  maxHealth: 1
 --- !u!114 &5169507764869604571
 MonoBehaviour:
   m_ObjectHideFlags: 0

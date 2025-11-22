@@ -36,7 +36,7 @@ public class CharacterManager : MonoBehaviour
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(gameObject); // persist across scenes with characters
+        //DontDestroyOnLoad(gameObject); // persist across scenes with characters
 
         foreach (var entry in characters)
         {

@@ -16,8 +16,7 @@ GameObject:
   - component: {fileID: 7287948730731112746}
   - component: {fileID: 2117740745052078075}
   - component: {fileID: 5862413047231559757}
-  - component: {fileID: 5572996274471522491}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ConnSlimes
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -182,7 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 831d865ffb641e64fbe80ed23c76dbb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  maxHealth: 12
+  maxHealth: 1
 --- !u!114 &7287948730731112746
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -117,6 +117,7 @@ GameObject:
   - component: {fileID: 5946531124306920042}
   - component: {fileID: 5791187157844025036}
   - component: {fileID: 8960889938121374028}
+  - component: {fileID: 751604788739440151}
   m_Layer: 0
   m_Name: Occultist
   m_TagString: Untagged
@@ -330,3 +331,16 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &751604788739440151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8531352048984218676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 831d865ffb641e64fbe80ed23c76dbb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Health
+  maxHealth: 1

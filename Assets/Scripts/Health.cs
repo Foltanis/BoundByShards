@@ -1,9 +1,10 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Collider2D))]
 public class Health : MonoBehaviour
 {
-    [SerializeField] private int maxHealth = 6;
+    [SerializeField] private int maxHealth = 1;
     private int currentHealth;
 
     void Awake() => currentHealth = maxHealth;
@@ -11,7 +12,6 @@ public class Health : MonoBehaviour
     public void TakeDamage(int dmg)
     {
         currentHealth -= dmg;
-        Debug.Log($"{name} took {dmg} damage ? HP: {currentHealth}");
 
         if (currentHealth <= 0)
             Die();
@@ -19,8 +19,15 @@ public class Health : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log($"{name} died!");
-        gameObject.SetActive(false);
+        if (CompareTag("Player"))
+        {
+            Debug.Log("Player died. Reloading scene...");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     public int GetHp() => currentHealth;
