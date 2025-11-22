@@ -9,6 +9,7 @@ public class PursuingAbility : MonoBehaviour
     private GameObject targetPlayer;
     private Rigidbody2D rb;
     private State currentState;
+    private Vector3 baseScale;
 
     [SerializeField] private float speed = 3.0f;
     [SerializeField] private float minDistanceToTeleportFromPlayer = 2.0f;
@@ -32,6 +33,8 @@ public class PursuingAbility : MonoBehaviour
         }
 
         currentState = State.FindTarget;
+
+        baseScale = transform.localScale;
     }
 
     // Update is called once per frame
@@ -67,6 +70,15 @@ public class PursuingAbility : MonoBehaviour
 
     }
 
+    private void UpdateFacing()
+    {
+        float moveValue = rb.linearVelocity.x;
+        if (moveValue > 0.1f)
+            transform.localScale = new Vector3(Mathf.Abs(baseScale.x), baseScale.y, baseScale.z);
+        else if (moveValue < -0.1f)
+            transform.localScale = new Vector3(-Mathf.Abs(baseScale.x), baseScale.y, baseScale.z);
+    }
+
     void MoveTowards(GameObject target)
     {
         float magicConstant = 10f;
@@ -79,6 +91,8 @@ public class PursuingAbility : MonoBehaviour
         //return
         else 
             rb.linearVelocity = new Vector2(dir * speed, rb.linearVelocity.y);
+        
+        UpdateFacing();
     }
 
 
@@ -140,49 +154,49 @@ public class PursuingAbility : MonoBehaviour
 
     void TeleportToPlayerPlatform()
     {
-        GameObject platformToTeleport = FindPlatformUndePlayer(targetPlayer);
-        if (platformToTeleport == null)
-            return;
+        // GameObject platformToTeleport = FindPlatformUndePlayer(targetPlayer);
+        // if (platformToTeleport == null)
+        //     return;
 
-        BoxCollider2D col = platformToTeleport.GetComponent<BoxCollider2D>();
+        // BoxCollider2D col = platformToTeleport.GetComponent<BoxCollider2D>();
 
-        // platform bounds
-        Bounds b = col.bounds;
-        float left = b.min.x;
-        float right = b.max.x;
+        // // platform bounds
+        // Bounds b = col.bounds;
+        // float left = b.min.x;
+        // float right = b.max.x;
 
-        float playerX = targetPlayer.transform.position.x;
+        // float playerX = targetPlayer.transform.position.x;
 
-        // forbidden area around player
-        float forbiddenLeft = playerX - minDistanceToTeleportFromPlayer;
-        float forbiddenRight = playerX + minDistanceToTeleportFromPlayer;
+        // // forbidden area around player
+        // float forbiddenLeft = playerX - minDistanceToTeleportFromPlayer;
+        // float forbiddenRight = playerX + minDistanceToTeleportFromPlayer;
         
-        List<(float, float)> intervals = new List<(float, float)>();
+        // List<(float, float)> intervals = new List<(float, float)>();
 
-        // intervals where teleport is allowed
-        if (forbiddenLeft > left)
-            intervals.Add((left, forbiddenLeft));
-        // intervals.Add((left, Mathf.Min(forbiddenLeft, right))); why not this?
+        // // intervals where teleport is allowed
+        // if (forbiddenLeft > left)
+        //     intervals.Add((left, forbiddenLeft));
+        // // intervals.Add((left, Mathf.Min(forbiddenLeft, right))); why not this?
 
-        if (forbiddenRight < right)
-            intervals.Add((forbiddenRight, right));
+        // if (forbiddenRight < right)
+        //     intervals.Add((forbiddenRight, right));
 
-        if (intervals.Count == 0)
-        {
-            Debug.Log("No room to teleport on platform");
-            return;
-        }
-
-        
-        var randomInterval = intervals[Random.Range(0, intervals.Count)];
-        float randomX = Random.Range(randomInterval.Item1, randomInterval.Item2);
+        // if (intervals.Count == 0)
+        // {
+        //     Debug.Log("No room to teleport on platform");
+        //     return;
+        // }
 
         
-        float y = b.max.y + transform.localScale.y + 0.01f; // slightly above platform
+        // var randomInterval = intervals[Random.Range(0, intervals.Count)];
+        // float randomX = Random.Range(randomInterval.Item1, randomInterval.Item2);
 
-        // teleport
-        transform.position = new Vector3(randomX, y, transform.position.z);
-        Debug.Log("Teleported to: " + transform.position);
+        
+        // float y = b.max.y + transform.localScale.y + 0.01f; // slightly above platform
+
+        // // teleport
+        // transform.position = new Vector3(randomX, y, transform.position.z);
+        // Debug.Log("Teleported to: " + transform.position);
     }
 
     GameObject FindPlatformUndePlayer(GameObject player)

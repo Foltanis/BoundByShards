@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 3354037432182590936}
   - component: {fileID: 2868377957074245869}
   - component: {fileID: 6106085468113512201}
+  - component: {fileID: 8217480171434949376}
   m_Layer: 0
   m_Name: DashSlime
   m_TagString: Untagged
@@ -34,7 +35,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.3, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -86,9 +87,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  m_Sprite: {fileID: -6785554086269119554, guid: af2ea5073aa755a45b920724b6f97104, type: 3}
   m_Color: {r: 0.41010326, g: 0.90943396, b: 0.4101093, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 2}
@@ -131,17 +132,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0001180172, y: 0.004372835}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 2}
+    oldSize: {x: 0.31, y: 0.24}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 0.19212294, y: 0.18935633}
   m_EdgeRadius: 0
 --- !u!50 &5590954261408088411
 Rigidbody2D:
@@ -275,6 +276,13 @@ MonoBehaviour:
   speed: 6
   jumpForce: 6
   wallJumpForce: 4
+  platformLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  groundCheckDistance: 0.1
+  wallCheckDistance: 0.1
+  showDebugGizmos: 1
+  anim: {fileID: 8217480171434949376}
 --- !u!114 &3354037432182590936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,3 +323,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7ada260684041e45a54c5af77521d15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Freezable
+--- !u!95 &8217480171434949376
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8071830606806677439}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c7003e72a9bc69c409fb9337b22de1c1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 1
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

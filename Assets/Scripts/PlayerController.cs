@@ -6,9 +6,21 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Health))]
 public class PlayerController : MonoBehaviour, IFreezableReceiver
 {
+    [Header("Movement")]
     [SerializeField] private float speed = 6f;
     [SerializeField] private float jumpForce = 6f;
     [SerializeField] private float wallJumpForce = 4f;
+
+    [Header("Detection")]
+    [SerializeField] private LayerMask platformLayer;
+    [SerializeField] private float groundCheckDistance = 0.1f;
+    [SerializeField] private float wallCheckDistance = 0.1f;
+
+    [Header("Debug")]
+    [SerializeField] private bool showDebugGizmos = true;
+
+    [Header("Animation")]
+    [SerializeField] private Animator anim;
 
     private float moveValue;
 
@@ -17,14 +29,19 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
     private InputAction jumpAction;
 
     private Rigidbody2D body;
-    //private Health health;
-    private bool grounded;
-    private bool onWall;
+    private BoxCollider2D boxCollider;
     private Vector3 baseScale;
+    
+    //private Health health;
+    
+    private bool isGrounded;
+    private bool isTouchingWall;
+    private bool wallJumpLock;
+    private int wallDirection;
 
     private bool frozen = false;
 
-    public bool IsGrounded() => grounded;
+    public bool IsGrounded() => isGrounded;
 
     void Awake()
     {
@@ -34,6 +51,7 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
         jumpAction = actionMap.FindAction("Jump");
 
         body = GetComponent<Rigidbody2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
         baseScale = transform.localScale;
 
         //health = GetComponent<Health>();
@@ -57,59 +75,96 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
 
     void FixedUpdate() 
     {
+        CheckGrounded();
+        CheckWall();
+        HandleMovement();
+        UpdateFacing();
+        anim.SetBool("IsGrounded", isGrounded);
+    }
+
+    private void CheckGrounded()
+    {
+        Vector2 origin = boxCollider.bounds.center;
+        Vector2 size = boxCollider.bounds.size;
+        Vector2 boxCenter = origin + Vector2.down * (size.y + groundCheckDistance) * 0.5f;
+        Vector2 boxSize   = new Vector2(size.x * 0.9f, groundCheckDistance);
+        Collider2D hit = Physics2D.OverlapBox(
+            boxCenter,
+            boxSize,
+            0f,
+            platformLayer
+        );
+        isGrounded = hit != null;
+    }
+
+    private void CheckWall()
+    {
+        Vector2 origin = boxCollider.bounds.center;
+        Vector2 size = boxCollider.bounds.size;
+        Vector2 boxSize   = new Vector2(size.x * 0.9f, groundCheckDistance);
+        Collider2D hitLeft = Physics2D.OverlapBox(
+            origin + Vector2.left * (size.y + groundCheckDistance) * 0.5f,
+            boxSize,
+            0f,
+            platformLayer
+        );
+        Collider2D hitRight = Physics2D.OverlapBox(
+            origin + Vector2.right * (size.y + groundCheckDistance) * 0.5f,
+            boxSize,
+            0f,
+            platformLayer
+        );
+        // Debug.Log("isGrounded " + isGrounded + "  hitLeft " + (hitLeft != null) + "  hitRight " + (hitRight != null));
+        isTouchingWall = (hitLeft != null) || (hitRight != null);
+    }
+
+    private void HandleMovement()
+    {
         if (frozen) return;
         body.linearVelocity = new Vector2(moveValue * speed, body.linearVelocity.y);
+    }
 
-        // rotate character in direction of movement
-        if (moveValue > 0.01f)
+    private void UpdateFacing()
+    {
+        if (moveValue > 0.1f)
             transform.localScale = new Vector3(Mathf.Abs(baseScale.x), baseScale.y, baseScale.z);
-        else if (moveValue < -0.01f)
+        else if (moveValue < -0.1f)
             transform.localScale = new Vector3(-Mathf.Abs(baseScale.x), baseScale.y, baseScale.z);
     }
 
     private void OnMovePerformed(InputAction.CallbackContext ctx)
     {
         moveValue = ctx.ReadValue<float>();
+        anim.SetFloat("Speed", Mathf.Abs(moveValue) * Mathf.Sqrt(speed));
     }
 
     private void OnMoveCanceled(InputAction.CallbackContext ctx)
     {
         moveValue = 0;
+        anim.SetFloat("Speed", 0);
     }
 
     private void OnJumpPerformed(InputAction.CallbackContext ctx)
     {
         float jumpValue = ctx.ReadValue<float>();
-        if (grounded)
+        if (isGrounded)
         {
             Vector2 ba = Vector3.up * jumpValue * jumpForce;
             body.AddForce(ba, ForceMode2D.Impulse);
-            
+            anim.SetTrigger("Jump");
         }
-        else if (onWall)
+        else if (isTouchingWall)
         {
             float wallDir = transform.localScale.x > 0 ? -1 : 1;
             Vector2 force = new Vector2(wallDir * wallJumpForce, jumpForce);
             body.linearVelocity = force;
+            anim.SetTrigger("Jump");
         }
     }
 
     private void OnJumpCanceled(InputAction.CallbackContext ctx)
     {
-        onWall = false; // to stop climbing the wall
-    }
-
-    void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.CompareTag("Ground")) grounded = true;
-        if (col.gameObject.CompareTag("Wall")) onWall = true;
-        //if (col.gameObject.CompareTag("Enemy")) health.TakeDamage(1);
-    }
-
-    void OnCollisionExit2D(Collision2D col)
-    {
-        if (col.gameObject.CompareTag("Ground")) grounded = false;
-        if (col.gameObject.CompareTag("Wall")) onWall = false;
+        isTouchingWall = false; // to stop climbing the wall
     }
 
     public void ResetInput()
