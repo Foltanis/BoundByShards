@@ -5,11 +5,14 @@ using System.ComponentModel;
 
 public class PursuingAbility : MonoBehaviour
 {
+    [SerializeField] private LayerMask platformMask;
+
     private List<GameObject> players;
     private GameObject targetPlayer;
     private Rigidbody2D rb;
     private State currentState;
     private Vector3 baseScale;
+    private PlayerController targetPlayerController;
 
     [SerializeField] private float speed = 3.0f;
     [SerializeField] private float minDistanceToTeleportFromPlayer = 2.0f;
@@ -50,7 +53,7 @@ public class PursuingAbility : MonoBehaviour
                 MoveTowards(targetPlayer);
 
                 // If target player is no longer on the same platform, find a new target
-                if (!IsPlayerOnSameLevel(targetPlayer) && targetPlayer.GetComponent<PlayerController>().IsGrounded())
+                if (!IsPlayerOnSameLevel(targetPlayer) && targetPlayerController.IsGrounded())
                     currentState = State.FindTarget;
                 break;
 
@@ -86,8 +89,8 @@ public class PursuingAbility : MonoBehaviour
         float dir = Mathf.Sign(xDeltaFromTarget);
 
         // 
-        if (Mathf.Abs(xDeltaFromTarget) < 0.3/*speed * Time.fixedDeltaTime * magicConstant*/)
-            rb.linearVelocity = Vector2.zero;
+        if (!targetPlayerController.IsGrounded() && Mathf.Abs(xDeltaFromTarget) < 0.3/*speed * Time.fixedDeltaTime * magicConstant*/)
+            rb.linearVelocity = new Vector2(0.0f, rb.linearVelocity.y);
         //return
         else 
             rb.linearVelocity = new Vector2(dir * speed, rb.linearVelocity.y);
@@ -123,6 +126,8 @@ public class PursuingAbility : MonoBehaviour
 
         if (closest == null)
             closest = FindRandomGroundedPlayer(groundedPlayers);
+
+        targetPlayerController = closest.GetComponent<PlayerController>();
 
         return closest;
     }
@@ -201,8 +206,6 @@ public class PursuingAbility : MonoBehaviour
 
     GameObject FindPlatformUndePlayer(GameObject player)
     {
-        int platformMask = LayerMask.GetMask("Platform");
-
         RaycastHit2D hit = Physics2D.Raycast(
             player.transform.position,
             Vector2.down,

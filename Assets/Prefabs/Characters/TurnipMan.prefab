@@ -179,6 +179,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a9b38290b89fdc4cb1b2e14a52a82e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PursuingAbility
+  platformMask:
+    serializedVersion: 2
+    m_Bits: 64
   speed: 3
   minDistanceToTeleportFromPlayer: 2
 --- !u!95 &5549070645573232710
