@@ -1,5 +1,6 @@
 using NUnit.Framework;  
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 
@@ -10,69 +11,119 @@ public class PursuingAbility : MonoBehaviour
     private List<GameObject> players;
     private GameObject targetPlayer;
     private Rigidbody2D rb;
+    private BoxCollider2D bc;
     private State currentState;
     private Vector3 baseScale;
     private PlayerController targetPlayerController;
+    private Animator anim;
+    private List<GameObject> groundedPlayers;
+    private float stepSize = 0.5f;
 
     [SerializeField] private float speed = 3.0f;
     [SerializeField] private float minDistanceToTeleportFromPlayer = 2.0f;
+    [SerializeField] private float jumpInDuration = 1.0f;
+    [SerializeField] private float jumpOutDuration = 1.0f;
     private enum State
     {
         Stunned,
         ChaseTarget,
         FindTarget,
+        JumpIn,
+        JumpOut
     }
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        bc = GetComponent<BoxCollider2D>();
+        anim = GetComponent<Animator>();
         players = new List<GameObject>();
-
         foreach (var character in CharacterManager.Instance.Characters)
         {
-
             if (character.instance != null)
                 players.Add(character.instance);
         }
-
         currentState = State.FindTarget;
-
         baseScale = transform.localScale;
+    }
+
+    void SetTarget(GameObject target)
+    {
+        targetPlayer = target;
+        if (targetPlayer != null)
+            targetPlayerController = targetPlayer.GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        anim.SetFloat("jumpInDuration", 1.0f / jumpInDuration);
+        anim.SetFloat("jumpOutDuration", 1.0f / jumpOutDuration);
         switch (currentState)
         {
             case State.Stunned:
+                // Debug.Log("State.Stunned");
                 rb.linearVelocity = Vector2.zero;
                 break;
 
             case State.ChaseTarget:
+                // Debug.Log("State.ChaseTarget");
                 if (targetPlayer == null) break;
-                MoveTowards(targetPlayer);
 
+                bool isSameLevel = IsPlayerOnSameLevel(targetPlayer);
                 // If target player is no longer on the same platform, find a new target
-                if (!IsPlayerOnSameLevel(targetPlayer) && targetPlayerController.IsGrounded())
-                    currentState = State.FindTarget;
+                if (!isSameLevel && targetPlayerController.IsGrounded())
+                    currentState = State.JumpIn;
+
+                MoveTowards(targetPlayer);
                 break;
 
             // Finds the target player to chase, teleports to them if necessary, stands still if no target found
             case State.FindTarget:
-                targetPlayer = FindClosestPlayerOnSameLevel();
-                if (targetPlayer != null)
-                {
-                    currentState = State.ChaseTarget;
+                // Debug.Log("State.FindTarget currentTarget" + targetPlayer);
+                SetTarget(FindClosestPlayerOnSamePlatform());
+                if (targetPlayer == null)
+                    SetTarget(FindRandomGroundedPlayer(groundedPlayers));
+                if (targetPlayer == null) break;
+                // Debug.Log("Pursuing " + targetPlayer.name);
+                if (!IsPlayerOnSamePlatform(targetPlayer))
+                    if (TeleportToPlayerPlatform()) currentState = State.JumpOut;
+                break;
+            case State.JumpIn:
+                Debug.Log("State.JumpIn");
+                currentState = State.Stunned;
+                StartCoroutine(JumpIn(jumpInDuration));
+                break;
 
-                    if (!IsPlayerOnSameLevel(targetPlayer))
-                        TeleportToPlayerPlatform();
-
-                }
+            case State.JumpOut:
+                Debug.Log("State.JumpOut");
+                currentState = State.Stunned;
+                Debug.Log("State.JumpOutPre");
+                StartCoroutine(JumpOut(jumpOutDuration));
+                Debug.Log("State.JumpOutPost");
                 break;
         }
-
+        anim.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
     }
+
+    IEnumerator JumpIn(float duration)
+    {
+        anim.ResetTrigger("JumpOutEnd");
+        anim.SetTrigger("JumpIn");
+        yield return new WaitForSeconds(duration);
+        anim.ResetTrigger("JumpIn");
+        currentState = State.FindTarget;
+    }
+
+    IEnumerator JumpOut(float duration)
+    {
+        anim.SetTrigger("JumpOut");
+        yield return new WaitForSeconds(duration);
+        anim.ResetTrigger("JumpOut");
+        currentState = State.ChaseTarget;
+        anim.SetTrigger("JumpOutEnd");
+    }
+
 
     private void UpdateFacing()
     {
@@ -83,36 +134,62 @@ public class PursuingAbility : MonoBehaviour
             transform.localScale = new Vector3(-Mathf.Abs(baseScale.x), baseScale.y, baseScale.z);
     }
 
+    bool HasGroundAhead(float direction)
+    {
+        float checkDistance = 0.25f;
+        Vector2 origin = new Vector2(
+            transform.position.x + (direction * checkDistance),
+            transform.position.y
+        );
+        float rayDistance = bc.bounds.size.y * 0.6f + 0.5f;
+        RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.down, rayDistance, platformMask);
+        Debug.DrawRay(origin, Vector2.down * rayDistance, hit.collider ? Color.green : Color.red);
+        if (!hit.collider) return false;
+        return true;
+    }
+
     void MoveTowards(GameObject target)
     {
-        float magicConstant = 10f;
+        if (!IsPlayerOnSameLevel(target))
+        {
+            rb.linearVelocity = new Vector2(0.0f, rb.linearVelocity.y);
+            return;
+        }
+
         float xDeltaFromTarget = target.transform.position.x - transform.position.x;
         float dir = Mathf.Sign(xDeltaFromTarget);
 
         if (!targetPlayerController.IsGrounded() && Mathf.Abs(xDeltaFromTarget) < 0.1)
+        {
             rb.linearVelocity = new Vector2(0.0f, rb.linearVelocity.y);
-        else 
+        }
+        else if (HasGroundAhead(dir))
+        {
             rb.linearVelocity = new Vector2(dir * speed, rb.linearVelocity.y);
+        }
+        else
+        {
+            // No ground ahead, stop moving
+            rb.linearVelocity = new Vector2(0.0f, rb.linearVelocity.y);
+        }
         
         UpdateFacing();
     }
 
-
-    GameObject FindClosestPlayerOnSameLevel()
+    GameObject FindClosestPlayerOnSamePlatform()
     {
         GameObject closest = null;
         float minDist = Mathf.Infinity;
-        List<GameObject> groundedPlayers = new List<GameObject>();
+        groundedPlayers = new List<GameObject>();
 
         foreach (var p in players)
         {
             // Skip inactive and jumping players
-            if (!p.gameObject.activeInHierarchy ||
-                !p.GetComponent<PlayerController>().IsGrounded()) continue;
+            if (!p.gameObject.activeInHierarchy || !p.GetComponent<PlayerController>().IsGrounded()) continue;
 
             groundedPlayers.Add(p);
 
-            if (IsPlayerOnSameLevel(p))
+            if (IsPlayerOnSamePlatform(p))
             {
                 float dist = Vector2.Distance(transform.position, p.transform.position);
                 if (dist < minDist)
@@ -122,12 +199,6 @@ public class PursuingAbility : MonoBehaviour
                 }
             }
         }
-
-        if (closest == null)
-            closest = FindRandomGroundedPlayer(groundedPlayers);
-
-        if (closest != null)
-            targetPlayerController = closest.GetComponent<PlayerController>();
 
         return closest;
     }
@@ -149,7 +220,7 @@ public class PursuingAbility : MonoBehaviour
 
     bool IsPlayerOnSameLevel(GameObject player)
     {
-        float inLevelThreshold = 0.15f;
+        float inLevelThreshold = 0.25f;
 
         float playerFeetY = player.transform.position.y - player.transform.localScale.y;
         float myFeetY = transform.position.y - transform.localScale.y;
@@ -157,138 +228,75 @@ public class PursuingAbility : MonoBehaviour
         return Mathf.Abs(playerFeetY - myFeetY) < inLevelThreshold;
     }
 
-    bool TryFindTopEdgePolygon(CompositeCollider2D comp, Vector3 playerPos, out float left, out float right, out float surfaceY)
+    bool IsPlayerOnSamePlatform(GameObject player)
     {
-        left = right = surfaceY = 0f;
-        float bestDist = Mathf.Infinity;
-        bool found = false;
-
-        // Allocate a temp buffer. You can also allocate dynamically, but this is fine.
-        Vector2[] points = new Vector2[32];
-
-        for (int p = 0; p < comp.pathCount; p++)
+        if (!IsPlayerOnSameLevel(player)) return false;
+        Vector2 playerPos = targetPlayer.transform.position;
+        Vector2 targetBoundsCenter = targetPlayer.GetComponent<BoxCollider2D>().bounds.center;
+        float dir = Mathf.Sign(playerPos.x - targetBoundsCenter.x);
+        int i = 0;
+        while (Mathf.Abs(i * stepSize * dir - playerPos.x) > 0.0f)
         {
-            int count = comp.GetPath(p, points);
-
-            if (count < 2)
-                continue;
-
-            // Closed polygon: last point connects back to first
-            for (int i = 0; i < count; i++)
-            {
-                Vector2 a = points[i];
-                Vector2 b = points[(i + 1) % count]; // wrap-around
-
-                bool horizontal = Mathf.Abs(a.y - b.y) < 0.01f;
-                if (!horizontal) continue;
-
-                float y = a.y;
-
-                // Only consider edges BELOW the player
-                if (playerPos.y < y) continue;
-
-                float segLeft = Mathf.Min(a.x, b.x);
-                float segRight = Mathf.Max(a.x, b.x);
-
-                // Check if player's X is over that segment
-                if (playerPos.x < segLeft - 0.01f || playerPos.x > segRight + 0.01f)
-                    continue;
-
-                // Distance to this surface
-                float dist = Mathf.Abs(playerPos.y - y);
-
-                if (dist < bestDist)
-                {
-                    bestDist = dist;
-                    left = segLeft;
-                    right = segRight;
-                    surfaceY = y;
-                    found = true;
-                }
-            }
+            Vector2 checkPos = new Vector2(playerPos.x + i * stepSize * dir, playerPos.y);
+            RaycastHit2D preHit = Physics2D.Raycast(checkPos, Vector2.right * dir, stepSize, platformMask);
+            if (preHit.collider) return false;
+            RaycastHit2D hit = Physics2D.Raycast(checkPos, Vector2.down, stepSize, platformMask);
+            if (!hit.collider) return false;
+            i++;
         }
-
-        return found;
+        return true;
     }
-
-    float FindSafeTeleportY(CompositeCollider2D comp, Vector2 startPos)
+    
+    bool TeleportToPlayerPlatform()
     {
-        float y = startPos.y;
+        Vector2 playerPos = targetPlayer.transform.position;
+        float targetY = playerPos.y - 0.5f * targetPlayer.GetComponent<BoxCollider2D>().bounds.size.y;
 
-        // Move up in tiny steps until you're clearly outside platform collider
-        for (int i = 0; i < 20; i++)
+        List<float> xes = new();
+
+        float left = playerPos.x - minDistanceToTeleportFromPlayer;
+        for (int i = 0; i < 100; i++)
         {
-            if (!comp.OverlapPoint(new Vector2(startPos.x, y)))
-                return y;
-
-            y += 0.05f;  // climb in small increments
+            Vector2 checkPos = new Vector2(left - i * stepSize, playerPos.y);
+            RaycastHit2D preHitLeft = Physics2D.Raycast(playerPos, Vector2.left, i * stepSize + minDistanceToTeleportFromPlayer, platformMask);
+            if (preHitLeft.collider) break;
+            // Debug.DrawRay(playerPos, Vector2.left * (i * stepSize + minDistanceToTeleportFromPlayer), Color.cyan, 2f);
+            RaycastHit2D hitLeft = Physics2D.Raycast(checkPos, Vector2.down, stepSize, platformMask);
+            if (hitLeft.collider && Mathf.Abs(hitLeft.point.y - targetY) < 0.1f)
+                xes.Add(checkPos.x);
+            else break;
+            Debug.DrawRay(checkPos, Vector2.down * stepSize, Color.blue, 2f);
+        }
+        float right = playerPos.x + minDistanceToTeleportFromPlayer;
+        for (int i = 0; i < 100; i++)
+        {
+            Vector2 checkPos = new Vector2(right + i * stepSize, playerPos.y);
+            RaycastHit2D preHitRight = Physics2D.Raycast(playerPos, Vector2.right, i * stepSize + minDistanceToTeleportFromPlayer, platformMask);
+            if (preHitRight.collider) break;
+            // Debug.DrawRay(playerPos, Vector2.right * (i * stepSize + minDistanceToTeleportFromPlayer), Color.yellow, 2f);
+            RaycastHit2D hitRight = Physics2D.Raycast(checkPos, Vector2.down, stepSize, platformMask);
+            if (hitRight.collider && Mathf.Abs(hitRight.point.y - targetY) < 0.1f)
+                xes.Add(checkPos.x);
+            else break;
+            Debug.DrawRay(checkPos, Vector2.down * stepSize, Color.blue, 2f);
         }
 
-        // fallback (just in case)
-        return startPos.y + 1f;
-    }
-
-    void TeleportToPlayerPlatform()
-    {
-        GameObject platform = FindPlatformUndePlayer(targetPlayer);
-        if (platform == null) return;
-
-        CompositeCollider2D comp = platform.GetComponent<CompositeCollider2D>();
-        if (comp == null)
+        if (xes.Count == 0)
         {
-            Debug.LogWarning("Platform has no CompositeCollider2D.");
-            return;
+            // Debug.Log("cant teleport");
+            currentState = State.FindTarget;
+            // SetTarget(FindRandomGroundedPlayer(groundedPlayers));
+            return false;
         }
 
-        if (!TryFindTopEdgePolygon(comp, targetPlayer.transform.position, out float left, out float right, out float surfaceY))
-        {
-            Debug.LogWarning("Could not find top polygon edge.");
-            return;
-        }
+        float randomX = xes[Random.Range(0, xes.Count)];
 
-        float playerX = targetPlayer.transform.position.x;
+        float y = targetY + bc.bounds.size.y * 0.5f;
 
-        float forbiddenLeft = playerX - minDistanceToTeleportFromPlayer;
-        float forbiddenRight = playerX + minDistanceToTeleportFromPlayer;
-
-        List<(float, float)> intervals = new();
-
-        if (forbiddenLeft > left)
-            intervals.Add((left, Mathf.Min(forbiddenLeft, right)));
-
-        if (forbiddenRight < right)
-            intervals.Add((Mathf.Max(forbiddenRight, left), right));
-
-        if (intervals.Count == 0)
-        {
-            Debug.Log("No valid teleport interval.");
-            return;
-        }
-
-        var interval = intervals[Random.Range(0, intervals.Count)];
-        float randomX = Random.Range(interval.Item1, interval.Item2);
-
-        float initialY = surfaceY + 0.1f;
-        float y = FindSafeTeleportY(comp, new Vector2(randomX, initialY));
-
+        // Debug.Log("teleporting");
         transform.position = new Vector3(randomX, y, transform.position.z);
-    }
 
-    GameObject FindPlatformUndePlayer(GameObject player)
-    {
-        RaycastHit2D hit = Physics2D.Raycast(
-            player.transform.position,
-            Vector2.down,
-            3f,
-            platformMask
-        );
-
-        if (hit.collider != null)
-        {
-            return hit.collider.gameObject;
-        }
-        Debug.LogWarning("Cant finde PLATFORM!!!!!!");
-        return null;
+        return true;
     }
 
     private void OnCollisionEnter2D(Collision2D other)

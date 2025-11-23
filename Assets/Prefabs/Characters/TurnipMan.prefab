@@ -183,7 +183,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   speed: 3
-  minDistanceToTeleportFromPlayer: 2
+  minDistanceToTeleportFromPlayer: 2.2
+  jumpInDuration: 1
+  jumpOutDuration: 1
 --- !u!95 &5549070645573232710
 Animator:
   serializedVersion: 7
