@@ -182,7 +182,7 @@ MonoBehaviour:
   platformMask:
     serializedVersion: 2
     m_Bits: 64
-  speed: 3
+  speed: 1
   minDistanceToTeleportFromPlayer: 2
 --- !u!95 &5549070645573232710
 Animator:
