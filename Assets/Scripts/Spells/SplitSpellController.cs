@@ -12,6 +12,13 @@ public class SplitSpellController : MonoBehaviour
     private bool isSplit = false;
     private Coroutine reconnectTimer;
 
+    private CharacterManager characterManager;
+
+    public void Awake()
+    {
+        characterManager = CharacterManager.Instance;
+    }
+
     public void Cast()
     {
         if (!isSplit)
@@ -27,9 +34,16 @@ public class SplitSpellController : MonoBehaviour
         Vector3 pos = slimesConnected.transform.position;
         int hp = slimesConnected.GetComponent<Health>().GetHp();
 
+        characterManager.ActiveCharacters.Remove(slimesConnected);
+        characterManager.ActiveCharacters.Add(slimeOne);
+        characterManager.ActiveCharacters.Add(slimeTwo);
+
         slimesConnected.SetActive(false);
         slimeOne.SetActive(true);
         slimeTwo.SetActive(true);
+
+        if (hp % 2 != 0)
+            hp += 1; // make even for splitting
 
         slimeOne.GetComponent<Health>().SetHp(hp / 2);
         slimeTwo.GetComponent<Health>().SetHp(hp / 2);
@@ -65,6 +79,10 @@ public class SplitSpellController : MonoBehaviour
 
         int hp = slimeOne.GetComponent<Health>().GetHp() + slimeTwo.GetComponent<Health>().GetHp();
         Vector3 mergePos = (slimeOne.transform.position + slimeTwo.transform.position) / 2f;
+
+        characterManager.ActiveCharacters.Add(slimesConnected);
+        characterManager.ActiveCharacters.Remove(slimeOne);
+        characterManager.ActiveCharacters.Remove(slimeTwo);
 
         slimeOne.SetActive(false);
         slimeTwo.SetActive(false);

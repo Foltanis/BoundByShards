@@ -26,7 +26,10 @@ public class CharacterManager : MonoBehaviour
 
     private Dictionary<CharacterType, GameObject> lookup = new Dictionary<CharacterType, GameObject>();
 
+    private HashSet<GameObject> activeCharacters = new HashSet<GameObject>();
+
     public List<CharacterEntry> Characters => characters;
+    public HashSet<GameObject> ActiveCharacters => activeCharacters;
 
     void Awake()
     {
@@ -46,6 +49,8 @@ public class CharacterManager : MonoBehaviour
             if (!entry.activeOnStart && entry.instance != null)
                 entry.instance.SetActive(false);
 
+            if (entry.activeOnStart && entry.instance != null)
+                activeCharacters.Add(entry.instance);
         }
     }
 

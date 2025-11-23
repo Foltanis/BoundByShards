@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 2868377957074245869}
   - component: {fileID: 6106085468113512201}
   - component: {fileID: 8217480171434949376}
+  - component: {fileID: 3473392101157983397}
   m_Layer: 7
   m_Name: DashSlime
   m_TagString: Player
@@ -273,8 +274,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b622c0fadf2614b4291e1f3425f4607d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  speed: 6
-  jumpForce: 6
+  speed: 5
+  jumpForce: 5
   wallJumpForce: 4
   platformLayer:
     serializedVersion: 2
@@ -309,8 +310,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DashAbility
   dashSpeed: 20
-  dashDuration: 0.2
-  dashCooldown: 1
+  dashDuration: 0.1
+  dashCooldown: 3
 --- !u!114 &6106085468113512201
 MonoBehaviour:
   m_ObjectHideFlags: 0

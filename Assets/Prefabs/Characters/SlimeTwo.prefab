@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 5615946209376479982}
   - component: {fileID: 7023006090582539396}
   - component: {fileID: 1496877151242145851}
+  - component: {fileID: 2851272785464822234}
   m_Layer: 7
   m_Name: SlimeTwo
   m_TagString: Player
@@ -272,8 +273,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b622c0fadf2614b4291e1f3425f4607d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  speed: 6
-  jumpForce: 6
+  speed: 5
+  jumpForce: 5
   wallJumpForce: 4
   platformLayer:
     serializedVersion: 2

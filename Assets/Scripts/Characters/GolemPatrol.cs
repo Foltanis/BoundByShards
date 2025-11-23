@@ -1,45 +1,44 @@
 using UnityEngine;
+using UnityEngine.Timeline;
 
 public class GolemPatrol : MonoBehaviour
 {
-    [SerializeField] private float speed = 2f;        // movement speed
-    [SerializeField] private float period = 2f;       // time it takes to move in one direction
+    [SerializeField] private float speed = 2f;
+    [SerializeField] private float moveDistance = 3f;
     [SerializeField] private bool startMovingRight = true;
 
+    private Vector2 startPosition;
     private int direction;
-    private float timer;
 
     private void Start()
     {
-        direction = startMovingRight ? 1 : -1;
-        timer = period * 0.5f;
+        // set starting position, direction, facing right or left
+        ChangeDirection(startMovingRight ? 1 : -1);
     }
 
     private void Update()
     {
-        // Move based on direction
-        transform.Translate(speed * direction * Time.deltaTime, 0f, 0f);
+        // movement in x direction
+        float moveStep = speed * Time.deltaTime * direction;
+        transform.Translate(moveStep, 0f, 0f);
 
-        // Count up time
-        timer += Time.deltaTime;
+        float currentOffset = Mathf.Abs(transform.position.x - startPosition.x);
 
-        // When period finishes, switch direction
-        if (timer >= period)
+        if (currentOffset >= moveDistance)
         {
-            timer = 0f;
-            ChangeDirection();
+            if (direction == 1)
+                ChangeDirection(-1);
+            else
+                ChangeDirection(1);
         }
     }
 
-    private void ChangeDirection()
+    private void ChangeDirection(int newDirection)
     {
-        direction = -direction; // flip direction
+        startPosition = transform.position;
+        direction = newDirection;
 
-        // Flip sprite visually
-        transform.localScale = new Vector3(
-            -transform.localScale.x,
-            transform.localScale.y,
-            transform.localScale.z
-        );
+        // rotate the golem to face the new direction
+        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
 }

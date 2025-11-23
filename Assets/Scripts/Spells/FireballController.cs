@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class FireballController : MonoBehaviour
+public class FireballController : MonoBehaviour, IFreezableReceiver
 {
     private Rigidbody2D rb;
     private Collider2D myCollider;
@@ -33,11 +33,20 @@ public class FireballController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        // Example: deal damage if target has HP
         var hp = col.gameObject.GetComponent<Health>();
         if (hp != null)
             hp.TakeDamage(damage);
 
         Destroy(gameObject);
+    }
+
+    public void CastOnFreeze()
+    {
+        Destroy(gameObject);
+    }
+
+    public void CastOnUnfreeze()
+    {
+        // No action needed on unfreeze for the fireball
     }
 }

@@ -11,6 +11,7 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int dmg)
     {
+        Debug.Log($"{gameObject.name} hp: {currentHealth} took {dmg} damage.");
         currentHealth -= dmg;
 
         if (currentHealth <= 0)

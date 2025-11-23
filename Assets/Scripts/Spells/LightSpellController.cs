@@ -55,8 +55,8 @@ public class LightSpellController : MonoBehaviour, IFreezableReceiver
         light2 = Instantiate(spellData.lightPrefab, center + Vector3.right * spellData.spawnDistance, Quaternion.identity)
             .AddComponent<LightController>();
 
-        light1.Init(movePrimary);
-        light2.Init(moveSecondary);
+        light1.Init(moveSecondary); 
+        light2.Init(movePrimary);
     }
 
     private void EndSpell()
