@@ -4,61 +4,52 @@ using UnityEngine.SceneManagement;
 
 public class Objective : MonoBehaviour
 {
-    private GameObject[] allPlayers;                      // All players found at Start
-    private HashSet<GameObject> playersInside = new HashSet<GameObject>();   // Active players currently inside
+    [SerializeField] private GameObject gem;
+    private CharacterManager characterManager;
+
+    private HashSet<GameObject> playersInside = new HashSet<GameObject>();
 
     private void Start()
     {
-        // Find ALL players in the scene with tag "Player" (active or inactive)
-        allPlayers = Resources.FindObjectsOfTypeAll<GameObject>();
-
-        List<GameObject> playerList = new List<GameObject>();
-        foreach (var obj in allPlayers)
-        {
-            if (obj.CompareTag("Player"))
-                playerList.Add(obj);
-        }
-
-        allPlayers = playerList.ToArray();
+        characterManager = CharacterManager.Instance;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("OnTriggerEnter");
-        if (!other.CompareTag("Player"))
-            return;
+        if (!characterManager.ActiveCharacters.Contains(other.gameObject))
+            return; // ignore non-player objects
 
-        GameObject player = other.gameObject;
+        playersInside.Add(other.gameObject);
 
-        // Only track active players
-        if (player.activeInHierarchy)
-            playersInside.Add(player);
-
-        // Check if all ACTIVE players are inside
-        if (AreAllActivePlayersInside())
-            LoadNextScene();
+        CheckObjective();
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        Debug.Log("OnTriggerExit");
-        if (!other.CompareTag("Player"))
+        if (!characterManager.ActiveCharacters.Contains(other.gameObject))
             return;
 
-        GameObject player = other.gameObject;
-
-        playersInside.Remove(player);
+        playersInside.Remove(other.gameObject);
     }
 
-    private bool AreAllActivePlayersInside()
+    private void CheckObjective()
     {
-        foreach (var p in allPlayers)
+        int totalPlayers = characterManager.ActiveCharacters.Count;
+        int insidePlayers = playersInside.Count;
+
+        if (totalPlayers > 0 && insidePlayers == totalPlayers)
         {
-            if (p.activeInHierarchy && !playersInside.Contains(p))
-                return false;
+            if (gem != null)
+                Debug.Log("Gem not collected!");
+            else
+            {
+                Debug.Log("All players in zone! Loading next scene...");
+                LoadNextScene();
+            }
+                
         }
-        return true;
     }
+
 
     private void LoadNextScene()
     {
