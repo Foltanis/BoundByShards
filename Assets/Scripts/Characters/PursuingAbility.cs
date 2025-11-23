@@ -85,11 +85,10 @@ public class PursuingAbility : MonoBehaviour
 
     void MoveTowards(GameObject target)
     {
-        float magicConstant = 10f;
         float xDeltaFromTarget = target.transform.position.x - transform.position.x;
         float dir = Mathf.Sign(xDeltaFromTarget);
 
-        if (!targetPlayerController.IsGrounded() && Mathf.Abs(xDeltaFromTarget) < 0.1)
+        if (!targetPlayerController.IsGrounded() && Mathf.Abs(xDeltaFromTarget) < 0.3)
             rb.linearVelocity = new Vector2(0.0f, rb.linearVelocity.y);
         else 
             rb.linearVelocity = new Vector2(dir * speed, rb.linearVelocity.y);

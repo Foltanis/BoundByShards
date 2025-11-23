@@ -31,6 +31,9 @@ public class SplitSpellController : MonoBehaviour
         slimeOne.SetActive(true);
         slimeTwo.SetActive(true);
 
+        if (hp % 2 != 0)
+            hp += 1; // make even for splitting
+
         slimeOne.GetComponent<Health>().SetHp(hp / 2);
         slimeTwo.GetComponent<Health>().SetHp(hp / 2);
 
