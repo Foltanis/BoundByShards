@@ -92,3 +92,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FreezeZone
   freezeDuration: 3
+  freezeParticles: {fileID: 4165085481773956328, guid: a21191a4a751be64ab16f5b1d9815ae1, type: 3}
