@@ -7860,13 +7860,13 @@ MonoBehaviour:
     activeOnStart: 1
   - id: 2
     instance: {fileID: 1987607730}
-    activeOnStart: 1
+    activeOnStart: 0
   - id: 1
     instance: {fileID: 1210360562}
-    activeOnStart: 0
+    activeOnStart: 1
   - id: 3
     instance: {fileID: 308493025}
-    activeOnStart: 1
+    activeOnStart: 0
 --- !u!4 &1890789602
 Transform:
   m_ObjectHideFlags: 0

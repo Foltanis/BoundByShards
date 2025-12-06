@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Timeline;
 
-public class GolemPatrol : MonoBehaviour
+public class PatrolAbility : MonoBehaviour
 {
     [SerializeField] private float speed = 2f;
     [SerializeField] private float moveDistance = 3f;
