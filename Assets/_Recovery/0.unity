@@ -11002,16 +11002,61 @@ PrefabInstance:
       propertyPath: m_Name
       value: ConnSlimes
       objectReference: {fileID: 0}
+    - target: {fileID: 7287948730731112746, guid: 5b9176eb18003574aaa23a7b567ea41b, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 7287948730731112746, guid: 5b9176eb18003574aaa23a7b567ea41b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[15].m_ActionId
+      value: 98161394-1215-4901-982a-b658f31b0a4e
+      objectReference: {fileID: 0}
+    - target: {fileID: 7287948730731112746, guid: 5b9176eb18003574aaa23a7b567ea41b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[15].m_ActionName
+      value: 'ConnSlimes/CarryMage[/Keyboard/k,/Keyboard/numpad5]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8934529518704908919, guid: 5b9176eb18003574aaa23a7b567ea41b, type: 3}
+      propertyPath: m_Size.x
+      value: 0.23568787
+      objectReference: {fileID: 0}
+    - target: {fileID: 8934529518704908919, guid: 5b9176eb18003574aaa23a7b567ea41b, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.0012340024
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 336576361140073839, guid: 5b9176eb18003574aaa23a7b567ea41b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1614613197}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2429295521814322496, guid: 5b9176eb18003574aaa23a7b567ea41b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1210360572}
   m_SourcePrefab: {fileID: 100100000, guid: 5b9176eb18003574aaa23a7b567ea41b, type: 3}
 --- !u!1 &1210360562 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2429295521814322496, guid: 5b9176eb18003574aaa23a7b567ea41b, type: 3}
   m_PrefabInstance: {fileID: 1210360561}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1210360571 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 336576361140073839, guid: 5b9176eb18003574aaa23a7b567ea41b, type: 3}
+  m_PrefabInstance: {fileID: 1210360561}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1210360572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210360562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ff29e15ccfb4164380d622cfceced46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CarryAbility
+  carryPoint: {fileID: 1614613197}
+  followSpeed: 20
 --- !u!1001 &1230410958
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12134,6 +12179,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2835879529516867212, guid: dee5e8b7772828340929107f80f274fb, type: 3}
   m_PrefabInstance: {fileID: 792990493}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1614613196
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1614613197}
+  m_Layer: 0
+  m_Name: CarryPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1614613197
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614613196}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0}
+  m_LocalScale: {x: 0.70710677, y: 0.70710677, z: 0.70710677}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1210360571}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1618491147
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16667,6 +16743,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 852177532496594813, guid: 83f681a76d73f7a4482b25248c80fa6c, type: 3}
+      propertyPath: m_Size.x
+      value: 0.17847109
+      objectReference: {fileID: 0}
+    - target: {fileID: 852177532496594813, guid: 83f681a76d73f7a4482b25248c80fa6c, type: 3}
+      propertyPath: m_Size.y
+      value: 0.4114232
+      objectReference: {fileID: 0}
+    - target: {fileID: 852177532496594813, guid: 83f681a76d73f7a4482b25248c80fa6c, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.015908003
+      objectReference: {fileID: 0}
+    - target: {fileID: 852177532496594813, guid: 83f681a76d73f7a4482b25248c80fa6c, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.078330755
+      objectReference: {fileID: 0}
     - target: {fileID: 2265801819773075243, guid: 83f681a76d73f7a4482b25248c80fa6c, type: 3}
       propertyPath: slimeOne
       value: 

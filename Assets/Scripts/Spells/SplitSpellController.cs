@@ -14,7 +14,7 @@ public class SplitSpellController : MonoBehaviour
 
     private CharacterManager characterManager;
 
-    public void Awake()
+    public void Start()
     {
         characterManager = CharacterManager.Instance;
     }

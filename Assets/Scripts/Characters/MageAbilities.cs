@@ -3,14 +3,11 @@ using UnityEngine.InputSystem;
 
 public class MageAbilities : MonoBehaviour
 {
-    //[SerializeField] private GameObject lightPrefab;
-    //[SerializeField] private GameObject fireballPrefab;
     private FireballSpellController fireballSpell;
 
     [SerializeField] private SplitSpellController splitSpellController;
 
     private InputAction splitAction;
-    //private InputAction lightAction;
     private InputAction fireballAction;
     private InputAction aimAction;
 
@@ -22,7 +19,6 @@ public class MageAbilities : MonoBehaviour
         if (input != null)
         {
             splitAction = input.actions["SplitSpell"];
-            //lightAction = input.actions["LightSpell"];
             fireballAction = input.actions["FireballSpell"];
             aimAction = input.actions["SpellMovePrimary"];
         }
@@ -30,16 +26,10 @@ public class MageAbilities : MonoBehaviour
 
     void Update()
     {
-        //FireballSpell.Instance.Update(Time.deltaTime);
 
         if (splitAction != null && splitAction.triggered)
             splitSpellController.Cast();
 
-        //if (lightAction != null && lightAction.triggered)
-        //    LightSpell.Instance.Cast(lightPrefab);
-
-        //if (fireballAction != null && fireballAction.triggered)
-        //    FireballSpell.Instance.Cast(fireballPrefab, primarySpellMove.ReadValue<Vector2>());
 
         if (fireballAction != null && fireballAction.triggered)
         {
