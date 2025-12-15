@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e4cfc7740086ba1428de9164b46f735a
+guid: 1045caf5a7556a84e95bf929a478c713
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6994377436830007165
-    second: pozadie_0
+      213: 6366622634749087619
+    second: "pozadie \u2013 k\xF3pia_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pozadie_0
+      name: "pozadie \u2013 k\xF3pia_0"
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 34
-        height: 50
+        width: 6400
+        height: 2500
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3808dbc67cafeee90800000000000000
-      internalID: -6994377436830007165
+      spriteID: 38f4e23fd89ca5850800000000000000
+      internalID: 6366622634749087619
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      pozadie_0: -6994377436830007165
+      "pozadie \u2013 k\xF3pia_0": 6366622634749087619
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
