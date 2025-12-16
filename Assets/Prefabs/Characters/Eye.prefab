@@ -30,6 +30,10 @@ Transform:
 <<<<<<< Updated upstream
   m_LocalPosition: {x: 0.42, y: 0.02, z: 0}
   m_LocalScale: {x: -5.08, y: 4.63, z: 3.17}
+=======
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 4.5, y: 2.79, z: 3.17}
+>>>>>>> Stashed changes
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1469456416784667675}
@@ -107,6 +111,12 @@ MonoBehaviour:
   lostSightDelay: 3
   rotationSpeed: 10
   rotationOffset: 90
+=======
+  chaseSpeed: 3
+  wallMask:
+    serializedVersion: 2
+    m_Bits: 64
+>>>>>>> Stashed changes
 --- !u!1 &2908591730819945451
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,6 +134,8 @@ GameObject:
   - component: {fileID: 5878826730711295530}
   - component: {fileID: 8182876789131560467}
   - component: {fileID: 7997864423828683479}
+=======
+>>>>>>> Stashed changes
   m_Layer: 0
   m_Name: Eye
   m_TagString: Untagged
@@ -144,6 +156,10 @@ Transform:
 <<<<<<< Updated upstream
   m_LocalScale: {x: 0.69, y: 0.69, z: 0.69}
   m_ConstrainProportionsScale: 0
+=======
+  m_LocalScale: {x: 0.26, y: 0.26, z: 0.26}
+  m_ConstrainProportionsScale: 1
+>>>>>>> Stashed changes
   m_Children:
   - {fileID: 281236636551492597}
   m_Father: {fileID: 0}
@@ -197,6 +213,9 @@ SpriteRenderer:
   m_SortingOrder: 0
 <<<<<<< Updated upstream
   m_Sprite: {fileID: -3863559246781394473, guid: 431888574649d374f873363575b37e95, type: 3}
+=======
+  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+>>>>>>> Stashed changes
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -235,6 +254,9 @@ Rigidbody2D:
   m_CollisionDetection: 0
 <<<<<<< Updated upstream
   m_Constraints: 6
+=======
+  m_Constraints: 0
+>>>>>>> Stashed changes
 --- !u!58 &3571467180862664302
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -272,6 +294,10 @@ CircleCollider2D:
 <<<<<<< Updated upstream
   m_Offset: {x: -0.007500208, y: 0.021845384}
   m_Radius: 0.14196096
+=======
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.49999997
+>>>>>>> Stashed changes
 --- !u!114 &218164130723976985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340,3 +366,6 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: ffffffff
+=======
+  startMovingRight: 0
+>>>>>>> Stashed changes
