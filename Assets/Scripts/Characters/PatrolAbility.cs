@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Timeline;
 
 public class PatrolAbility : MonoBehaviour
 {
@@ -7,38 +6,45 @@ public class PatrolAbility : MonoBehaviour
     [SerializeField] private float moveDistance = 3f;
     [SerializeField] private bool startMovingRight = true;
 
+    [Header("Moonwalking fix")]
+    [SerializeField] private bool defaultFacingRight = true;
+
     private Vector2 startPosition;
     private int direction;
+    private int facingMultiplier;
 
     private void Start()
     {
-        // set starting position, direction, facing right or left
+        // sprite correction factor
+        facingMultiplier = defaultFacingRight ? 1 : -1;
+
+        startPosition = transform.position;
         ChangeDirection(startMovingRight ? 1 : -1);
     }
 
     private void Update()
     {
-        // movement in x direction
         float moveStep = speed * Time.deltaTime * direction;
-        transform.Translate(moveStep, 0f, 0f);
+        transform.Translate(moveStep, 0f, 0f, Space.World);
 
         float currentOffset = Mathf.Abs(transform.position.x - startPosition.x);
 
         if (currentOffset >= moveDistance)
         {
-            if (direction == 1)
-                ChangeDirection(-1);
-            else
-                ChangeDirection(1);
+            ChangeDirection(-direction);
         }
     }
 
     private void ChangeDirection(int newDirection)
     {
-        startPosition = transform.position;
         direction = newDirection;
+        startPosition = transform.position;
 
-        // rotate the golem to face the new direction
-        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        // sprite flip with orientation correction
+        transform.localScale = new Vector3(
+            Mathf.Abs(transform.localScale.x) * direction * facingMultiplier,
+            transform.localScale.y,
+            transform.localScale.z
+        );
     }
 }

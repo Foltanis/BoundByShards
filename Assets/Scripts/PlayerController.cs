@@ -31,16 +31,16 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
     private Rigidbody2D body;
     private BoxCollider2D boxCollider;
     private Vector3 baseScale;
-    
+
     //private Health health;
-    
+
     private bool isGrounded;
     private bool isTouchingWall;
     private bool wallJumpLock;
     private int wallDirection;
 
     private bool frozen = false;
-
+    // TODO: fix movement when frozen, mage is moving after freeze if was moving before
     public bool IsGrounded() => isGrounded;
 
     void Awake()
@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
         jumpAction.canceled -= OnJumpCanceled;
     }
 
-    void FixedUpdate() 
+    void FixedUpdate()
     {
         CheckGrounded();
         CheckWall();
@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
         Vector2 origin = boxCollider.bounds.center;
         Vector2 size = boxCollider.bounds.size;
         Vector2 boxCenter = origin + Vector2.down * (size.y + groundCheckDistance) * 0.5f;
-        Vector2 boxSize   = new Vector2(size.x * 0.9f, groundCheckDistance);
+        Vector2 boxSize = new Vector2(size.x * 0.9f, groundCheckDistance);
         Collider2D hit = Physics2D.OverlapBox(
             boxCenter,
             boxSize,
@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
     {
         Vector2 origin = boxCollider.bounds.center;
         Vector2 size = boxCollider.bounds.size;
-        Vector2 boxSize   = new Vector2(wallCheckDistance, size.y * 0.9f);
+        Vector2 boxSize = new Vector2(wallCheckDistance, size.y * 0.9f);
         Collider2D hitLeft = Physics2D.OverlapBox(
             origin + Vector2.left * (size.x + wallCheckDistance) * 0.5f,
             boxSize,
@@ -174,9 +174,6 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
 
     public void CastOnFreeze()
     {
-
-        Debug.Log("Player frozensdadasdasdas");
-        Debug.Log(name);
         body.linearVelocity = Vector2.zero;
         enabled = false;
     }

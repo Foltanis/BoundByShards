@@ -6,6 +6,17 @@ public class Freezable : MonoBehaviour
     private bool frozen = false;
     public bool IsFrozen => frozen;
 
+    private SpriteRenderer sr;
+    private Color originalColor;
+    MaterialPropertyBlock block;
+
+    private void Awake()
+    {
+        sr = GetComponent<SpriteRenderer>();
+        if (sr != null)
+            originalColor = sr.color;
+    }
+
     public void Freeze(float duration)
     {
         if (!frozen)
@@ -30,9 +41,26 @@ public class Freezable : MonoBehaviour
             Debug.Log($"Notifying receiver {receiver} of freeze state: {freezing}");
 
             if (freezing)
+            {
+                DefaultFreezeEfect();
                 receiver.CastOnFreeze();
+            }
             else
+            {
+                DefaultUnfreezeEfect();
                 receiver.CastOnUnfreeze();
+            }
+                
         }
+    }
+
+    private void DefaultFreezeEfect()
+    {
+        sr.color = new Color(0.5f, 0.8f, 1f);
+    }
+
+    private void DefaultUnfreezeEfect()
+    {
+        sr.color = originalColor;        
     }
 }

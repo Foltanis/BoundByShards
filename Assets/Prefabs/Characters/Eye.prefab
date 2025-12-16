@@ -27,8 +27,8 @@ Transform:
   m_GameObject: {fileID: 2164974837536359826}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4.5, y: 2.79, z: 3.17}
+  m_LocalPosition: {x: 0.42, y: 0.02, z: 0}
+  m_LocalScale: {x: -5.08, y: 4.63, z: 3.17}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1469456416784667675}
@@ -97,10 +97,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 732fe544c5fb4e2439baabd6f71c77f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EyeAbility
-  chaseSpeed: 3
+  chaseSpeed: 2
+  keepDistance: 2.5
   wallMask:
     serializedVersion: 2
     m_Bits: 64
+  lostSightDelay: 3
+  rotationSpeed: 10
+  rotationOffset: 90
 --- !u!1 &2908591730819945451
 GameObject:
   m_ObjectHideFlags: 0
@@ -114,6 +118,9 @@ GameObject:
   - component: {fileID: 5532728798326522129}
   - component: {fileID: 3571467180862664302}
   - component: {fileID: 218164130723976985}
+  - component: {fileID: 5878826730711295530}
+  - component: {fileID: 8182876789131560467}
+  - component: {fileID: 7997864423828683479}
   m_Layer: 0
   m_Name: Eye
   m_TagString: Untagged
@@ -131,8 +138,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.23555, y: -0.13594, z: 0}
-  m_LocalScale: {x: 0.26, y: 0.26, z: 0.26}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 0.69, y: 0.69, z: 0.69}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 281236636551492597}
   m_Father: {fileID: 0}
@@ -184,7 +191,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: -3863559246781394473, guid: 431888574649d374f873363575b37e95, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -221,7 +228,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 6
 --- !u!58 &3571467180862664302
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -256,8 +263,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.49999997
+  m_Offset: {x: -0.007500208, y: 0.021845384}
+  m_Radius: 0.14196096
 --- !u!114 &218164130723976985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,4 +279,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PatrolAbility
   speed: 1.2
   moveDistance: 5
-  startMovingRight: 0
+  startMovingRight: 1
+  defaultFacingRight: 0
+--- !u!95 &5878826730711295530
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2908591730819945451}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1e01471ef068b914e8f30d436b36c47d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8182876789131560467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2908591730819945451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 831d865ffb641e64fbe80ed23c76dbb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Health
+  maxHealth: 2
+--- !u!114 &7997864423828683479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2908591730819945451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshModifier
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
