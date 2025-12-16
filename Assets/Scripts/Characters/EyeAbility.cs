@@ -26,16 +26,18 @@ public class EyeAbility : MonoBehaviour
 
     void Start()
     {
+        //maybe possition is enough TODO
         eye = transform.parent;
         patrolAbility = eye.GetComponent<PatrolAbility>();
     }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             player = other.transform;
             Debug.Log("Player entered eye trigger");
-        }
+    }
     }
     void OnTriggerExit2D(Collider2D other)
     {
@@ -43,7 +45,7 @@ public class EyeAbility : MonoBehaviour
         {
             player = null;
             Debug.Log("Player exited eye trigger");
-        }
+    }
     }
     void Update()
     {
@@ -62,6 +64,7 @@ public class EyeAbility : MonoBehaviour
         dir.Normalize();
         // Raycast to check for walls between eye and player
         RaycastHit2D hit = Physics2D.Raycast(eye.position, dir, dist, wallMask);
+
         if (hit.collider != null)
         {
             // Wall blocking view
@@ -73,7 +76,7 @@ public class EyeAbility : MonoBehaviour
                 wasPlayerVisible = false;
                 playerVisible = false;
                 HandleLostPlayer();
-            }
+        }
         }
         else
         {
@@ -84,7 +87,7 @@ public class EyeAbility : MonoBehaviour
             {
                 // Just gained sight
                 wasPlayerVisible = true;
-                playerVisible = true;
+            playerVisible = true;
 
                 // Cancel return to patrol if running
                 if (lostSightCoroutine != null)
@@ -96,7 +99,7 @@ public class EyeAbility : MonoBehaviour
                 // Signal fireballs
                 FireballSignalBroadcaster.EnemySeen(player.gameObject);
 
-                if (patrolAbility != null)
+            if (patrolAbility != null)
                 {
                     patrolAbility.enabled = false;
                     patrolPosition = eye.position;
@@ -108,7 +111,7 @@ public class EyeAbility : MonoBehaviour
             {
                 // Continue signaling while player is visible
                 FireballSignalBroadcaster.EnemySeen(player.gameObject);
-            }
+        }
 
             ChasePlayer(dist, dir);
         }

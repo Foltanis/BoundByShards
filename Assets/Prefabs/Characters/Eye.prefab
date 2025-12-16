@@ -27,6 +27,7 @@ Transform:
   m_GameObject: {fileID: 2164974837536359826}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+<<<<<<< Updated upstream
   m_LocalPosition: {x: 0.42, y: 0.02, z: 0}
   m_LocalScale: {x: -5.08, y: 4.63, z: 3.17}
   m_ConstrainProportionsScale: 0
@@ -97,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 732fe544c5fb4e2439baabd6f71c77f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EyeAbility
+<<<<<<< Updated upstream
   chaseSpeed: 2
   keepDistance: 2.5
   wallMask:
@@ -118,6 +120,7 @@ GameObject:
   - component: {fileID: 5532728798326522129}
   - component: {fileID: 3571467180862664302}
   - component: {fileID: 218164130723976985}
+<<<<<<< Updated upstream
   - component: {fileID: 5878826730711295530}
   - component: {fileID: 8182876789131560467}
   - component: {fileID: 7997864423828683479}
@@ -138,6 +141,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.23555, y: -0.13594, z: 0}
+<<<<<<< Updated upstream
   m_LocalScale: {x: 0.69, y: 0.69, z: 0.69}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -191,6 +195,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+<<<<<<< Updated upstream
   m_Sprite: {fileID: -3863559246781394473, guid: 431888574649d374f873363575b37e95, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -228,6 +233,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
+<<<<<<< Updated upstream
   m_Constraints: 6
 --- !u!58 &3571467180862664302
 CircleCollider2D:
@@ -263,6 +269,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
+<<<<<<< Updated upstream
   m_Offset: {x: -0.007500208, y: 0.021845384}
   m_Radius: 0.14196096
 --- !u!114 &218164130723976985
@@ -279,6 +286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PatrolAbility
   speed: 1.2
   moveDistance: 5
+<<<<<<< Updated upstream
   startMovingRight: 1
   defaultFacingRight: 0
 --- !u!95 &5878826730711295530
