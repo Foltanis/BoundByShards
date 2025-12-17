@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2315979538341308912}
   - component: {fileID: 332891789697607743}
   - component: {fileID: 740897763672158786}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FreezeArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
