@@ -183,6 +183,7 @@ GameObject:
   - component: {fileID: 8291140271031169326}
   - component: {fileID: 3889359535814870492}
   - component: {fileID: 6455620221919926667}
+  - component: {fileID: 4651897795819445476}
   m_Layer: 0
   m_Name: Golem
   m_TagString: Untagged
@@ -392,3 +393,23 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: ffffffff
+--- !u!114 &4651897795819445476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8931499198187513527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20d137ada806afa4eba2fcd4e26aeaad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GolemAttack
+  attackRange: 2
+  killRadius: 1.2
+  shockwaveRadius: 2.5
+  knockbackForce: 50
+  attackCooldown: 2
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 128

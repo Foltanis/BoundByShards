@@ -118,6 +118,13 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
         isTouchingWall = (hitLeft != null) || (hitRight != null);
     }
 
+    public void Knockback(Vector2 force)
+    {
+        body.linearVelocity = Vector2.zero;
+        body.AddForce(force, ForceMode2D.Impulse);
+    }
+
+
     private void HandleMovement()
     {
         if (frozen) return;

@@ -257,6 +257,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 92f8ca1f-098f-43e8-82a2-4f15482deffc
     m_ActionName: 'SlimeTwo/Freeze[/Keyboard/numpad5]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 98161394-1215-4901-982a-b658f31b0a4e
+    m_ActionName: 'ConnSlimes/CarryMage[/Keyboard/k,/Keyboard/numpad5]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: DashSlime
@@ -275,7 +279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   speed: 5
-  jumpForce: 5
+  jumpForce: 6
   wallJumpForce: 4
   platformLayer:
     serializedVersion: 2
