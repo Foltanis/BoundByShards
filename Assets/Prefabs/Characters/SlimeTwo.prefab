@@ -256,6 +256,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 7d664fb5-d189-432b-8f97-1a7b28347e36
     m_ActionName: 'ConnSlimes/Jump[/Keyboard/numpad8]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 98161394-1215-4901-982a-b658f31b0a4e
+    m_ActionName: 'ConnSlimes/CarryMage[/Keyboard/k,/Keyboard/numpad5]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: SlimeTwo
@@ -275,7 +279,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   speed: 5
   jumpForce: 5
-  wallJumpForce: 4
+  wallJumpForce: 5
   platformLayer:
     serializedVersion: 2
     m_Bits: 64
