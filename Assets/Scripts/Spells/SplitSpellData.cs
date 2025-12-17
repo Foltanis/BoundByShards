@@ -4,5 +4,5 @@ using UnityEngine;
 public class SplitSpellData : ScriptableObject
 {
     public float mergeDistance = 0.4f;
-    public float timeToReconnect = 10f;
+    public float timeToReconnect = 100f;
 }

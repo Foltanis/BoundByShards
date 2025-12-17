@@ -11571,6 +11571,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurnipMan
       objectReference: {fileID: 0}
+    - target: {fileID: 777056163639063724, guid: a1d8cf789a7645c42afad90a58e87a73, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3127806688822667624, guid: a1d8cf789a7645c42afad90a58e87a73, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.53
