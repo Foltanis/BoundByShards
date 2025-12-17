@@ -167,16 +167,14 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
         float jumpValue = ctx.ReadValue<float>();
         if (isGrounded)
         {
-            Vector2 ba = Vector3.up * jumpValue * jumpForce;
-            body.AddForce(ba, ForceMode2D.Impulse);
+            Vector2 upForce = Vector3.up * jumpValue * jumpForce;
+            body.AddForce(upForce, ForceMode2D.Impulse);
             anim.SetTrigger("Jump");
             hasWallJumped = false; // Reset when grounded jump
         }
         else if (isTouchingWall && !hasWallJumped)
         {
-            float wallDir = transform.localScale.x > 0 ? -1 : 1;
-            Vector2 force = new Vector2(wallDir * wallJumpForce, jumpForce);
-            body.linearVelocity = force;
+            body.linearVelocity = new Vector2(body.linearVelocity.x, body.linearVelocity.y + jumpValue * wallJumpForce);
             anim.SetTrigger("Jump");
             hasWallJumped = true;
         }
