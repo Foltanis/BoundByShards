@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class EyeAbility : MonoBehaviour
+public class EyeAbility : MonoBehaviour//,IFreezableReceiver
 {
     [Header("Chase")]
     public float chaseSpeed = 3f;
@@ -155,5 +155,25 @@ public class EyeAbility : MonoBehaviour
 
         lostSightCoroutine = null;
     }
+
+    //TODO eye on freeze behavior, problem is this is child of eye
+    //public void CastOnFreeze()
+    //{
+    //    // Stop all movement
+    //    if (lostSightCoroutine != null)
+    //    {
+    //        StopCoroutine(lostSightCoroutine);
+    //        lostSightCoroutine = null;
+    //    }
+    //    if (patrolAbility != null)
+    //        patrolAbility.enabled = false;
+    //}
+
+    //public void CastOnUnfreeze()
+    //{
+    //    // Resume patrol
+    //    if (patrolAbility != null)
+    //        patrolAbility.enabled = true;
+    //}
 
 }
