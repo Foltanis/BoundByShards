@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 58b9b3ad990422a4bbb79f3756f3bf64
+guid: 7c8f35bfb6b8d9c469bb5ff2ae818a64
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -127,9 +127,9 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: pillar
+  - name: hanging vines straight
     originalName: 
-    pivot: {x: 0.5263158, y: -0.06451613}
+    pivot: {x: 0.6, y: -0.086956516}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -137,9 +137,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 38
-      height: 62
-    spriteID: fb800d8a7a3b7e04ea6b7a30431afde5
+      width: 10
+      height: 46
+    spriteID: 12bad6ca5b703f74787a17864b9285ba
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -147,31 +147,31 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: -11, y: 4}
+    uvTransform: {x: 4, y: 4}
   spriteSheetImportData: []
   tileSetImportData: []
   asepriteLayers:
   - layerIndex: 0
     uuid:
-      value0: 2153306290
+      value0: 3294421321
       value1: 0
       value2: 0
       value3: 0
     guid: 0
-    name: pillar
+    name: hanging vines straight
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: pillar
+    - name: hanging vines straight
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: -10
+        x: 19
         y: 4
-        width: 70
-        height: 62
-      spriteId: fb800d8a7a3b7e04ea6b7a30431afde5
+        width: 10
+        height: 46
+      spriteId: 12bad6ca5b703f74787a17864b9285ba
     linkedCells: []
     tileCells: []
     tileSetIndex: 0
@@ -181,5 +181,5 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 50, y: 70}
-  previousTextureSize: {x: 64, y: 128}
+  canvasSize: {x: 50, y: 50}
+  previousTextureSize: {x: 32, y: 64}

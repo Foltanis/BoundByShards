@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 58b9b3ad990422a4bbb79f3756f3bf64
+guid: a0923cae1577838408e35b67c5ecb88e
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -127,9 +127,9 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: pillar
+  - name: obetny stojan na krystal
     originalName: 
-    pivot: {x: 0.5263158, y: -0.06451613}
+    pivot: {x: 0.5357143, y: -0.30434784}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -137,9 +137,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 38
-      height: 62
-    spriteID: fb800d8a7a3b7e04ea6b7a30431afde5
+      width: 28
+      height: 23
+    spriteID: c4af928033721c245a68958928e333a8
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -147,31 +147,31 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: -11, y: 4}
+    uvTransform: {x: 4, y: 4}
   spriteSheetImportData: []
   tileSetImportData: []
   asepriteLayers:
   - layerIndex: 0
     uuid:
-      value0: 2153306290
+      value0: 950812555
       value1: 0
       value2: 0
       value3: 0
     guid: 0
-    name: pillar
+    name: obetny stojan na krystal
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: pillar
+    - name: obetny stojan na krystal
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: -10
-        y: 4
-        width: 70
-        height: 62
-      spriteId: fb800d8a7a3b7e04ea6b7a30431afde5
+        x: 10
+        y: 7
+        width: 28
+        height: 23
+      spriteId: c4af928033721c245a68958928e333a8
     linkedCells: []
     tileCells: []
     tileSetIndex: 0
@@ -182,4 +182,4 @@ ScriptedImporter:
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 50, y: 70}
-  previousTextureSize: {x: 64, y: 128}
+  previousTextureSize: {x: 64, y: 32}
