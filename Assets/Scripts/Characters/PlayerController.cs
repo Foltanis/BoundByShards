@@ -31,16 +31,18 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
     private Rigidbody2D body;
     private BoxCollider2D boxCollider;
     private Vector3 baseScale;
-    
+
     //private Health health;
-    
+
     private bool isGrounded;
     private bool isTouchingWall;
     private bool wallJumpLock;
     private int wallDirection;
+    private bool hasWallJumped;
+    private float wallJumpInputLockTimer = 0f;
 
     private bool frozen = false;
-
+    // TODO: fix movement when frozen, mage is moving after freeze if was moving before
     public bool IsGrounded() => isGrounded;
 
     void Awake()
@@ -73,7 +75,7 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
         jumpAction.canceled -= OnJumpCanceled;
     }
 
-    void FixedUpdate() 
+    void FixedUpdate()
     {
         CheckGrounded();
         CheckWall();
@@ -87,7 +89,7 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
         Vector2 origin = boxCollider.bounds.center;
         Vector2 size = boxCollider.bounds.size;
         Vector2 boxCenter = origin + Vector2.down * (size.y + groundCheckDistance) * 0.5f;
-        Vector2 boxSize   = new Vector2(size.x * 0.9f, groundCheckDistance);
+        Vector2 boxSize = new Vector2(size.x * 0.9f, groundCheckDistance);
         Collider2D hit = Physics2D.OverlapBox(
             boxCenter,
             boxSize,
@@ -101,22 +103,38 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
     {
         Vector2 origin = boxCollider.bounds.center;
         Vector2 size = boxCollider.bounds.size;
-        Vector2 boxSize   = new Vector2(wallCheckDistance, size.y * 0.9f);
+        Vector2 boxSize = new Vector2(wallCheckDistance, size.y * 0.9f);
+        
         Collider2D hitLeft = Physics2D.OverlapBox(
             origin + Vector2.left * (size.x + wallCheckDistance) * 0.5f,
-            boxSize,
-            0f,
-            platformLayer
+            boxSize, 0f, platformLayer
         );
         Collider2D hitRight = Physics2D.OverlapBox(
             origin + Vector2.right * (size.x + wallCheckDistance) * 0.5f,
-            boxSize,
-            0f,
-            platformLayer
+            boxSize, 0f, platformLayer
         );
-        // Debug.Log("isGrounded " + isGrounded + "  hitLeft " + (hitLeft != null) + "  hitRight " + (hitRight != null));
+
+        bool wasTouchingWall = isTouchingWall;
         isTouchingWall = (hitLeft != null) || (hitRight != null);
+        
+        // Reset wall jump only when grounded OR when player actually left the wall
+        if (isGrounded)
+        {
+            hasWallJumped = false;
+        }
+        else if (wasTouchingWall && !isTouchingWall)
+        {
+            // Player left the wall — allow wall jump again if they touch a wall later
+            hasWallJumped = false;
+        }
     }
+
+    public void Knockback(Vector2 force)
+    {
+        body.linearVelocity = Vector2.zero;
+        body.AddForce(force, ForceMode2D.Impulse);
+    }
+
 
     private void HandleMovement()
     {
@@ -149,16 +167,16 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
         float jumpValue = ctx.ReadValue<float>();
         if (isGrounded)
         {
-            Vector2 ba = Vector3.up * jumpValue * jumpForce;
-            body.AddForce(ba, ForceMode2D.Impulse);
+            Vector2 upForce = Vector3.up * jumpValue * jumpForce;
+            body.AddForce(upForce, ForceMode2D.Impulse);
             anim.SetTrigger("Jump");
+            hasWallJumped = false; // Reset when grounded jump
         }
-        else if (isTouchingWall)
+        else if (isTouchingWall && !hasWallJumped)
         {
-            float wallDir = transform.localScale.x > 0 ? -1 : 1;
-            Vector2 force = new Vector2(wallDir * wallJumpForce, jumpForce);
-            body.linearVelocity = force;
+            body.linearVelocity = new Vector2(body.linearVelocity.x, body.linearVelocity.y + jumpValue * wallJumpForce);
             anim.SetTrigger("Jump");
+            hasWallJumped = true;
         }
     }
 
@@ -174,9 +192,6 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
 
     public void CastOnFreeze()
     {
-
-        Debug.Log("Player frozensdadasdasdas");
-        Debug.Log(name);
         body.linearVelocity = Vector2.zero;
         enabled = false;
     }

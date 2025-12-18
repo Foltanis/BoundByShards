@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -4366588853623858564}
   - component: {fileID: 2229604193793137129}
   - component: {fileID: 7666410765866527942}
+  - component: {fileID: 8135202993577190259}
   m_Layer: 0
   m_Name: FireballObject
   m_TagString: Untagged
@@ -234,3 +235,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7ada260684041e45a54c5af77521d15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Freezable
+--- !u!195 &8135202993577190259
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4472305404297667350}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.32500002
+  m_Speed: 4
+  m_Acceleration: 1000
+  avoidancePriority: 50
+  m_AngularSpeed: 0
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 0.31000003
+  m_BaseOffset: 0.15500002
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4

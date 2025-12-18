@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 448724546130913030}
   - component: {fileID: 48065962966013484}
   - component: {fileID: 5695113200458763320}
+  - component: {fileID: -6419271987036258532}
   m_Layer: 0
   m_Name: Spike
   m_TagString: Untagged
@@ -184,3 +185,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MakesDamage
   damageAmount: 1
   affectOnlyPlayer: 1
+--- !u!114 &-6419271987036258532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2569024879997874158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshModifier
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
