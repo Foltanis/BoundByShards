@@ -171,6 +171,17 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "",
+                    "id": "2869d149-aae3-4ccd-a0be-a8e5d14caa11",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LightSpell",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
                     "name": "2D Vector",
                     "id": "fd61dbe6-78b5-43a9-997a-3ba4df72604c",
                     "path": "2DVector",
@@ -232,51 +243,51 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SpellMoveSecondary",
+                    "action": "SpellMovePrimary",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "up",
                     "id": "28002cdc-6330-488f-bbce-e0e9df4b4881",
-                    "path": "<Keyboard>/w",
+                    "path": "<Gamepad>/rightStick/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SpellMoveSecondary",
+                    "action": "SpellMovePrimary",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "down",
                     "id": "b09a9d5c-e775-4992-b2a9-ab13d7d4b224",
-                    "path": "<Keyboard>/s",
+                    "path": "<Gamepad>/rightStick/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SpellMoveSecondary",
+                    "action": "SpellMovePrimary",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "left",
                     "id": "72d26d87-4585-4bff-8d11-15e176cbc427",
-                    "path": "<Keyboard>/a",
+                    "path": "<Gamepad>/rightStick/left",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SpellMoveSecondary",
+                    "action": "SpellMovePrimary",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "right",
                     "id": "6ec3dde4-d4c2-423b-bcda-47faa3c46a10",
-                    "path": "<Keyboard>/d",
+                    "path": "<Gamepad>/rightStick/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SpellMoveSecondary",
+                    "action": "SpellMovePrimary",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -284,6 +295,17 @@
                     "name": "",
                     "id": "36d2b5ef-4008-4870-93b0-388ce0226c4b",
                     "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SplitSpell",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e8efceb0-04a3-41d6-b24e-3875ba0e4c7b",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -301,6 +323,72 @@
                     "action": "FireballSpell",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9d2308ea-feb1-48a9-aca6-d5dfa38ba926",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FireballSpell",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "5520755d-4814-48b7-93f6-e69389c5d16a",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpellMoveSecondary",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "853b4b4c-5deb-4a43-82db-b46bcd8ed358",
+                    "path": "<Gamepad>/leftStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpellMoveSecondary",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "88819521-64ff-493f-8ef8-7d958c6a4854",
+                    "path": "<Gamepad>/leftStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpellMoveSecondary",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "ac52271d-4f84-4f0a-b6dc-26379344a1d6",
+                    "path": "<Gamepad>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpellMoveSecondary",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "9e6b591c-ba1a-4d37-a781-0ff3f9e052c7",
+                    "path": "<Gamepad>/leftStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpellMoveSecondary",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         },
@@ -385,17 +473,6 @@
                     "name": "",
                     "id": "d6a027c0-05db-44c5-a1df-140f73b14c65",
                     "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "bc894dc9-45a1-4ddd-aa6d-6f23c25a6ddb",
-                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
