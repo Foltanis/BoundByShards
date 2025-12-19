@@ -48,8 +48,8 @@ public class SplitSpellController : MonoBehaviour
         slimeOne.GetComponent<Health>().SetHp(hp / 2);
         slimeTwo.GetComponent<Health>().SetHp(hp / 2);
 
-        slimeOne.transform.position = pos + new Vector3(-data.mergeDistance, 0, 0);
-        slimeTwo.transform.position = pos + new Vector3(data.mergeDistance, 0, 0);
+        slimeOne.transform.position = pos + new Vector3(-data.splitDistance, 0, 0);
+        slimeTwo.transform.position = pos + new Vector3(data.splitDistance, 0, 0);
 
         reconnectTimer = StartCoroutine(ReconnectTimer());
     }
@@ -67,9 +67,8 @@ public class SplitSpellController : MonoBehaviour
             yield break;
 
         // failed reconnect
-        slimeOne.SetActive(false);
-        slimeTwo.SetActive(false);
-        slimesConnected.SetActive(false);
+        slimeOne.GetComponent<Health>().TakeDamage(9999);
+        slimeTwo.GetComponent<Health>().TakeDamage(9999);
     }
 
     private void Connect()

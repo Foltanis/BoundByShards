@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: SplitSpellData
   m_EditorClassIdentifier: Assembly-CSharp::SplitSpellData
   mergeDistance: 0.4
+  splitDistance: 0.3
   timeToReconnect: 20
