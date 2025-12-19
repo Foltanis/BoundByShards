@@ -5244,6 +5244,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2117988864607655238, guid: 8b2ae8f2ab2ff4442a9e826b68820638, type: 3}
+      propertyPath: fadeDuration
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7542733534067435789, guid: 8b2ae8f2ab2ff4442a9e826b68820638, type: 3}
       propertyPath: m_Name
       value: SceneTransitionManager
