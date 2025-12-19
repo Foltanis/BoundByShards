@@ -30074,13 +30074,9 @@ CompositeCollider2D:
         Y: 25000000
       - X: 40000000
         Y: 35000000
-      - X: 15000000
+      - X: 25000000
         Y: 35000000
-      - X: 15000000
-        Y: 25000000
-      - X: 20000000
-        Y: 25000000
-      - X: 20000000
+      - X: 25000000
         Y: 30000000
       - X: 35000000
         Y: 30000000
@@ -30104,6 +30100,14 @@ CompositeCollider2D:
         Y: 30000000
       - X: -75000000
         Y: 30000000
+    - - X: 25000000
+        Y: 30000000
+      - X: 15000000
+        Y: 30000000
+      - X: 15000000
+        Y: 25000000
+      - X: 25000000
+        Y: 25000000
     - - X: -45000000
         Y: 30000000
       - X: -50000000
@@ -30226,20 +30230,18 @@ CompositeCollider2D:
       - {x: 4.999971, y: 2.5}
       - {x: 4, y: 2.5000293}
       - {x: 3.999971, y: 3.5}
-      - {x: 1.5, y: 3.499971}
-      - {x: 1.5000293, y: 2.5}
-      - {x: 2, y: 2.5000293}
-      - {x: 2.0000293, y: 3}
+      - {x: 2.5, y: 3.499971}
+      - {x: 2.5000293, y: 3}
       - {x: 3.5, y: 2.9999707}
       - {x: 3.4999704, y: 1.5}
       - {x: 1.5, y: 1.4999707}
       - {x: 1.5000293, y: 1}
       - {x: 3.5, y: 0.9999706}
       - {x: 3.5000293, y: 0.5}
-    - - {x: -7.5000296, y: 3}
-      - {x: -7.5000296, y: 3.5}
-      - {x: -8, y: 3.499971}
-      - {x: -7.9999704, y: 3}
+    - - {x: 2.499971, y: 2.5}
+      - {x: 2.499971, y: 3}
+      - {x: 1.5, y: 2.999971}
+      - {x: 1.5000293, y: 2.5}
     - - {x: -4.500029, y: 2.5}
       - {x: -4.500029, y: 3}
       - {x: -5, y: 2.999971}
@@ -32081,6 +32083,16 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+  - first: {x: 4, y: 5, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 2
+      m_TileSpriteIndex: 2
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: 7, y: 5, z: 0}
     second:
       serializedVersion: 2
@@ -32112,26 +32124,6 @@ Tilemap:
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
   - first: {x: -16, y: 6, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 2
-      m_TileSpriteIndex: 2
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
-  - first: {x: 3, y: 6, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 2
-      m_TileSpriteIndex: 2
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
-  - first: {x: 4, y: 6, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 2
@@ -33366,6 +33358,10 @@ PrefabInstance:
     - target: {fileID: 3431395615600348192, guid: e3fe3fa353f46f641a8f4076b534f725, type: 3}
       propertyPath: m_Intensity
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4651897795819445476, guid: e3fe3fa353f46f641a8f4076b534f725, type: 3}
+      propertyPath: shockwaveRadius
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5702111912381864800, guid: e3fe3fa353f46f641a8f4076b534f725, type: 3}
       propertyPath: m_Intensity
