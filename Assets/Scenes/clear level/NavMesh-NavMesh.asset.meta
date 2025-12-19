@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scenes/clear level/NavMesh-NavMesh.asset.meta
 guid: ee3f15f336b2aed4f9ef4683b08403d4
+========
+guid: e162c5df1abf4f347ac1726771de6248
+>>>>>>>> 31140c546f2ae55639a19b23e5ea19e9c770d754:Assets/Scenes/Test2/NavMesh-NavMesh.asset.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 23800000

@@ -90,17 +90,17 @@ public class PursuingAbility : MonoBehaviour
                     if (TeleportToPlayerPlatform()) currentState = State.JumpOut;
                 break;
             case State.JumpIn:
-                Debug.Log("State.JumpIn");
+                // Debug.Log("State.JumpIn");
                 currentState = State.Stunned;
                 StartCoroutine(JumpIn(jumpInDuration));
                 break;
 
             case State.JumpOut:
-                Debug.Log("State.JumpOut");
+                // Debug.Log("State.JumpOut");
                 currentState = State.Stunned;
-                Debug.Log("State.JumpOutPre");
+                // Debug.Log("State.JumpOutPre");
                 StartCoroutine(JumpOut(jumpOutDuration));
-                Debug.Log("State.JumpOutPost");
+                // Debug.Log("State.JumpOutPost");
                 break;
         }
         anim.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
