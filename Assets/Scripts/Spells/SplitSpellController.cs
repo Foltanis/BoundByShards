@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 using System.Collections;
+using System;
 
 public class SplitSpellController : MonoBehaviour
 {
@@ -52,6 +54,14 @@ public class SplitSpellController : MonoBehaviour
         slimeTwo.transform.position = pos + new Vector3(data.splitDistance, 0, 0);
 
         reconnectTimer = StartCoroutine(ReconnectTimer());
+
+        HashSet<GameObject> characters = CharacterManager.Instance.ActiveCharacters;
+        foreach (var character in characters)
+        {
+            SoundManager.StopSound(SoundType.SLIME_WALK, character);
+        }
+
+        SoundManager.PlaySound(SoundType.SPLIT_SPELL, gameObject, 1);
     }
 
     private IEnumerator ReconnectTimer()
@@ -91,6 +101,13 @@ public class SplitSpellController : MonoBehaviour
         slimesConnected.SetActive(true);
 
         isSplit = false;
+        
+        SoundManager.PlaySound(SoundType.SPLIT_SPELL_JOIN, gameObject, 1);
+        HashSet<GameObject> characters = CharacterManager.Instance.ActiveCharacters;
+        foreach (var character in characters)
+        {
+            SoundManager.StopSound(SoundType.SLIME_WALK, character);
+        }
     }
 
     private bool TryReconnect()

@@ -42,6 +42,7 @@ public class DashAbility : MonoBehaviour
     {
         //if (dashRoutine != null) StopCoroutine(dashRoutine);
         dashRoutine = StartCoroutine(DashRoutine());
+        SoundManager.PlaySound(SoundType.SLIME_DASH, gameObject, 1);
     }
 
     private IEnumerator DashRoutine()

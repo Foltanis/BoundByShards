@@ -22,7 +22,7 @@ public class MainMenu : MonoBehaviour
         string newGameName = newGameNameInput.text;
         SaveSystem.CreateNewGame(newGameName);
         Debug.Log("Starting new game: " + newGameName);
-        SceneManager.LoadScene("Level1");
+        SceneTransitionManager.Instance.LoadNextScene();
     }
 
     public void QuitGame()

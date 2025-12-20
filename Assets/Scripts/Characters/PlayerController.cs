@@ -43,7 +43,6 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
     private float xMovementCounter = 0f;
 
     private bool frozen = false;
-    // TODO: fix movement when frozen, mage is moving after freeze if was moving before
     public bool IsGrounded() => isGrounded;
 
     void Awake()
@@ -119,7 +118,7 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
         isTouchingWall = (hitLeft != null) || (hitRight != null);
         
         // Reset wall jump only when grounded OR when player actually left the wall
-        if (isGrounded || wasTouchingWall && !isTouchingWall && xMovementCounter > 0.05f)
+        if (isGrounded || wasTouchingWall && !isTouchingWall && xMovementCounter > wallCheckDistance)
         {
             hasWallJumped = false;
         }
@@ -194,7 +193,7 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
             anim.SetTrigger("Jump");
             hasWallJumped = false; // Reset when grounded jump
         }
-        else if (isTouchingWall && !hasWallJumped)
+        else if (isTouchingWall && !hasWallJumped && wallJumpForce > 0)
         {
             body.linearVelocity = new Vector2(body.linearVelocity.x, jumpValue * wallJumpForce);
             anim.SetTrigger("Jump");

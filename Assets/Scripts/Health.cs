@@ -23,7 +23,7 @@ public class Health : MonoBehaviour
         if (CompareTag("Player"))
         {
             Debug.Log("Player died. Reloading scene...");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneTransitionManager.Instance.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
         else
         {

@@ -27,6 +27,7 @@ public class FireballSpellController : MonoBehaviour, IFreezableReceiver
             .Init(direction, spellData.projectileSpeed, spellData.damage, caster);
 
         cooldownRemaining = spellData.cooldown;
+        
         return true;
     }
 

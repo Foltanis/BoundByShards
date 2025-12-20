@@ -77,6 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61019057f04921a41b7a9b2f7f750366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FireballController
+  explosionParticlesPrefab: {fileID: 4739816518470612840, guid: eaa9238e7c2f9a04a94c5723bc4746da, type: 3}
 --- !u!58 &-5672811196883319411
 CircleCollider2D:
   m_ObjectHideFlags: 0

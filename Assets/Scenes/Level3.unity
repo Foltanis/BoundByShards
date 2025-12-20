@@ -8392,6 +8392,79 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: -8435245712485981826, guid: bffe951a9f4222f4c9bd63ea41567cd1, type: 3}
+--- !u!1001 &978777410
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6192344716591542196, guid: 2355722f9c77f4546ac9bac8b8f95b8c, type: 3}
+      propertyPath: soundList.Array.size
+      value: 27
+      objectReference: {fileID: 0}
+    - target: {fileID: 6192344716591542196, guid: 2355722f9c77f4546ac9bac8b8f95b8c, type: 3}
+      propertyPath: soundList.Array.data[26].name
+      value: FIREBALL_HIT
+      objectReference: {fileID: 0}
+    - target: {fileID: 6192344716591542196, guid: 2355722f9c77f4546ac9bac8b8f95b8c, type: 3}
+      propertyPath: soundList.Array.data[18].sound
+      value: 
+      objectReference: {fileID: 8300000, guid: d6766f8fe04c9b746bfb3c5b3aa32b7a, type: 3}
+    - target: {fileID: 6192344716591542196, guid: 2355722f9c77f4546ac9bac8b8f95b8c, type: 3}
+      propertyPath: soundList.Array.data[26].sound
+      value: 
+      objectReference: {fileID: 8300000, guid: 61b506dd5c83c4540b49a6378d3335f5, type: 3}
+    - target: {fileID: 7844703764102544917, guid: 2355722f9c77f4546ac9bac8b8f95b8c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.87658
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844703764102544917, guid: 2355722f9c77f4546ac9bac8b8f95b8c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.07137
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844703764102544917, guid: 2355722f9c77f4546ac9bac8b8f95b8c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844703764102544917, guid: 2355722f9c77f4546ac9bac8b8f95b8c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844703764102544917, guid: 2355722f9c77f4546ac9bac8b8f95b8c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844703764102544917, guid: 2355722f9c77f4546ac9bac8b8f95b8c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844703764102544917, guid: 2355722f9c77f4546ac9bac8b8f95b8c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844703764102544917, guid: 2355722f9c77f4546ac9bac8b8f95b8c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844703764102544917, guid: 2355722f9c77f4546ac9bac8b8f95b8c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844703764102544917, guid: 2355722f9c77f4546ac9bac8b8f95b8c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251036560321713331, guid: 2355722f9c77f4546ac9bac8b8f95b8c, type: 3}
+      propertyPath: m_Name
+      value: SoundManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2355722f9c77f4546ac9bac8b8f95b8c, type: 3}
 --- !u!1 &984763096
 GameObject:
   m_ObjectHideFlags: 0
@@ -12735,6 +12808,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 281236636551492597, guid: 4845d4e62f5e6bb4f9891ede4d2d7a18, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1469456416784667675, guid: 4845d4e62f5e6bb4f9891ede4d2d7a18, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.71
@@ -13096,6 +13173,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 978777410}
   - {fileID: 1181646582}
   - {fileID: 6821268906655841237}
   - {fileID: 382712509716305108}

@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-public class PursuingAbility : MonoBehaviour
+public class PursuingAbility : MonoBehaviour, IFreezableReceiver
 {
     [SerializeField] private LayerMask platformMask;
 
@@ -69,6 +69,12 @@ public class PursuingAbility : MonoBehaviour
             case State.ChaseTarget:
                 // Debug.Log("State.ChaseTarget");
                 if (targetPlayer == null) break;
+
+                // if (!targetPlayer.active)
+                // {
+                //     currentState = State.JumpIn;
+                //     break;
+                // }
 
                 bool isSameLevel = IsPlayerOnSameLevel(targetPlayer);
                 // If target player is no longer on the same platform, find a new target
@@ -143,7 +149,7 @@ public class PursuingAbility : MonoBehaviour
         );
         float rayDistance = bc.bounds.size.y * 0.6f + 0.5f;
         RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.down, rayDistance, platformMask);
-        Debug.DrawRay(origin, Vector2.down * rayDistance, hit.collider ? Color.green : Color.red);
+        // Debug.DrawRay(origin, Vector2.down * rayDistance, hit.collider ? Color.green : Color.red);
         if (!hit.collider) return false;
         return true;
     }
@@ -230,6 +236,7 @@ public class PursuingAbility : MonoBehaviour
 
     bool IsPlayerOnSamePlatform(GameObject player)
     {
+        // Debug.Log();
         if (!IsPlayerOnSameLevel(player)) return false;
         Vector2 playerPos = targetPlayer.transform.position;
         Vector2 targetBoundsCenter = targetPlayer.GetComponent<BoxCollider2D>().bounds.center;
@@ -254,46 +261,48 @@ public class PursuingAbility : MonoBehaviour
 
         List<float> xes = new();
 
-        float left = playerPos.x - minDistanceToTeleportFromPlayer;
+        float left = playerPos.x - stepSize;
         for (int i = 0; i < 100; i++)
         {
             Vector2 checkPos = new Vector2(left - i * stepSize, playerPos.y);
-            RaycastHit2D preHitLeft = Physics2D.Raycast(playerPos, Vector2.left, i * stepSize + minDistanceToTeleportFromPlayer, platformMask);
+            RaycastHit2D preHitLeft = Physics2D.Raycast(playerPos, Vector2.left, (i + 1) * stepSize, platformMask);
             if (preHitLeft.collider) break;
-            // Debug.DrawRay(playerPos, Vector2.left * (i * stepSize + minDistanceToTeleportFromPlayer), Color.cyan, 2f);
+            // Debug.DrawRay(playerPos, Vector2.left * i * stepSize, Color.cyan, 2f);
+            // Debug.DrawRay(checkPos, Vector2.down * stepSize, Color.blue, 2f);
             RaycastHit2D hitLeft = Physics2D.Raycast(checkPos, Vector2.down, stepSize, platformMask);
             if (hitLeft.collider && Mathf.Abs(hitLeft.point.y - targetY) < 0.1f)
-                xes.Add(checkPos.x);
-            else break;
-            Debug.DrawRay(checkPos, Vector2.down * stepSize, Color.blue, 2f);
+            {
+                if (Mathf.Abs(checkPos.x - playerPos.x) >= minDistanceToTeleportFromPlayer)
+                    xes.Add(checkPos.x);
+            }
+            else break; // Now correctly breaks when no valid platform below
         }
-        float right = playerPos.x + minDistanceToTeleportFromPlayer;
+        
+        float right = playerPos.x + stepSize;
         for (int i = 0; i < 100; i++)
         {
             Vector2 checkPos = new Vector2(right + i * stepSize, playerPos.y);
-            RaycastHit2D preHitRight = Physics2D.Raycast(playerPos, Vector2.right, i * stepSize + minDistanceToTeleportFromPlayer, platformMask);
+            RaycastHit2D preHitRight = Physics2D.Raycast(playerPos, Vector2.right, (i + 1) * stepSize, platformMask);
             if (preHitRight.collider) break;
-            // Debug.DrawRay(playerPos, Vector2.right * (i * stepSize + minDistanceToTeleportFromPlayer), Color.yellow, 2f);
+            // Debug.DrawRay(playerPos, Vector2.right * i * stepSize, Color.yellow, 2f);
+            // Debug.DrawRay(checkPos, Vector2.down * stepSize, Color.blue, 2f);
             RaycastHit2D hitRight = Physics2D.Raycast(checkPos, Vector2.down, stepSize, platformMask);
             if (hitRight.collider && Mathf.Abs(hitRight.point.y - targetY) < 0.1f)
-                xes.Add(checkPos.x);
-            else break;
-            Debug.DrawRay(checkPos, Vector2.down * stepSize, Color.blue, 2f);
+            {
+                if (Mathf.Abs(checkPos.x - playerPos.x) >= minDistanceToTeleportFromPlayer)
+                    xes.Add(checkPos.x);
+            }
+            else break; // Now correctly breaks when no valid platform below
         }
 
         if (xes.Count == 0)
         {
-            // Debug.Log("cant teleport");
             currentState = State.FindTarget;
-            // SetTarget(FindRandomGroundedPlayer(groundedPlayers));
             return false;
         }
 
         float randomX = xes[Random.Range(0, xes.Count)];
-
         float y = targetY + bc.bounds.size.y * 0.5f;
-
-        // Debug.Log("teleporting");
         transform.position = new Vector3(randomX, y, transform.position.z);
 
         return true;
@@ -301,10 +310,24 @@ public class PursuingAbility : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && enabled)
         {
             other.gameObject.GetComponent<Health>().TakeDamage(10);
         }
+    }
+
+    public void CastOnFreeze()
+    {
+        rb.linearVelocity = Vector2.zero;
+        // rb.isKinematic = true;
+        anim.SetFloat("Speed", 0);
+        enabled = false;
+    }
+
+    public void CastOnUnfreeze()
+    {
+        enabled = true;
+        // rb.isKinematic = false;
     }
 
 }

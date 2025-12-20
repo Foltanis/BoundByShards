@@ -23,6 +23,7 @@ public class FireballController : MonoBehaviour, IFreezableReceiver, IFireballSi
     private FireballMoveMode moveMode = FireballMoveMode.Straight;
     private Vector2 straightDirection;
 
+    [SerializeField] private GameObject explosionParticlesPrefab;
 
     public enum FireballMoveMode
     {
@@ -61,6 +62,8 @@ public class FireballController : MonoBehaviour, IFreezableReceiver, IFireballSi
         agent.enabled = false;
 
         target = CharacterManager.Instance.Get(CharacterType.Mage);
+
+        SoundManager.PlaySound(SoundType.FIREBALL, gameObject, 0.5f);
     }
 
     void Update()
@@ -83,7 +86,17 @@ public class FireballController : MonoBehaviour, IFreezableReceiver, IFireballSi
         if (hp != null)
             hp.TakeDamage(damage);
 
+        if (explosionParticlesPrefab != null)
+            Instantiate(explosionParticlesPrefab, transform.position, Quaternion.identity);
+
+        // SoundManager.PlaySound(SoundType.FIREBALL_HIT, gameObject, 1);
+
         Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        SoundManager.StopSound(SoundType.FIREBALL, gameObject);
     }
 
     public void OnEnemySeen(GameObject enemy)

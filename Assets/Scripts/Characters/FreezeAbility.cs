@@ -40,5 +40,6 @@ public class FreezeAbility : MonoBehaviour
 
         cooldown = true;
         timer = freezeCooldown;
+        SoundManager.PlaySound(SoundType.SLIME_FREEZE, gameObject, 1);
     }
 }
