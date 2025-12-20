@@ -83,6 +83,7 @@ public static class SaveSystem
         var wrapper = new SaveMetadataList { list = new List<SaveMetadata>(saves.Values) };
         string json = JsonUtility.ToJson(wrapper, true);
         File.WriteAllText(indexPath, json, Encoding.UTF8);
+        Debug.Log("saving json file " + indexPath);
     }
 
     [Serializable]

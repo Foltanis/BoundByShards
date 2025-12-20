@@ -39,7 +39,8 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
     private bool wallJumpLock;
     private int wallDirection;
     private bool hasWallJumped;
-    private float wallJumpInputLockTimer = 0f;
+
+    private float xMovementCounter = 0f;
 
     private bool frozen = false;
     // TODO: fix movement when frozen, mage is moving after freeze if was moving before
@@ -118,16 +119,35 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
         isTouchingWall = (hitLeft != null) || (hitRight != null);
         
         // Reset wall jump only when grounded OR when player actually left the wall
-        if (isGrounded)
+        if (isGrounded || wasTouchingWall && !isTouchingWall && xMovementCounter > 0.05f)
         {
-            hasWallJumped = false;
-        }
-        else if (wasTouchingWall && !isTouchingWall)
-        {
-            // Player left the wall — allow wall jump again if they touch a wall later
             hasWallJumped = false;
         }
     }
+
+    // private void CheckWall()
+    // {
+    //     Vector2 origin = boxCollider.bounds.center;
+    //     Vector2 size = boxCollider.bounds.size;
+    //     Vector2 boxSize = new Vector2(wallCheckDistance, size.y * 0.9f);
+        
+    //     Collider2D hitLeft = Physics2D.OverlapBox(
+    //         origin + Vector2.left * (size.x + wallCheckDistance) * 0.5f,
+    //         boxSize, 0f, platformLayer
+    //     );
+    //     Collider2D hitRight = Physics2D.OverlapBox(
+    //         origin + Vector2.right * (size.x + wallCheckDistance) * 0.5f,
+    //         boxSize, 0f, platformLayer
+    //     );
+
+    //     isTouchingWall = (hitLeft != null) || (hitRight != null);
+        
+    //     // Only reset wall jump when grounded
+    //     if (isGrounded)
+    //     {
+    //         hasWallJumped = false;
+    //     }
+    // }
 
     public void Knockback(Vector2 force)
     {
@@ -139,7 +159,9 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
     private void HandleMovement()
     {
         if (frozen) return;
-        body.linearVelocity = new Vector2(moveValue * speed, body.linearVelocity.y);
+        float xMovement = moveValue * speed;
+        body.linearVelocity = new Vector2(xMovement, body.linearVelocity.y);
+        xMovementCounter += xMovement;
     }
 
     private void UpdateFacing()
@@ -174,7 +196,7 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
         }
         else if (isTouchingWall && !hasWallJumped)
         {
-            body.linearVelocity = new Vector2(body.linearVelocity.x, body.linearVelocity.y + jumpValue * wallJumpForce);
+            body.linearVelocity = new Vector2(body.linearVelocity.x, jumpValue * wallJumpForce);
             anim.SetTrigger("Jump");
             hasWallJumped = true;
         }
