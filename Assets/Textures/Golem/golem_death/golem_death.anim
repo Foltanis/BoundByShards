@@ -21,25 +21,25 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 21300000, guid: ce3f6a4e0cb0ca84698ef32b14dabd6e, type: 3}
+      value: {fileID: 21300000, guid: 627108b09bac06d49b415bdc24425c5f, type: 3}
     - time: 0.1
-      value: {fileID: 21300000, guid: 683f607c742830d46aad33c033e08c0e, type: 3}
-    - time: 0.21666667
-      value: {fileID: 21300000, guid: 80d574f84ede4d646b23e813d7c9de3a, type: 3}
+      value: {fileID: 21300000, guid: f1b74ae2cbdd3714cb795d6985906272, type: 3}
+    - time: 0.2
+      value: {fileID: 21300000, guid: 511a7644f2ebee64caf95403613b610e, type: 3}
     - time: 0.3
-      value: {fileID: 21300000, guid: 94d0a343ad57ed44c911aa6b9c15961d, type: 3}
-    - time: 0.38333333
-      value: {fileID: 21300000, guid: 60a66898ea2d0564fa3e5533d3a36ead, type: 3}
-    - time: 0.53333336
-      value: {fileID: 21300000, guid: 78d9312b42685c8468490388ef6e4b9e, type: 3}
+      value: {fileID: 21300000, guid: a0e520bb2a80a6c47bdbf574dfb3b1d8, type: 3}
+    - time: 0.4
+      value: {fileID: 21300000, guid: 094b10fd182dc6e4ebf95ca0876f76b1, type: 3}
+    - time: 0.51666665
+      value: {fileID: 21300000, guid: 2a3d121ae0e543744849ad8f6d312885, type: 3}
     - time: 0.6166667
-      value: {fileID: 21300000, guid: 423f6c2520781ba4cafc7bdad3a8d9ba, type: 3}
-    - time: 0.7
-      value: {fileID: 21300000, guid: f1bf92ab767974c46bb16b057aa494c3, type: 3}
+      value: {fileID: 21300000, guid: f81c9266767abab4c9a182715d85de64, type: 3}
+    - time: 0.71666664
+      value: {fileID: 21300000, guid: 6e0b0b116dd84fe42b9236327180d796, type: 3}
     - time: 0.81666666
-      value: {fileID: 21300000, guid: 95495b8acba0a374b9272255922e4121, type: 3}
+      value: {fileID: 21300000, guid: 7e142c330ca371a41a0736b7a0bd33d5, type: 3}
     - time: 0.9166667
-      value: {fileID: 21300000, guid: 7be5244782de7204885f6d3d879fd675, type: 3}
+      value: {fileID: 21300000, guid: f329d331c3f2b754abb4d017155cc089, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -62,16 +62,16 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 21300000, guid: ce3f6a4e0cb0ca84698ef32b14dabd6e, type: 3}
-    - {fileID: 21300000, guid: 683f607c742830d46aad33c033e08c0e, type: 3}
-    - {fileID: 21300000, guid: 80d574f84ede4d646b23e813d7c9de3a, type: 3}
-    - {fileID: 21300000, guid: 94d0a343ad57ed44c911aa6b9c15961d, type: 3}
-    - {fileID: 21300000, guid: 60a66898ea2d0564fa3e5533d3a36ead, type: 3}
-    - {fileID: 21300000, guid: 78d9312b42685c8468490388ef6e4b9e, type: 3}
-    - {fileID: 21300000, guid: 423f6c2520781ba4cafc7bdad3a8d9ba, type: 3}
-    - {fileID: 21300000, guid: f1bf92ab767974c46bb16b057aa494c3, type: 3}
-    - {fileID: 21300000, guid: 95495b8acba0a374b9272255922e4121, type: 3}
-    - {fileID: 21300000, guid: 7be5244782de7204885f6d3d879fd675, type: 3}
+    - {fileID: 21300000, guid: 627108b09bac06d49b415bdc24425c5f, type: 3}
+    - {fileID: 21300000, guid: f1b74ae2cbdd3714cb795d6985906272, type: 3}
+    - {fileID: 21300000, guid: 511a7644f2ebee64caf95403613b610e, type: 3}
+    - {fileID: 21300000, guid: a0e520bb2a80a6c47bdbf574dfb3b1d8, type: 3}
+    - {fileID: 21300000, guid: 094b10fd182dc6e4ebf95ca0876f76b1, type: 3}
+    - {fileID: 21300000, guid: 2a3d121ae0e543744849ad8f6d312885, type: 3}
+    - {fileID: 21300000, guid: f81c9266767abab4c9a182715d85de64, type: 3}
+    - {fileID: 21300000, guid: 6e0b0b116dd84fe42b9236327180d796, type: 3}
+    - {fileID: 21300000, guid: 7e142c330ca371a41a0736b7a0bd33d5, type: 3}
+    - {fileID: 21300000, guid: f329d331c3f2b754abb4d017155cc089, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
@@ -96,4 +96,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.51666665
+    functionName: OnDeathAnimationComplete
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

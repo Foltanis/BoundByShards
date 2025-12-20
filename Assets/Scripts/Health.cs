@@ -1,3 +1,4 @@
+using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,7 +8,14 @@ public class Health : MonoBehaviour
     [SerializeField] private int maxHealth = 1;
     private int currentHealth;
 
-    void Awake() => currentHealth = maxHealth;
+    private bool isDead = false;
+    private Animator animator;
+
+    private void Awake()
+    {
+        currentHealth = maxHealth;
+        animator = GetComponent<Animator>();
+    }
 
     public void TakeDamage(int dmg)
     {
@@ -20,15 +28,33 @@ public class Health : MonoBehaviour
 
     private void Die()
     {
-        if (CompareTag("Player"))
+        isDead = true;
+
+        if (animator != null)
         {
             Debug.Log("Player died. Reloading scene...");
             SceneTransitionManager.Instance.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            animator.SetTrigger("die");
         }
         else
         {
-            Destroy(gameObject);
+            HandleDeath();
         }
+    }
+
+    private void HandleDeath()
+    {
+        Destroy(gameObject);
+        if (gameObject.CompareTag("Player"))
+        {
+            ReloadScene();
+        }
+    }
+
+    public void ReloadScene()
+    { 
+        Debug.Log("Player died. Reloading scene...");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public int GetHp() => currentHealth;

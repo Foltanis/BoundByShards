@@ -195,6 +195,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Candle
   unlitSprite: {fileID: -8836723210903759496, guid: b7290458e79435c4c8689f247977f26d, type: 3}
+  smokePrefab: {fileID: 3838972086482000169, guid: 7d44603494f3b3b4292735ca2f89b821, type: 3}
+  offsetY: 0.5
 --- !u!50 &4369443833285747633
 Rigidbody2D:
   serializedVersion: 5

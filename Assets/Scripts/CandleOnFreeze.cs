@@ -4,6 +4,8 @@ using UnityEngine.Rendering.Universal;
 public class Candle : MonoBehaviour, IFreezableReceiver
 {
     [SerializeField] private Sprite unlitSprite;
+    [SerializeField] private GameObject smokePrefab;
+    [SerializeField] private float offsetY = 0.5f;
 
     private SpriteRenderer sr;
     private Animator animator;
@@ -36,6 +38,10 @@ public class Candle : MonoBehaviour, IFreezableReceiver
             sr.sprite = unlitSprite;
 
         // spawn smoke
+        if (smokePrefab != null)
+        {
+            Instantiate(smokePrefab, transform.position + new Vector3(0, offsetY, 0), Quaternion.identity);
+        }
     }
 
     public void CastOnUnfreeze()
