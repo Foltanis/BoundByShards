@@ -107,6 +107,14 @@ public class SceneTransitionManager : MonoBehaviour
         }
     }
 
+    public void ReloadCurrentScene()
+    {
+        if (!isTransitioning)
+        {
+            StartCoroutine(TransitionToScene(SceneManager.GetActiveScene().buildIndex));
+        }
+    }
+
     public void LoadNextScene()
     {
         int next = SceneManager.GetActiveScene().buildIndex + 1;
@@ -134,6 +142,8 @@ public class SceneTransitionManager : MonoBehaviour
         yield return StartCoroutine(Fade(1, 0, 0, musicVolume));
         
         isTransitioning = false;
+
+        SaveSystem.SaveCurrentGame(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
     IEnumerator Fade(float startAlpha, float endAlpha, float startVol, float endVol)

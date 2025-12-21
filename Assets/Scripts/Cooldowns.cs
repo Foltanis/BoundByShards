@@ -1,10 +1,12 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 using System.Collections.Generic;
 
-public class UICooldowns : MonoBehaviour
+public class Cooldowns : MonoBehaviour
 {
-    private UIDocument uiDocument;
+    [SerializeField] private ProgressBar dashCooldownBar;
+    [SerializeField] private ProgressBar freezeCooldownBar;
+    [SerializeField] private ProgressBar fireballCooldownBar;
+    [SerializeField] private ProgressBar splitCooldownBar;
 
     public enum AbilityType
     {
@@ -26,27 +28,24 @@ public class UICooldowns : MonoBehaviour
 
     void Awake()
     {
-        uiDocument = GetComponent<UIDocument>();
-        var root = uiDocument.rootVisualElement;
-
         cooldowns[AbilityType.Dash] = new CooldownData
         {
-            bar = root.Q<ProgressBar>("dashCooldown")
+            bar = dashCooldownBar
         };
 
         cooldowns[AbilityType.Freeze] = new CooldownData
         {
-            bar = root.Q<ProgressBar>("freezeCooldown")
+            bar = freezeCooldownBar
         };
 
         cooldowns[AbilityType.Fireball] = new CooldownData
         {
-            bar = root.Q<ProgressBar>("fireballCooldown")
+            bar = fireballCooldownBar
         };
 
         cooldowns[AbilityType.Split] = new CooldownData
         {
-            bar = root.Q<ProgressBar>("splitCooldown")
+            bar = splitCooldownBar
         };
 
         foreach (var cd in cooldowns.Values)
@@ -73,7 +72,7 @@ public class UICooldowns : MonoBehaviour
             {
                 cd.bar.value = 1f;
                 cd.active = false;
-                cd.bar.style.opacity = 1f;
+                // cd.bar.style.opacity = 1f;
             }
         }
     }
@@ -87,7 +86,7 @@ public class UICooldowns : MonoBehaviour
         cd.timer = duration;
         cd.bar.value = 0f;
         cd.active = true;
-        cd.bar.style.opacity = 0.5f;
+        // cd.bar.style.opacity = 0.5f;
     }
 
     public void AbilityReady(AbilityType type)
@@ -96,6 +95,6 @@ public class UICooldowns : MonoBehaviour
         var cd = cooldowns[type];
         cd.active = true;
         cd.bar.value = 1f;
-        cd.bar.style.opacity = 1f;
+        // cd.bar.style.opacity = 1f;
     }
 }

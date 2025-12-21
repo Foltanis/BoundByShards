@@ -52,7 +52,7 @@ public class Health : MonoBehaviour
     public void ReloadScene()
     { 
         Debug.Log("Player died. Reloading scene...");
-        SceneTransitionManager.Instance.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneTransitionManager.Instance.ReloadCurrentScene();
     }
 
     public int GetHp() => currentHealth;

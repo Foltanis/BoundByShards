@@ -41,8 +41,33 @@ public static class SaveSystem
 
         PlayerPrefs.SetString("currentSaveId", id);
 
-        GameData newData = new GameData { metadata = meta };
+        // first level is at build index 1
+        string levelSceneName = UnityEngine.SceneManagement.SceneUtility.GetScenePathByBuildIndex(1);
+        GameData newData = new GameData { metadata = meta, levelSceneName = levelSceneName };
         SaveGameData(newData);
+    }
+
+    public static GameData GetCurrentGameData()
+    {
+        string currentSaveId = PlayerPrefs.GetString("currentSaveId", null);
+        if (string.IsNullOrEmpty(currentSaveId))
+            return null;
+        return LoadGameData(currentSaveId);
+    }
+
+    public static void SaveCurrentGame(string sceneName)
+    {
+        GameData data = GetCurrentGameData();
+        string currentSaveId = PlayerPrefs.GetString("currentSaveId", null);
+        if (string.IsNullOrEmpty(currentSaveId))
+        {
+            Debug.LogError("No current save ID found in PlayerPrefs.");
+            return;
+        }
+
+        data.levelSceneName = sceneName;
+
+        SaveGameData(data);
     }
 
     public static void SaveGameData(GameData data)

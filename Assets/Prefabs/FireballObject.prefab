@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 8135202993577190259}
   m_Layer: 0
   m_Name: FireballObject
-  m_TagString: Untagged
+  m_TagString: Fireball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,6 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FireballController
   explosionParticlesPrefab: {fileID: 4739816518470612840, guid: eaa9238e7c2f9a04a94c5723bc4746da, type: 3}
+  explosionSmokeParticlesPrefab: {fileID: 4739816518470612840, guid: 3e510c6b71244764f97a4422f0d29a02, type: 3}
 --- !u!58 &-5672811196883319411
 CircleCollider2D:
   m_ObjectHideFlags: 0

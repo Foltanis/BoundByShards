@@ -6,7 +6,7 @@ using System;
 public class SplitSpellController : MonoBehaviour
 {
     [SerializeField] private SplitSpellData data;
-    [SerializeField] private UICooldowns uiCooldowns;
+    [SerializeField] private Cooldowns cooldowns;
 
     private GameObject slimesConnected;
     private GameObject slimeOne;
@@ -40,7 +40,7 @@ public class SplitSpellController : MonoBehaviour
     private void Split()
     {
         isSplit = true;
-        uiCooldowns.StartCooldown(UICooldowns.AbilityType.Split, data.timeToReconnect);
+        cooldowns.StartCooldown(Cooldowns.AbilityType.Split, data.timeToReconnect);
 
         Vector3 pos = slimesConnected.transform.position;
         int hp = slimesConnected.GetComponent<Health>().GetHp();
@@ -95,7 +95,7 @@ public class SplitSpellController : MonoBehaviour
         if (reconnectTimer != null)
             StopCoroutine(reconnectTimer);
 
-        uiCooldowns.AbilityReady(UICooldowns.AbilityType.Split);
+        cooldowns.AbilityReady(Cooldowns.AbilityType.Split);
 
         // fixing bug when slime is still frozen after connecting and splitting again
         if (slimeOnePC.IsFrozen())

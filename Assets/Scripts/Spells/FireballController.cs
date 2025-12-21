@@ -24,6 +24,7 @@ public class FireballController : MonoBehaviour, IFreezableReceiver, IFireballSi
     private Vector2 straightDirection;
 
     [SerializeField] private GameObject explosionParticlesPrefab;
+    [SerializeField] private GameObject explosionSmokeParticlesPrefab;
 
     public enum FireballMoveMode
     {
@@ -164,6 +165,8 @@ public class FireballController : MonoBehaviour, IFreezableReceiver, IFireballSi
 
     public void CastOnFreeze()
     {
+        if (explosionSmokeParticlesPrefab != null)
+            Instantiate(explosionSmokeParticlesPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 

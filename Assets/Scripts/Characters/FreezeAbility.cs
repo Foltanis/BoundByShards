@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D), typeof(PlayerInput))]
 public class FreezeAbility : MonoBehaviour
 {
-    [SerializeField] private UICooldowns uiCooldowns;
+    [SerializeField] private Cooldowns cooldowns;
 
     [SerializeField] private float freezeCooldown = 2f;
     [SerializeField] private GameObject freezeZone;
@@ -41,7 +41,7 @@ public class FreezeAbility : MonoBehaviour
         Destroy(freezeArea, 0.2f); // active for a moment
 
         cooldown = true;
-        uiCooldowns.StartCooldown(UICooldowns.AbilityType.Freeze, freezeCooldown);
+        cooldowns.StartCooldown(Cooldowns.AbilityType.Freeze, freezeCooldown);
 
         timer = freezeCooldown;
         SoundManager.PlaySound(SoundType.SLIME_FREEZE, gameObject, 1);

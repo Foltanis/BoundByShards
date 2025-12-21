@@ -13,6 +13,8 @@ public class SaveItemUI : MonoBehaviour
         nameText.text = data.displayName;
     }
 
+    public void OnDelete() => Destroy(gameObject);
+
     public void OnLoadClicked() => GameLoader.Load(meta.id);
     public void OnDeleteClicked() => SaveSystem.DeleteSave(meta.id);
 }

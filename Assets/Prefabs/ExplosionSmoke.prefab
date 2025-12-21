@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 195162125683653920}
   - component: {fileID: 7069966332312657639}
   m_Layer: 0
-  m_Name: Explosion
+  m_Name: ExplosionSmoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1046,20 +1046,20 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 0.78144956
-          outSlope: 0.78144956
+          inSlope: 0.40168747
+          outSlope: 0.40168747
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
-          outWeight: 0.24269663
+          outWeight: 0.12876712
         - serializedVersion: 3
           time: 1
           value: 0
-          inSlope: -0.7758621
-          outSlope: -0.7758621
+          inSlope: -0.0723345
+          outSlope: -0.0723345
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.19999999
+          inWeight: 0.23835623
           outWeight: 0.33333334
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -1070,20 +1070,20 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 1.0306455
-          outSlope: 1.0306455
+          inSlope: 0.65553164
+          outSlope: 0.65553164
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
-          outWeight: 0.1505618
+          outWeight: 0.13150685
         - serializedVersion: 3
           time: 1
           value: 0
-          inSlope: -1.5344826
-          outSlope: -1.5344826
+          inSlope: -0.27361315
+          outSlope: -0.27361315
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.1797753
+          inWeight: 0.18904114
           outWeight: 0.33333334
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -1366,9 +1366,9 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 1, g: 0.64840233, b: 0, a: 0}
-        key2: {r: 1, g: 0, b: 0, a: 0}
+        key0: {r: 1, g: 0, b: 0, a: 1}
+        key1: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 0}
+        key2: {r: 1, g: 1, b: 1, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
