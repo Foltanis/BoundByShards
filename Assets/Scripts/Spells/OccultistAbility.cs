@@ -18,4 +18,10 @@ public class OccultistAbility : MonoBehaviour
         
         fireballSpell.Cast(facingDiraction);
     }
+
+    public void OnDeathAnimationComplete()
+    {
+        Destroy(gameObject);
+    }
+
 }

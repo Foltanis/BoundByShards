@@ -32,8 +32,6 @@ public class Health : MonoBehaviour
 
         if (animator != null)
         {
-            Debug.Log("Player died. Reloading scene...");
-            SceneTransitionManager.Instance.LoadScene(SceneManager.GetActiveScene().buildIndex);
             animator.SetTrigger("die");
         }
         else
@@ -54,7 +52,7 @@ public class Health : MonoBehaviour
     public void ReloadScene()
     { 
         Debug.Log("Player died. Reloading scene...");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneTransitionManager.Instance.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public int GetHp() => currentHealth;
