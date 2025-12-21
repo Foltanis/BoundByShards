@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -2672120125895909867}
   - component: {fileID: 4284289366776137866}
   - component: {fileID: 3590109288425420667}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: TurnipMan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,6 +189,7 @@ MonoBehaviour:
   minDistanceToTeleportFromPlayer: 2.2
   jumpInDuration: 1
   jumpOutDuration: 1
+  inGroundDuration: 20
 --- !u!95 &5549070645573232710
 Animator:
   serializedVersion: 7

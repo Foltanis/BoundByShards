@@ -18568,6 +18568,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1264864402838340001, guid: c940c9abcd1dca6419326ed07199118e, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 6821268906655841238}
     - target: {fileID: 1899611267738744935, guid: c940c9abcd1dca6419326ed07199118e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

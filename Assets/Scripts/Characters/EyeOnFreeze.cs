@@ -13,17 +13,13 @@ public class EyeOnFreeze : MonoBehaviour, IFreezableReceiver
 
     public void CastOnFreeze()
     {
-        if (eyeAbility != null)
-        {
-            eyeAbility.CastOnFreeze();
-        }
+        eyeAbility?.CastOnFreeze();
+        // SoundManager.StopSound(SoundType.EYE_FLYING, gameObject);
     }
 
     public void CastOnUnfreeze()
     {
-        if (eyeAbility != null)
-        {
-            eyeAbility.CastOnUnfreeze();
-        }
+        eyeAbility?.CastOnUnfreeze();
+        // SoundManager.PlaySound(SoundType.EYE_FLYING, gameObject, 0.01f);
     }
 }

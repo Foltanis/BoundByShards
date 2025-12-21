@@ -6,5 +6,11 @@ public class GameBootstrap : MonoBehaviour
     private static void Initialize()
     {
         SaveSystem.Init();
+        
+        if (!PlayerPrefs.HasKey("MusicVolume"))
+            PlayerPrefs.SetFloat("MusicVolume", 1f);
+
+        if (!PlayerPrefs.HasKey("SFXVolume"))
+            PlayerPrefs.SetFloat("SFXVolume", 1f);
     }
 }

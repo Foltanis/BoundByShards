@@ -5,15 +5,9 @@ public class Settings : MonoBehaviour
 {
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider sfxSlider;
-    //test
+
     private void OnEnable()
     {
-        if (!PlayerPrefs.HasKey("MusicVolume"))
-            PlayerPrefs.SetFloat("MusicVolume", 1f);
-
-        if (!PlayerPrefs.HasKey("SFXVolume"))
-            PlayerPrefs.SetFloat("SFXVolume", 1f);
-
         musicSlider.onValueChanged.RemoveAllListeners();
         sfxSlider.onValueChanged.RemoveAllListeners();
 
