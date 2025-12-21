@@ -10,6 +10,7 @@ public class SplitSpellController : MonoBehaviour
 
     private GameObject slimesConnected;
     private GameObject slimeOne;
+    private PlayerController slimeOnePC;
     private GameObject slimeTwo;
 
     private bool isSplit = false;
@@ -25,6 +26,7 @@ public class SplitSpellController : MonoBehaviour
         slimeOne = characterManager.Get(CharacterType.DashSlime);
         slimeTwo = characterManager.Get(CharacterType.SlimeTwo);
 
+        slimeOnePC = slimeOne.GetComponent<PlayerController>();
     }
 
     public void Cast()
@@ -94,6 +96,15 @@ public class SplitSpellController : MonoBehaviour
             StopCoroutine(reconnectTimer);
 
         uiCooldowns.AbilityReady(UICooldowns.AbilityType.Split);
+
+        // fixing bug when slime is still frozen after connecting and splitting again
+        if (slimeOnePC.IsFrozen())
+        {
+            slimeOnePC.CastOnUnfreeze();
+            Debug.Log("Unfreezing slime one on reconnect");
+            slimeOnePC.SetOriginalColor();
+            Debug.Log("Set slime one color to original on reconnect");
+        }
 
         int hp = slimeOne.GetComponent<Health>().GetHp() + slimeTwo.GetComponent<Health>().GetHp();
         Vector3 mergePos = (slimeOne.transform.position + slimeTwo.transform.position) / 2f;

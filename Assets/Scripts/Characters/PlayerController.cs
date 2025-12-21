@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
     private BoxCollider2D boxCollider;
     private Vector3 baseScale;
 
+    private SpriteRenderer sr;
+    private Color originalColor;
     //private Health health;
 
     private bool isGrounded;
@@ -44,6 +46,7 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
 
     private bool frozen = false;
     public bool IsGrounded() => isGrounded;
+    public bool IsFrozen() => frozen;
 
     void Awake()
     {
@@ -52,6 +55,8 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
         moveAction = actionMap.FindAction("Move");
         jumpAction = actionMap.FindAction("Jump");
 
+        sr = GetComponent<SpriteRenderer>();
+        originalColor = sr.color;
         body = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
         baseScale = transform.localScale;
@@ -215,12 +220,18 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
     public void CastOnFreeze()
     {
         body.linearVelocity = Vector2.zero;
+        frozen = true;
         enabled = false;
     }
 
     public void CastOnUnfreeze()
     {
+        frozen = false;
         enabled = true;
+    }
+    public void SetOriginalColor()
+    {
+        sr.color = originalColor;
     }
 
     private void OnDrawGizmosSelected()

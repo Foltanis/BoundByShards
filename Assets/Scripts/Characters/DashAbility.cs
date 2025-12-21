@@ -17,67 +17,75 @@ public class DashAbility : MonoBehaviour
     private PlayerInput playerInput;
     private InputAction dashAction;
 
-    private bool canDash = true;
-    private Vector2 dashDirection;
+    private bool cooldown = false;
+    private float timer = 0f;
 
+    private Vector2 dashDirection;
     private float defaultGravityScale;
+
     private Coroutine dashRoutine;
 
-    void Awake()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         playerController = GetComponent<PlayerController>();
         playerInput = GetComponent<PlayerInput>();
         dashAction = playerInput.actions["Dash"];
+
         defaultGravityScale = rb.gravityScale;
     }
 
-    void Update()
+    private void Update()
     {
-        if (canDash && dashAction.triggered)
+        if (cooldown)
         {
-            StartDash();
+            timer -= Time.deltaTime;
+            if (timer <= 0f)
+                cooldown = false;
         }
+
+        if (dashAction.triggered)
+            TryDash();
     }
 
-    private void StartDash()
+    private void TryDash()
     {
-        //if (dashRoutine != null) StopCoroutine(dashRoutine);
+        if (cooldown) return;
+
         dashRoutine = StartCoroutine(DashRoutine());
+
+        cooldown = true;
+        timer = dashCooldown;
+
+        uiCooldowns.StartCooldown(
+            UICooldowns.AbilityType.Dash,
+            dashCooldown
+        );
+
         SoundManager.PlaySound(SoundType.SLIME_DASH, gameObject, 1);
     }
 
     private IEnumerator DashRoutine()
     {
-        Debug.Log("Dash started");
-
         // Disable input
         playerController.enabled = false;
 
-        // Determine dash direction
-        dashDirection = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
+        // Direction
+        dashDirection = transform.localScale.x > 0
+            ? Vector2.right
+            : Vector2.left;
 
-        // Modify physics
+        // Physics setup
         rb.gravityScale = 0f;
         rb.linearDamping = 0f;
         rb.linearVelocity = Vector2.zero;
 
-        // Apply dash force
+        // Dash impulse
         rb.AddForce(dashDirection * dashSpeed, ForceMode2D.Impulse);
 
-        canDash = false;
-
-        uiCooldowns.StartCooldown(UICooldowns.AbilityType.Dash, dashCooldown);
-
-        // Wait for dash duration
         yield return new WaitForSeconds(dashDuration);
 
-        // End dash
         EndDash();
-
-        // Start cooldown
-        yield return new WaitForSeconds(dashCooldown);
-        canDash = true;
     }
 
     private void EndDash()
@@ -87,7 +95,5 @@ public class DashAbility : MonoBehaviour
 
         playerController.ResetInput();
         playerController.enabled = true;
-
-        Debug.Log("Dash ended");
     }
 }

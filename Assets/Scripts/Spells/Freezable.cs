@@ -19,8 +19,7 @@ public class Freezable : MonoBehaviour
 
     public void Freeze(float duration)
     {
-        if (!frozen)
-            StartCoroutine(FreezeRoutine(duration));
+        StartCoroutine(FreezeRoutine(duration));
     }
 
     private IEnumerator FreezeRoutine(float time)

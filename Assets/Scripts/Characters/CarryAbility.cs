@@ -79,6 +79,7 @@ public class CarryAbility : MonoBehaviour
     public void DropMage()
     {
         Debug.Log("Dropping mage");
+        if (!carryingMage) return;
         mage.transform.SetParent(null);
         
         mageRb.gravityScale = mageGravityScale;
