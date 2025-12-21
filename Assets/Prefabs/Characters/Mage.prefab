@@ -265,6 +265,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 98161394-1215-4901-982a-b658f31b0a4e
     m_ActionName: 'ConnSlimes/CarryMage[/Keyboard/k,/Keyboard/numpad5]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7299c1ed-920c-4bbe-93d4-166928f9812b
+    m_ActionName: 'UI/PauseMenu[/Keyboard/escape,/Keyboard/p]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Mage
@@ -344,9 +348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SplitSpellController
   data: {fileID: 11400000, guid: 8712dbe32cdb96547bef8883304c9e9c, type: 2}
-  slimeOne: {fileID: 0}
-  slimeTwo: {fileID: 0}
-  slimesConnected: {fileID: 0}
+  cooldowns: {fileID: 3556926607866984842, guid: c940c9abcd1dca6419326ed07199118e, type: 3}
 --- !u!114 &7052615775822783775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,6 +361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f641fb5ab8d250d4e9b84e9050b1f6e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FireballSpellController
+  cooldowns: {fileID: 3556926607866984842, guid: c940c9abcd1dca6419326ed07199118e, type: 3}
   spellData: {fileID: 11400000, guid: 8f311a58cb1dac347a8b2b0d2a6a6b45, type: 2}
 --- !u!114 &8027575757377276669
 MonoBehaviour:

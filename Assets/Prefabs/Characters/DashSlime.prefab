@@ -261,6 +261,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 98161394-1215-4901-982a-b658f31b0a4e
     m_ActionName: 'ConnSlimes/CarryMage[/Keyboard/k,/Keyboard/numpad5]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7299c1ed-920c-4bbe-93d4-166928f9812b
+    m_ActionName: 'UI/PauseMenu[/Keyboard/escape,/Keyboard/p]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: DashSlime
@@ -313,7 +317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 242eecb0fe8026840be426ab2c934700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DashAbility
-  uiCooldowns: {fileID: 0}
+  cooldowns: {fileID: 3556926607866984842, guid: c940c9abcd1dca6419326ed07199118e, type: 3}
   dashSpeed: 20
   dashDuration: 0.1
   dashCooldown: 3

@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D), typeof(PlayerInput))]
 public class DashAbility : MonoBehaviour
 {
-    [SerializeField] private UICooldowns uiCooldowns;
+    [SerializeField] private Cooldowns cooldowns;
 
     [Header("Dash Settings")]
     [SerializeField] private float dashSpeed = 200f;
@@ -57,8 +57,8 @@ public class DashAbility : MonoBehaviour
         cooldown = true;
         timer = dashCooldown;
 
-        uiCooldowns.StartCooldown(
-            UICooldowns.AbilityType.Dash,
+        cooldowns.StartCooldown(
+            Cooldowns.AbilityType.Dash,
             dashCooldown
         );
 

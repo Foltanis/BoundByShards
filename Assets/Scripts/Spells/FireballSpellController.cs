@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class FireballSpellController : MonoBehaviour, IFreezableReceiver
 {
-    [SerializeField] private UICooldowns uiCooldowns;
+    [SerializeField] private Cooldowns cooldowns;
     [SerializeField] private FireballData spellData;
 
     private float cooldownRemaining = 0f;
@@ -30,7 +30,7 @@ public class FireballSpellController : MonoBehaviour, IFreezableReceiver
         cooldownRemaining = spellData.cooldown;
 
         if(caster.CompareTag("Player"))
-            uiCooldowns.StartCooldown(UICooldowns.AbilityType.Fireball, spellData.cooldown);
+            cooldowns.StartCooldown(Cooldowns.AbilityType.Fireball, spellData.cooldown);
 
         return true;
     }

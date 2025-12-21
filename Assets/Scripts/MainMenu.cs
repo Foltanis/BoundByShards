@@ -9,7 +9,6 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
-        SaveSystem.Init();
     }
 
     void Update()
