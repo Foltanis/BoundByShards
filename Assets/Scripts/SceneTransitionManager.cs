@@ -175,4 +175,10 @@ public class SceneTransitionManager : MonoBehaviour
         c.a = alpha;
         fadeImage.color = c;
     }
+    
+    public void UpdateMusicVolume()
+    {
+        if (musicSource != null)
+            musicSource.volume = musicVolume * PlayerPrefs.GetFloat("MusicVolume", 1f);
+    }
 }

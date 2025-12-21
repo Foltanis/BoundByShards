@@ -6,7 +6,7 @@ public class Settings : MonoBehaviour
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider sfxSlider;
 
-    private void Awake()
+    private void OnEnable()
     {
         if (!PlayerPrefs.HasKey("MusicVolume"))
             PlayerPrefs.SetFloat("MusicVolume", 1f);
@@ -28,6 +28,7 @@ public class Settings : MonoBehaviour
     {
         PlayerPrefs.SetFloat("MusicVolume", volume);
         PlayerPrefs.Save();
+        SceneTransitionManager.Instance?.UpdateMusicVolume();
     }
 
     public void SetSFXVolume(float volume)
