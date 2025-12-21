@@ -11718,10 +11718,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4959055011937071292, guid: ac76704130e4e244bba2290cc54bb181, type: 3}
-      propertyPath: gem
-      value: 
-      objectReference: {fileID: 1439679026}
     - target: {fileID: 5418175449228410344, guid: ac76704130e4e244bba2290cc54bb181, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.485
@@ -11771,6 +11767,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac76704130e4e244bba2290cc54bb181, type: 3}
+--- !u!1001 &1308835183
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7844703764102544917, guid: 2355722f9c77f4546ac9bac8b8f95b8c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.89455
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844703764102544917, guid: 2355722f9c77f4546ac9bac8b8f95b8c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.78345
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844703764102544917, guid: 2355722f9c77f4546ac9bac8b8f95b8c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844703764102544917, guid: 2355722f9c77f4546ac9bac8b8f95b8c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844703764102544917, guid: 2355722f9c77f4546ac9bac8b8f95b8c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844703764102544917, guid: 2355722f9c77f4546ac9bac8b8f95b8c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844703764102544917, guid: 2355722f9c77f4546ac9bac8b8f95b8c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844703764102544917, guid: 2355722f9c77f4546ac9bac8b8f95b8c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844703764102544917, guid: 2355722f9c77f4546ac9bac8b8f95b8c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844703764102544917, guid: 2355722f9c77f4546ac9bac8b8f95b8c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251036560321713331, guid: 2355722f9c77f4546ac9bac8b8f95b8c, type: 3}
+      propertyPath: m_Name
+      value: SoundManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2355722f9c77f4546ac9bac8b8f95b8c, type: 3}
 --- !u!1 &1313569461
 GameObject:
   m_ObjectHideFlags: 0
@@ -12436,11 +12489,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: -8435245712485981826, guid: 99de4095fa44870439068cf05173419b, type: 3}
---- !u!1 &1439679026 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 298996620838132732, guid: 011918bdc9039104c90b3bcb49b87fae, type: 3}
-  m_PrefabInstance: {fileID: 2119587023}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1440926152
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22827,10 +22875,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3608076329122507548, guid: 83f681a76d73f7a4482b25248c80fa6c, type: 3}
-      propertyPath: m_PointLightOuterRadius
-      value: 0.74
-      objectReference: {fileID: 0}
     - target: {fileID: 4254639586056531541, guid: 83f681a76d73f7a4482b25248c80fa6c, type: 3}
       propertyPath: m_Name
       value: Mage
@@ -22945,14 +22989,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1581983881622850056, guid: 2e3d0058425c65c4ab8ec0b43f8a270f, type: 3}
-      propertyPath: speed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1581983881622850056, guid: 2e3d0058425c65c4ab8ec0b43f8a270f, type: 3}
-      propertyPath: jumpForce
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 8071830606806677439, guid: 2e3d0058425c65c4ab8ec0b43f8a270f, type: 3}
       propertyPath: m_Name
       value: DashSlime
@@ -23023,6 +23059,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1308835183}
   - {fileID: 563601431}
   - {fileID: 6821268906655841237}
   - {fileID: 4938189995913695898}

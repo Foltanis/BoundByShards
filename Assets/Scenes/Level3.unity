@@ -8400,22 +8400,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6192344716591542196, guid: 2355722f9c77f4546ac9bac8b8f95b8c, type: 3}
-      propertyPath: soundList.Array.size
-      value: 27
-      objectReference: {fileID: 0}
-    - target: {fileID: 6192344716591542196, guid: 2355722f9c77f4546ac9bac8b8f95b8c, type: 3}
-      propertyPath: soundList.Array.data[26].name
-      value: FIREBALL_HIT
-      objectReference: {fileID: 0}
-    - target: {fileID: 6192344716591542196, guid: 2355722f9c77f4546ac9bac8b8f95b8c, type: 3}
-      propertyPath: soundList.Array.data[18].sound
-      value: 
-      objectReference: {fileID: 8300000, guid: d6766f8fe04c9b746bfb3c5b3aa32b7a, type: 3}
-    - target: {fileID: 6192344716591542196, guid: 2355722f9c77f4546ac9bac8b8f95b8c, type: 3}
-      propertyPath: soundList.Array.data[26].sound
-      value: 
-      objectReference: {fileID: 8300000, guid: 61b506dd5c83c4540b49a6378d3335f5, type: 3}
     - target: {fileID: 7844703764102544917, guid: 2355722f9c77f4546ac9bac8b8f95b8c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.87658

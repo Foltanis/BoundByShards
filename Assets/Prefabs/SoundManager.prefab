@@ -83,7 +83,7 @@ MonoBehaviour:
   - name: TURNIP_WALK
     sound: {fileID: 0}
   - name: FIREBALL
-    sound: {fileID: 8300000, guid: 61b506dd5c83c4540b49a6378d3335f5, type: 3}
+    sound: {fileID: 8300000, guid: d6766f8fe04c9b746bfb3c5b3aa32b7a, type: 3}
   - name: SPLIT_SPELL
     sound: {fileID: 8300000, guid: edd7332f84b3ca0469d9b3a09ce79672, type: 3}
   - name: LIGHT_SPELL
@@ -99,7 +99,7 @@ MonoBehaviour:
   - name: GEM_COLLECT
     sound: {fileID: 8300000, guid: decee965aa559f0419830a0526793db9, type: 3}
   - name: FIREBALL_HIT
-    sound: {fileID: 0}
+    sound: {fileID: 8300000, guid: 61b506dd5c83c4540b49a6378d3335f5, type: 3}
 --- !u!82 &1445224732694076542
 AudioSource:
   m_ObjectHideFlags: 0

@@ -63,7 +63,7 @@ public class FireballController : MonoBehaviour, IFreezableReceiver, IFireballSi
 
         target = CharacterManager.Instance.Get(CharacterType.Mage);
 
-        SoundManager.PlaySound(SoundType.FIREBALL, gameObject, 0.5f);
+        SoundManager.PlaySound(SoundType.FIREBALL, gameObject, 0.3f);
     }
 
     void Update()
@@ -89,7 +89,7 @@ public class FireballController : MonoBehaviour, IFreezableReceiver, IFireballSi
         if (explosionParticlesPrefab != null)
             Instantiate(explosionParticlesPrefab, transform.position, Quaternion.identity);
 
-        // SoundManager.PlaySound(SoundType.FIREBALL_HIT, gameObject, 1);
+        SoundManager.PlaySound(SoundType.FIREBALL_HIT, gameObject, 0.3f);
 
         Destroy(gameObject);
     }

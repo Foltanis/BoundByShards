@@ -118,7 +118,7 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
         isTouchingWall = (hitLeft != null) || (hitRight != null);
         
         // Reset wall jump only when grounded OR when player actually left the wall
-        if (isGrounded || wasTouchingWall && !isTouchingWall && xMovementCounter > wallCheckDistance)
+        if (isGrounded || wasTouchingWall && !isTouchingWall)// && xMovementCounter > wallCheckDistance)
         {
             hasWallJumped = false;
         }
@@ -174,6 +174,7 @@ public class PlayerController : MonoBehaviour, IFreezableReceiver
     private void OnMovePerformed(InputAction.CallbackContext ctx)
     {
         moveValue = ctx.ReadValue<float>();
+        if (Mathf.Abs(moveValue) < 0.1f) moveValue = 0;
         anim.SetFloat("Speed", Mathf.Abs(moveValue) * Mathf.Sqrt(speed));
     }
 
