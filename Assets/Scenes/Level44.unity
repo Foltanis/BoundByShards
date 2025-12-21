@@ -7765,6 +7765,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &1020761230 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7439453057440574203, guid: ee7cefa5de5270e41b2e67071d96e725, type: 3}
+  m_PrefabInstance: {fileID: 5787128676904958130}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bf2470684d1d9b45aa28a5b3d8b2795, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UICooldowns
 --- !u!1001 &1210360561
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9683,6 +9694,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7023006090582539396, guid: b2ccb8742ccacea499757db3f633a29d, type: 3}
+      propertyPath: uiCooldowns
+      value: 
+      objectReference: {fileID: 1020761230}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9704,6 +9719,10 @@ PrefabInstance:
       propertyPath: slimeTwo
       value: 
       objectReference: {fileID: 308493025}
+    - target: {fileID: 2265801819773075243, guid: 83f681a76d73f7a4482b25248c80fa6c, type: 3}
+      propertyPath: uiCooldowns
+      value: 
+      objectReference: {fileID: 1020761230}
     - target: {fileID: 2265801819773075243, guid: 83f681a76d73f7a4482b25248c80fa6c, type: 3}
       propertyPath: slimesConnected
       value: 
@@ -9752,11 +9771,72 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mage
       objectReference: {fileID: 0}
+    - target: {fileID: 7052615775822783775, guid: 83f681a76d73f7a4482b25248c80fa6c, type: 3}
+      propertyPath: uiCooldowns
+      value: 
+      objectReference: {fileID: 1020761230}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83f681a76d73f7a4482b25248c80fa6c, type: 3}
+--- !u!1001 &5787128676904958130
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2850414508953172047, guid: ee7cefa5de5270e41b2e67071d96e725, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2850414508953172047, guid: ee7cefa5de5270e41b2e67071d96e725, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2850414508953172047, guid: ee7cefa5de5270e41b2e67071d96e725, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2850414508953172047, guid: ee7cefa5de5270e41b2e67071d96e725, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2850414508953172047, guid: ee7cefa5de5270e41b2e67071d96e725, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2850414508953172047, guid: ee7cefa5de5270e41b2e67071d96e725, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2850414508953172047, guid: ee7cefa5de5270e41b2e67071d96e725, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2850414508953172047, guid: ee7cefa5de5270e41b2e67071d96e725, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2850414508953172047, guid: ee7cefa5de5270e41b2e67071d96e725, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2850414508953172047, guid: ee7cefa5de5270e41b2e67071d96e725, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6004770100389350971, guid: ee7cefa5de5270e41b2e67071d96e725, type: 3}
+      propertyPath: m_Name
+      value: UIDocument
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ee7cefa5de5270e41b2e67071d96e725, type: 3}
 --- !u!1001 &6821268906655841237
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9862,6 +9942,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2868377957074245869, guid: 2e3d0058425c65c4ab8ec0b43f8a270f, type: 3}
+      propertyPath: uiCooldowns
+      value: 
+      objectReference: {fileID: 1020761230}
     - target: {fileID: 8071830606806677439, guid: 2e3d0058425c65c4ab8ec0b43f8a270f, type: 3}
       propertyPath: m_Name
       value: DashSlime
@@ -9947,3 +10031,4 @@ SceneRoots:
   - {fileID: 814887275}
   - {fileID: 1510986870}
   - {fileID: 1225674820}
+  - {fileID: 5787128676904958130}

@@ -6,10 +6,11 @@ using System;
 public class SplitSpellController : MonoBehaviour
 {
     [SerializeField] private SplitSpellData data;
+    [SerializeField] private UICooldowns uiCooldowns;
 
-    [SerializeField] private GameObject slimeOne;
-    [SerializeField] private GameObject slimeTwo;
-    [SerializeField] private GameObject slimesConnected;
+    private GameObject slimesConnected;
+    private GameObject slimeOne;
+    private GameObject slimeTwo;
 
     private bool isSplit = false;
     private Coroutine reconnectTimer;
@@ -19,6 +20,11 @@ public class SplitSpellController : MonoBehaviour
     public void Start()
     {
         characterManager = CharacterManager.Instance;
+
+        slimesConnected = characterManager.Get(CharacterType.SlimesConn);
+        slimeOne = characterManager.Get(CharacterType.DashSlime);
+        slimeTwo = characterManager.Get(CharacterType.SlimeTwo);
+
     }
 
     public void Cast()
@@ -32,6 +38,7 @@ public class SplitSpellController : MonoBehaviour
     private void Split()
     {
         isSplit = true;
+        uiCooldowns.StartCooldown(UICooldowns.AbilityType.Split, data.timeToReconnect);
 
         Vector3 pos = slimesConnected.transform.position;
         int hp = slimesConnected.GetComponent<Health>().GetHp();
@@ -85,6 +92,8 @@ public class SplitSpellController : MonoBehaviour
     {
         if (reconnectTimer != null)
             StopCoroutine(reconnectTimer);
+
+        uiCooldowns.AbilityReady(UICooldowns.AbilityType.Split);
 
         int hp = slimeOne.GetComponent<Health>().GetHp() + slimeTwo.GetComponent<Health>().GetHp();
         Vector3 mergePos = (slimeOne.transform.position + slimeTwo.transform.position) / 2f;

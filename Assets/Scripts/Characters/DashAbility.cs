@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D), typeof(PlayerInput))]
 public class DashAbility : MonoBehaviour
 {
+    [SerializeField] private UICooldowns uiCooldowns;
+
     [Header("Dash Settings")]
     [SerializeField] private float dashSpeed = 200f;
     [SerializeField] private float dashDuration = 0.2f;
@@ -64,6 +66,8 @@ public class DashAbility : MonoBehaviour
         rb.AddForce(dashDirection * dashSpeed, ForceMode2D.Impulse);
 
         canDash = false;
+
+        uiCooldowns.StartCooldown(UICooldowns.AbilityType.Dash, dashCooldown);
 
         // Wait for dash duration
         yield return new WaitForSeconds(dashDuration);
