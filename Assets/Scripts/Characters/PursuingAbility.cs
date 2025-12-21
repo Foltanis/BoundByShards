@@ -8,7 +8,6 @@ public class PursuingAbility : MonoBehaviour, IFreezableReceiver
 {
     [SerializeField] private LayerMask platformMask;
 
-    private List<GameObject> players;
     private GameObject targetPlayer;
     private Rigidbody2D rb;
     private BoxCollider2D bc;
@@ -37,12 +36,6 @@ public class PursuingAbility : MonoBehaviour, IFreezableReceiver
         rb = GetComponent<Rigidbody2D>();
         bc = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
-        players = new List<GameObject>();
-        foreach (var character in CharacterManager.Instance.Characters)
-        {
-            if (character.instance != null)
-                players.Add(character.instance);
-        }
         currentState = State.FindTarget;
         baseScale = transform.localScale;
     }
@@ -188,10 +181,10 @@ public class PursuingAbility : MonoBehaviour, IFreezableReceiver
         float minDist = Mathf.Infinity;
         groundedPlayers = new List<GameObject>();
 
-        foreach (var p in players)
+        foreach (var p in CharacterManager.Instance.ActiveCharacters)
         {
             // Skip inactive and jumping players
-            if (!p.gameObject.activeInHierarchy || !p.GetComponent<PlayerController>().IsGrounded()) continue;
+            if (!p.GetComponent<PlayerController>().IsGrounded()) continue;
 
             groundedPlayers.Add(p);
 
@@ -228,15 +221,17 @@ public class PursuingAbility : MonoBehaviour, IFreezableReceiver
     {
         float inLevelThreshold = 0.25f;
 
-        float playerFeetY = player.transform.position.y - player.transform.localScale.y;
-        float myFeetY = transform.position.y - transform.localScale.y;
+        Bounds playerBounds = player.GetComponent<Collider2D>().bounds;
+        Bounds myBounds = GetComponent<Collider2D>().bounds;
+
+        float playerFeetY = playerBounds.min.y;
+        float myFeetY = myBounds.min.y;
 
         return Mathf.Abs(playerFeetY - myFeetY) < inLevelThreshold;
     }
 
     bool IsPlayerOnSamePlatform(GameObject player)
     {
-        // Debug.Log();
         if (!IsPlayerOnSameLevel(player)) return false;
         Vector2 playerPos = targetPlayer.transform.position;
         Vector2 targetBoundsCenter = targetPlayer.GetComponent<BoxCollider2D>().bounds.center;

@@ -2,4 +2,29 @@
 }
 
 .unity-progress-bar {
+    height: 1px;
+}
+
+.unity-progress-bar__background {
+    height: 100%;
+}
+
+.unity-progress-bar__progress {
+    height: 100%;
+}
+
+#dashCooldown .unity-progress-bar__progress {
+    background-color: #5B8DEE;
+}
+
+#freezeCooldown .unity-progress-bar__progress {
+    background-color: #6ECFCF;
+}
+
+#fireballCooldown .unity-progress-bar__progress {
+    background-color: #F2994A;
+}
+
+#splitCooldown .unity-progress-bar__progress {
+    background-color: #BB6BD9;
 }

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlaySoundEnter
   sound: 1
-  volume: 0.1
-  loop: 0
+  volume: 0.01
+  loop: 1
 --- !u!1102 &-662164913007234764
 AnimatorState:
   serializedVersion: 6
