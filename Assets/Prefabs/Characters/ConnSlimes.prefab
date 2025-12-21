@@ -293,7 +293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   speed: 4.5
   jumpForce: 5.8
-  wallJumpForce: 5
+  wallJumpForce: 5.3
   platformLayer:
     serializedVersion: 2
     m_Bits: 64

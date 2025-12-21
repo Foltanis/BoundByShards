@@ -278,9 +278,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b622c0fadf2614b4291e1f3425f4607d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  speed: 5
+  speed: 4.6
   jumpForce: 6
-  wallJumpForce: 5
+  wallJumpForce: 6
   platformLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -313,6 +313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 242eecb0fe8026840be426ab2c934700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DashAbility
+  uiCooldowns: {fileID: 0}
   dashSpeed: 20
   dashDuration: 0.1
   dashCooldown: 3

@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Unity.VisualScripting;
 
 public class PursuingAbility : MonoBehaviour, IFreezableReceiver
 {
@@ -10,7 +11,7 @@ public class PursuingAbility : MonoBehaviour, IFreezableReceiver
 
     private GameObject targetPlayer;
     private Rigidbody2D rb;
-    private BoxCollider2D bc;
+    private BoxCollider2D col;
     private State currentState;
     private Vector3 baseScale;
     private PlayerController targetPlayerController;
@@ -22,6 +23,7 @@ public class PursuingAbility : MonoBehaviour, IFreezableReceiver
     [SerializeField] private float minDistanceToTeleportFromPlayer = 2.0f;
     [SerializeField] private float jumpInDuration = 1.0f;
     [SerializeField] private float jumpOutDuration = 1.0f;
+    [SerializeField] private float inGroundDuration = 20f;
     private enum State
     {
         Stunned,
@@ -34,7 +36,7 @@ public class PursuingAbility : MonoBehaviour, IFreezableReceiver
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        bc = GetComponent<BoxCollider2D>();
+        col = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
         currentState = State.FindTarget;
         baseScale = transform.localScale;
@@ -50,6 +52,10 @@ public class PursuingAbility : MonoBehaviour, IFreezableReceiver
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (currentState == State.Stunned)
+            return;
+
+
         anim.SetFloat("jumpInDuration", 1.0f / jumpInDuration);
         anim.SetFloat("jumpOutDuration", 1.0f / jumpOutDuration);
         switch (currentState)
@@ -140,7 +146,7 @@ public class PursuingAbility : MonoBehaviour, IFreezableReceiver
             transform.position.x + (direction * checkDistance),
             transform.position.y
         );
-        float rayDistance = bc.bounds.size.y * 0.6f + 0.5f;
+        float rayDistance = col.bounds.size.y * 0.6f + 0.5f;
         RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.down, rayDistance, platformMask);
         // Debug.DrawRay(origin, Vector2.down * rayDistance, hit.collider ? Color.green : Color.red);
         if (!hit.collider) return false;
@@ -297,7 +303,7 @@ public class PursuingAbility : MonoBehaviour, IFreezableReceiver
         }
 
         float randomX = xes[Random.Range(0, xes.Count)];
-        float y = targetY + bc.bounds.size.y * 0.5f;
+        float y = targetY + col.bounds.size.y * 0.5f;
         transform.position = new Vector3(randomX, y, transform.position.z);
 
         return true;
@@ -323,6 +329,26 @@ public class PursuingAbility : MonoBehaviour, IFreezableReceiver
     {
         enabled = true;
         // rb.isKinematic = false;
+    }
+
+    public void GoInGround()
+    {
+        currentState = State.Stunned;
+        col.enabled = false;
+        rb.gravityScale = 0;
+        rb.linearVelocity = Vector2.zero;
+
+        StartCoroutine(GoInGroundRoutine(inGroundDuration));
+    }
+
+    private IEnumerator GoInGroundRoutine(float duration)
+    {
+        yield return new WaitForSecondsRealtime(duration);
+
+        col.enabled = true;
+        rb.gravityScale = 1;
+        anim.SetTrigger("backInGame");
+        currentState = State.JumpOut;
     }
 
 }
