@@ -13,6 +13,7 @@ public class PursuingAbility : MonoBehaviour, IFreezableReceiver
     private Rigidbody2D rb;
     private BoxCollider2D col;
     private State currentState;
+
     private Vector3 baseScale;
     private PlayerController targetPlayerController;
     private Animator anim;
@@ -47,6 +48,18 @@ public class PursuingAbility : MonoBehaviour, IFreezableReceiver
         targetPlayer = target;
         if (targetPlayer != null)
             targetPlayerController = targetPlayer.GetComponent<PlayerController>();
+    }
+
+    public void Stun()
+    {
+        currentState = State.Stunned;
+        rb.linearVelocity = Vector2.zero;
+        rb.angularVelocity = 0f;
+    }
+
+    public void Unstun()
+    {
+        currentState = State.ChaseTarget;
     }
 
     // Update is called once per frame
