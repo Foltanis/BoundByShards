@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Freezable : MonoBehaviour
 {
+    // frozen bool maybe not needed or use it in other classes TODO
     private bool frozen = false;
     public bool IsFrozen => frozen;
 

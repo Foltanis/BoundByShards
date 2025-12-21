@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class EyeAbility : MonoBehaviour//,IFreezableReceiver
+public class EyeAbility : MonoBehaviour
 {
     [Header("Chase")]
     public float chaseSpeed = 3f;
@@ -24,6 +24,8 @@ public class EyeAbility : MonoBehaviour//,IFreezableReceiver
     private Coroutine lostSightCoroutine;
     private bool wasPlayerVisible = false;
 
+    private bool frozen = false;
+
     void Start()
     {
         //maybe possition is enough TODO
@@ -36,19 +38,24 @@ public class EyeAbility : MonoBehaviour//,IFreezableReceiver
         if (other.CompareTag("Player"))
         {
             player = other.transform;
-            Debug.Log("Player entered eye trigger");
-    }
+            //Debug.Log("Player entered eye trigger");
+        }
     }
     void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player") && other.transform == player)
         {
             player = null;
-            Debug.Log("Player exited eye trigger");
-    }
+            //Debug.Log("Player exited eye trigger");
+        }
     }
     void Update()
     {
+        if (frozen) {
+            return;
+        }
+
+
         if (player == null)
         {
             if (wasPlayerVisible)
@@ -105,7 +112,7 @@ public class EyeAbility : MonoBehaviour//,IFreezableReceiver
                     patrolPosition = eye.position;
                 }
 
-                Debug.Log("Eye spotted player!");
+                //Debug.Log("Eye spotted player!");
             }
             else
             {
@@ -134,7 +141,7 @@ public class EyeAbility : MonoBehaviour//,IFreezableReceiver
         {
             FireballSignalBroadcaster.EnemyLost();
             lostSightCoroutine = StartCoroutine(ReturnToPatrol());
-            Debug.Log("Eye lost player, returning to patrol");
+            //Debug.Log("Eye lost player, returning to patrol");
         }
     }
     IEnumerator ReturnToPatrol()
@@ -154,6 +161,28 @@ public class EyeAbility : MonoBehaviour//,IFreezableReceiver
             patrolAbility.enabled = true;
 
         lostSightCoroutine = null;
+    }
+
+    public void CastOnFreeze()
+    {
+        frozen = true;
+        // Stop all movement
+        if (lostSightCoroutine != null)
+        {
+            StopCoroutine(lostSightCoroutine);
+            lostSightCoroutine = null;
+        }
+        if (patrolAbility != null)
+            patrolAbility.enabled = false;
+        Debug.Log("Eye frozen");
+    }
+
+    public void CastOnUnfreeze()
+    {
+        frozen = false;
+        // Resume patrol
+        if (patrolAbility != null)
+            patrolAbility.enabled = true;
     }
 
     //TODO eye on freeze behavior, problem is this is child of eye
