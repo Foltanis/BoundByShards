@@ -26,6 +26,7 @@ public class MainMenu : MonoBehaviour
 
     public void QuitGame()
     {
+        PlayerPrefs.DeleteKey("LevelsUnlocked");
         Application.Quit();
     }
 }
